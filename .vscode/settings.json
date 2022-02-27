@@ -1,0 +1,19 @@
+{
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "search.exclude": {
+    ".temp": true,
+    "**/.git": true,
+    "**/node_modules": true,
+  },
+  "eslint.packageManager": "npm",
+  "cSpell.words": [
+    "slashnotes"
+  ]
+}
