@@ -1,0 +1,11 @@
+{
+  "name": "example",
+  "scripts": {
+    "start": "slashnotes start"
+  },
+  "dependencies": {
+    "@slashnotes/cli": "file:../packages/cli",
+    "@slashnotes/editor": "file:../packages/editor",
+    "@slashnotes/navigator": "file:../packages/navigator"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "slashnotes",
+  "scripts": {
+    "test": "CI=true jest",
+    "build": "npm run build --workspaces"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@faasjs/jest": "*",
+    "@faasjs/eslint-config-recommended": "*",
+    "@faasjs/eslint-config-react": "*",
+    "tsup": "*"
+  },
+  "eslintConfig": {
+    "ignorePatterns": [
+      "**/examples",
+      "**/lib",
+      "**/dist",
+      "**/tmp"
+    ],
+    "extends": [
+      "@faasjs/recommended",
+      "@faasjs/react"
+    ]
+  },
+  "jest": {
+    "transform": {
+      ".(jsx|tsx?)": "@faasjs/jest"
+    },
+    "collectCoverageFrom": [
+      "**/packages/**/*.ts",
+      "**/packages/**/*.tsx",
+      "!**/local/**"
+    ],
+    "testRegex": "/*\\.test\\.tsx?$",
+    "coveragePathIgnorePatterns": [
+      "/dist/",
+      "/__tests__/",
+      "!*.d.ts"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|sass|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "@faasjs/jest"
+    }
+  }
+}

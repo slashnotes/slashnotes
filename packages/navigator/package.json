@@ -9,5 +9,15 @@
   },
   "bugs": {
     "url": "https://github.com/slashnotes/slashnotes/issues"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup-node src/index.tsx"
+  },
+  "dependencies": {
+    "react": "*"
   }
 }
