@@ -1,9 +1,11 @@
-import { createServer } from 'http'
-import { compileSync } from '@mdx-js/mdx'
-import { readFileSync } from 'fs'
-import { createRequire } from 'module'
+import { createServer as createHttpServer } from 'http'
+import { readFileSync, existsSync } from 'fs'
+import { join, extname } from 'path'
 
-const require = createRequire(import.meta.url)
+const ContentTypes = {
+  '.html': 'text/html',
+  '.js': 'application/javascript',
+}
 
 export class Server {
   public readonly port: number
@@ -13,24 +15,23 @@ export class Server {
   }
 
   public async start () {
-    createServer((req, res) => {
+    const webPath = require.resolve('@slashnotes/web').replace(/index.js$/, 'dist')
+    console.log(webPath)
+    createHttpServer(async (req, res) => {
       console.log(req.url)
-      if (req.url.startsWith('/node_modules')) {
-        const name = req.url.replace('/node_modules/', '')
-        const path = require.resolve(name)
-        console.log(path)
-        res.setHeader('Content-Type', 'text/javascript')
-        res.end(readFileSync(path))
-        return
+
+      let path = req.url
+      if (path === '/')
+        path = 'index.html'
+      if (existsSync(join(webPath, path))) {
+        console.log(extname(path))
+        res.setHeader('Content-Type', ContentTypes[extname(path)])
+        res.write(readFileSync(join(webPath, path)))
+      } else {
+        res.statusCode = 404
+        res.setHeader('Content-Type', 'text/plain')
+        res.write('Not found file: ' + path)
       }
-      res.setHeader('Content-Type', 'text/html')
-      res.write(
-        '<!DOCTYPE html><body><script type="module">' +
-        compileSync(
-          readFileSync('home.mdx', 'utf8').toString()
-        ).toString()
-        + '</script></body>'
-      )
       res.end()
     })
       .listen(this.port)

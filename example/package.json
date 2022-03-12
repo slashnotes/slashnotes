@@ -1,11 +1,11 @@
 {
-  "name": "example",
+  "name": "@slashnotes/example",
+  "private": true,
   "scripts": {
-    "start": "slashnotes start"
+    "dev": "slashnotes start"
   },
   "dependencies": {
     "@slashnotes/cli": "file:../packages/cli",
-    "@slashnotes/editor": "file:../packages/editor",
-    "@slashnotes/navigator": "file:../packages/navigator"
+    "@slashnotes/web": "file:../packages/web"
   }
 }
