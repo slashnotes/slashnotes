@@ -16,3 +16,7 @@ A note taking app for your whole life.
 ### 0.1
 
 - [ ] Build localhost server with basic interface.
+
+### Others
+
+- [ ] Split window.

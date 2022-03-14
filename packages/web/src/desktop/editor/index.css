@@ -1,0 +1,30 @@
+.editor {
+  position: fixed;
+  left: 300px;
+  top: 0;
+  height: 100%;
+  width: calc(100% - 300px);
+  background-color: var(--slashnotes-editor-background-color);
+}
+
+.editor .tabs {
+  background-color: var(--slashnotes-background-color);
+  overflow: auto;
+  height: 35px;
+  line-height: 35px;
+}
+
+.editor .tabs .tab {
+  float: left;
+  border-right: 1px solid var(--slashnotes-editor-background-color);
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.editor .tabs .tab.active {
+  background-color: var(--slashnotes-editor-background-color);
+}
+
+.monaco-editor {
+  font-family: monospace;
+}

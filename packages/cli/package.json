@@ -19,8 +19,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup-node src/index.ts --format cjs",
-    "dev": "node dist/index.js start"
+    "build": "tsup-node src/index.ts --format cjs"
   },
   "peerDependencies": {
     "commander": "^9.0.0",
