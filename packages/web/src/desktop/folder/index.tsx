@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
-import { action } from './libs/action'
+import { action } from '../../libs/action'
 
-export function Desktop () {
+export function Folder () {
   const [posts, setPosts] = useState<string[]>([])
 
-  useEffect(() =>{
+  useEffect(() => {
     action('list')
       .then(setPosts)
   }, [])
 
   return <div>
-    <div>Slashnotes</div>
+
     <ul>
       {posts.map(post => <li key={ post }>{post}</li>)}
     </ul>

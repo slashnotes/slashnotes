@@ -11,7 +11,6 @@ const ContentTypes = {
   '.js': 'application/javascript',
 }
 
-
 function findPosts (dir: string, cwd: string, prev?: string[]): string[] {
   if (!prev) prev = []
 
