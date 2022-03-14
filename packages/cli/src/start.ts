@@ -1,5 +1,5 @@
 import type { Command } from 'commander'
-import { Server } from './server'
+import { Server } from '@slashnotes/server'
 
 export function action () {
   console.log('Start')

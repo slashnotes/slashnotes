@@ -11,21 +11,20 @@ const ContentTypes = {
   '.js': 'application/javascript',
 }
 
-function findPosts (dir: string, cwd: string, prev?: string[]): string[] {
+function findFiles (dir: string, cwd: string, prev?: string[]): string[] {
   if (!prev) prev = []
 
   readdirSync(dir).forEach(f => {
     const subPath = join(dir, f)
     if (statSync(subPath).isDirectory())
-      return findPosts(subPath, cwd, prev)
+      return findFiles(subPath, cwd, prev)
 
-    if (f.endsWith('.post.md'))
-      prev.push(subPath.replace(cwd, '').replace('.post.md', ''))
+    if (f.endsWith('.note.md'))
+      prev.push(subPath.replace(cwd, '').replace('.note.md', ''))
   })
 
   return prev
 }
-
 
 export class Server {
   public readonly port: number
@@ -36,7 +35,7 @@ export class Server {
 
   public async start () {
     const webPath = require.resolve('@slashnotes/web').replace(/index.js$/, 'dist')
-    console.log(webPath)
+
     createHttpServer(async (req, res) => {
       console.log(req.url)
 
@@ -48,7 +47,7 @@ export class Server {
           switch (command) {
             case 'list':
               res.writeHead(200, { 'Content-Type': 'application/json' })
-                .end(JSON.stringify(findPosts(process.cwd(), process.cwd() + sep)))
+                .end(JSON.stringify(findFiles(process.cwd(), process.cwd() + sep)))
               return
             default:
               res

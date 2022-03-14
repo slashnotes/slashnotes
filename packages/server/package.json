@@ -1,18 +1,15 @@
 {
-  "name": "@slashnotes/cli",
+  "name": "@slashnotes/server",
   "version": "0.1.0",
   "license": "AGPL-3.0",
   "homepage": "https://slashnotes.net/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/slashnotes/slashnotes.git",
-    "directory": "packages/cli"
+    "directory": "packages/server"
   },
   "bugs": {
     "url": "https://github.com/slashnotes/slashnotes/issues"
-  },
-  "bin": {
-    "slashnotes": "dist/index.js"
   },
   "main": "dist/index.js",
   "files": [
@@ -22,8 +19,13 @@
     "build": "tsup-node src/index.ts --format cjs",
     "dev": "node dist/index.js start"
   },
+  "dependencies": {
+    "@slashnotes/web": "*"
+  },
   "peerDependencies": {
+    "@mdx-js/mdx": "^2.0.0",
     "commander": "^9.0.0",
-    "@slashnotes/server": "*"
+    "vite": "^2.0.0",
+    "@vitejs/plugin-react": "*"
   }
 }
