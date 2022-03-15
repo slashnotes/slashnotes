@@ -24,16 +24,19 @@ export function Editor ({
 
   useEffect(() => {
     if (monacoEl?.current && !editor) {
-      setEditor(
-        monaco.editor.create(monacoEl.current, {
-          value: '',
-          language: 'markdown',
-          theme: 'vs-dark',
-          fontSize: 14,
-          tabSize: 2,
-          wordWrap: 'on',
-        })
-      )
+      const ed = monaco.editor.create(monacoEl.current, {
+        value: '',
+        language: 'markdown',
+        theme: 'vs-dark',
+        fontSize: 12,
+        tabSize: 2,
+        wordWrap: 'on',
+      })
+      setEditor(ed)
+
+      ed.onDidChangeModelContent(() => {
+        setValue(ed.getValue())
+      })
     }
 
     return () => editor?.dispose()
@@ -42,17 +45,20 @@ export function Editor ({
   useEffect(() => {
     if (!editor || activeItems.length < 1) return
 
-    action('read', activeItems[0])
+    action<{ body: string }>('read', activeItems[0])
       .then(data => {
         editor.setValue(data.body)
-        editor.onDidChangeModelContent(() => {
-          action('write', {
-            ...activeItems[0],
-            body: editor.getValue()
-          })
-        })
       })
   }, [activeItems])
+
+  useEffect(() => {
+    if (!editor) return
+
+    action('write', {
+      ...activeItems[0],
+      body: value
+    })
+  }, [value])
 
   return <div className="editor">
     {items.length > 0 && <div className='tabs'>

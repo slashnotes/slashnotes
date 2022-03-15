@@ -1,7 +1,8 @@
 :root {
   --slashnotes-background-color: #252526;
   --slashnotes-foreground-color: #ccc;
-  --slashnotes-hover-color: #2B2D2E;
+  --slashnotes-hover-background-color: #2B2D2E;
+  --slashnotes-active-background-color: #37363D;
   --slashnotes-editor-background-color: #1E1E1E;
 }
 
@@ -11,4 +12,6 @@
   height: 100%;
   background-color: var(--slashnotes-background-color);
   color: var(--slashnotes-foreground-color);
+  font-family: monospace;
+  font-size: 14px;
 }

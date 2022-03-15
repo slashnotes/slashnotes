@@ -24,7 +24,3 @@
 .editor .tabs .tab.active {
   background-color: var(--slashnotes-editor-background-color);
 }
-
-.monaco-editor {
-  font-family: monospace;
-}

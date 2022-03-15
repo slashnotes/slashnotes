@@ -16,5 +16,9 @@
 }
 
 .sidebar .item:hover{
-  background-color: var(--slashnotes-hover-color);
+  background-color: var(--slashnotes-hover-background-color);
+}
+
+.sidebar .item.active {
+  background-color: var(--slashnotes-active-background-color);
 }

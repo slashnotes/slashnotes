@@ -16,6 +16,7 @@ export function Desktop () {
     <Sidebar
       setItems={ setItems }
       setActiveItems={ setActiveItems }
+      activeItems={ activeItems }
     />
     <Editor
       items={ items }

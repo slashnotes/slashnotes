@@ -5,10 +5,12 @@ import './index.css'
 
 export function Sidebar ({
   setItems,
-  setActiveItems
+  setActiveItems,
+  activeItems,
 }: {
   setItems: React.Dispatch<React.SetStateAction<Item[]>>
   setActiveItems: React.Dispatch<React.SetStateAction<Item[]>>
+  activeItems: Item[]
 }) {
   const [posts, setPosts] = useState<Item[]>([])
 
@@ -21,7 +23,7 @@ export function Sidebar ({
     <div className='header'>Files</div>
     {posts.map(post => <div
       key={ post.path }
-      className='item'
+      className={ `item ${activeItems.includes(post) ? 'active' : ''}` }
       onClick={ () => {
         setItems(prev => (prev.includes(post) ? prev : [...prev, post]))
         setActiveItems([post])

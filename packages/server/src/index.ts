@@ -9,6 +9,7 @@ import {
 const ContentTypes = {
   '.html': 'text/html',
   '.js': 'application/javascript',
+  '.css': 'text/css',
 }
 
 type FilePath = {
@@ -24,11 +25,11 @@ function findFiles (dir: string, cwd: string, prev?: FilePath[]): FilePath[] {
     if (statSync(subPath).isDirectory())
       return findFiles(subPath, cwd, prev)
 
-    if (f.endsWith('.note.md')) {
-      const path = subPath.replace(cwd, '').replace('.note.md', '')
+    if (f.endsWith('.md')) {
+      const path = subPath.replace(cwd, '').replace('.md', '')
       prev.push({
         path,
-        type: 'note'
+        type: 'default'
       })
     }
   })
@@ -89,12 +90,12 @@ export class Server {
                 const data = JSON.parse(body)
                 res
                   .writeHead(200, headers)
-                  .end(JSON.stringify({ body: readFileSync(join(this.folder, data.path + '.note.md')).toString() }))
+                  .end(JSON.stringify({ body: readFileSync(join(this.folder, data.path + '.md')).toString() }))
                 return
               }
               case 'write': {
                 const data = JSON.parse(body)
-                writeFileSync(join(this.folder, data.path + '.note.md'), data.body)
+                writeFileSync(join(this.folder, data.path + '.md'), data.body)
                 res
                   .writeHead(201, headers)
                   .end()
