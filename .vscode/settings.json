@@ -15,7 +15,6 @@
   "eslint.packageManager": "npm",
   "cSpell.words": [
     "slashnotes",
-    "tsup",
-    "vite"
+    "tsup"
   ]
 }
