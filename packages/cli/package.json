@@ -26,5 +26,9 @@
     "commander": "^9.0.0",
     "@slashnotes/server": "*",
     "@slashnotes/web": "*"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
   }
 }

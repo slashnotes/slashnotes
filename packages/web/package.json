@@ -36,5 +36,9 @@
     "css-loader": "*",
     "swc-loader": "*",
     "html-webpack-plugin": "*"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
   }
 }
