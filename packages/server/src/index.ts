@@ -5,6 +5,10 @@ import {
 import {
   join, extname, sep
 } from 'path'
+import { compileSync } from '@mdx-js/mdx'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
 
 const ContentTypes = {
   '.html': 'text/html',
@@ -22,7 +26,7 @@ function findFiles (dir: string, cwd: string, prev?: FilePath[]): FilePath[] {
 
   readdirSync(dir).forEach(f => {
     const subPath = join(dir, f)
-    if (statSync(subPath).isDirectory())
+    if (statSync(subPath).isDirectory() && !subPath.includes('node_modules'))
       return findFiles(subPath, cwd, prev)
 
     if (f.endsWith('.md')) {
@@ -99,6 +103,13 @@ export class Server {
                 res
                   .writeHead(201, headers)
                   .end()
+                return
+              }
+              case 'view': {
+                const data = JSON.parse(body)
+                res
+                  .writeHead(200, headers)
+                  .end(JSON.stringify({ body: String(compileSync(readFileSync(join(this.folder, data.path + '.md')).toString(), { outputFormat: 'function-body' })) }))
                 return
               }
               default:

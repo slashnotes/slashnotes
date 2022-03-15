@@ -10,4 +10,4 @@ Working in progress.
 const a = 1
 ```
 
-123
+{1+2}

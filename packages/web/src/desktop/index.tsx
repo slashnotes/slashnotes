@@ -1,6 +1,6 @@
 import './index.css'
 import { Sidebar } from './sidebar'
-import { Editor } from './editor'
+import { Main } from './main'
 import { useState } from 'react'
 
 export type Item = {
@@ -18,7 +18,7 @@ export function Desktop () {
       setActiveItems={ setActiveItems }
       activeItems={ activeItems }
     />
-    <Editor
+    <Main
       items={ items }
       setItems={ setItems }
       activeItems={ activeItems }
