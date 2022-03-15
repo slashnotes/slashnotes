@@ -20,3 +20,7 @@ A note taking app for your whole life.
 ### Others
 
 - [ ] Split window.
+
+## Contributing
+
+See [Contributing.md](./Contributing.md)
