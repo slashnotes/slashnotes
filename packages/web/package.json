@@ -16,8 +16,8 @@
   ],
   "main": "index.js",
   "scripts": {
-    "dev": "SERVER=http://localhost:4000 webpack-cli serve --config .webpack/dev.js --progress",
-    "build": "webpack-cli --config .webpack/dev.js"
+    "dev": "VITE_SERVER=http://localhost:4000 vite",
+    "build": "tsc && vite build"
   },
   "dependencies": {
     "react": "*",
@@ -29,13 +29,9 @@
     "@types/react": "*",
     "@types/react-dom": "*",
     "@types/node": "*",
-    "webpack": "*",
-    "webpack-cli": "*",
-    "webpack-dev-server": "*",
-    "style-loader": "*",
-    "css-loader": "*",
-    "swc-loader": "*",
-    "html-webpack-plugin": "*"
+    "vite": "*",
+    "@vitejs/plugin-react": "*",
+    "typescript": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

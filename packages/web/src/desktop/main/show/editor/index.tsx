@@ -1,9 +1,10 @@
 import {
   useEffect, useRef, useState
 } from 'react'
-import * as monaco from 'monaco-editor'
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 import './index.css'
 import { action } from 'libs/action'
+import './worker'
 
 export function Editor ({ item }: {
   item: Item
