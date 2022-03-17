@@ -21,6 +21,7 @@ export function Editor ({ item }: {
         fontSize: 12,
         tabSize: 2,
         wordWrap: 'on',
+        minimap: { enabled: false }
       })
 
       setEditor(ed)
