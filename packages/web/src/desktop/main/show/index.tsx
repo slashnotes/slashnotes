@@ -2,7 +2,6 @@ import { Item } from 'desktop'
 import { useState } from 'react'
 import { Editor } from './editor'
 import { View } from './view'
-import './index.css'
 
 export function Show ({ item }: {
   item: Item

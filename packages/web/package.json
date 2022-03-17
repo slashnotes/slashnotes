@@ -31,7 +31,8 @@
     "@types/node": "*",
     "vite": "*",
     "@vitejs/plugin-react": "*",
-    "typescript": "*"
+    "typescript": "*",
+    "sass": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

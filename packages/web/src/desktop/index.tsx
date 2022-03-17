@@ -1,4 +1,4 @@
-import './index.css'
+import './desktop.scss'
 import { Sidebar } from './sidebar'
 import { Main } from './main'
 import { useState } from 'react'

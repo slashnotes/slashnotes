@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Item } from '..'
 import { action } from '../../libs/action'
-import './index.css'
 
 export function Sidebar ({
   setItems,

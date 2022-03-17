@@ -1,5 +1,4 @@
 import { Item } from '..'
-import './index.css'
 import { Show } from './show'
 
 export function Main ({
