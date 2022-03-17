@@ -8,13 +8,13 @@ import './worker'
 export function Editor ({ item }: {
   item: Item
 }) {
-  let editor: monaco.editor.IStandaloneCodeEditor
+  const [editor, setEditor] = useState<monaco.editor.IStandaloneCodeEditor | null>(null)
   const monacoEl = useRef(null)
   const [value, setValue] = useState<string>()
 
   useEffect(() => {
     if (monacoEl?.current) {
-      editor = monaco.editor.create(monacoEl.current, {
+      const ed = monaco.editor.create(monacoEl.current, {
         value: '',
         language: 'markdown',
         theme: 'vs-dark',
@@ -23,22 +23,24 @@ export function Editor ({ item }: {
         wordWrap: 'on',
       })
 
-      editor.onDidChangeModelContent(() => {
-        setValue(editor.getValue())
+      setEditor(ed)
+
+      ed.onDidChangeModelContent(() => {
+        setValue(ed.getValue())
       })
     }
 
-    return () => editor.dispose()
+    return () => editor?.dispose()
   }, [])
 
   useEffect(() => {
-    if (!item) return
+    if (!item || !editor) return
 
     action<{ body: string }>('read', item)
       .then(data => {
         editor.setValue(data.body)
       })
-  }, [item])
+  }, [item, editor])
 
   useEffect(() => {
     if (!item || !value) return
@@ -51,9 +53,6 @@ export function Editor ({ item }: {
 
   return <div
     ref={ monacoEl }
-    style={ {
-      width: '100%',
-      height: '100%',
-    } }
+    className='editor'
   ></div>
 }

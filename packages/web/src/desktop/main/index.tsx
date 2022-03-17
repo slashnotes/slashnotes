@@ -6,22 +6,26 @@ export function Main ({
   setItems,
   activeItems,
   setActiveItems,
+  currentItem,
+  setCurrentItem,
 }: {
   items: Item[]
   setItems: React.Dispatch<React.SetStateAction<Item[]>>
   activeItems: Item[]
   setActiveItems: React.Dispatch<React.SetStateAction<Item[]>>
+  currentItem?: Item
+  setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
 }) {
   return <div className="main">
     {items.length > 0 && <div className='tabs'>
       {items.map(item => <div
         key={ item.path }
-        className={ `tab ${activeItems.includes(item) ? 'active' : ''}` }
-        onClick={ () => setActiveItems([item]) }
+        className={ `tab ${currentItem === item ? 'active' : ''}` }
+        onClick={ () => setCurrentItem(item) }
       >{item.path}</div>)}
     </div>}
-    {activeItems.length > 0 && <Show
-      item={ activeItems[0] }
+    {currentItem && <Show
+      item={ currentItem }
     />}
   </div>
 }

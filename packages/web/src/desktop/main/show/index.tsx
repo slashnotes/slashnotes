@@ -10,8 +10,12 @@ export function Show ({ item }: {
 
   return <div className="show">
     <div className='mode'>
-      <div onClick={ () => setMode('view') }>View</div>
-      <div onClick={ () => setMode('edit') }>Edit</div>
+      <div
+        className={ mode === 'view' ? 'active' : '' }
+        onClick={ () => setMode('view') }>View</div>
+      <div
+        className={ mode === 'edit' ? 'active' : '' }
+        onClick={ () => setMode('edit') }>Edit</div>
     </div>
     {mode === 'view' && <View item={ item } />}
     {mode === 'edit' && <Editor item={ item } />}

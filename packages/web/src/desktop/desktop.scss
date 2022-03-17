@@ -29,14 +29,14 @@
     .item {
       padding: 5px 20px;
       cursor: pointer;
-    }
 
-    .item:hover{
-      background-color: var(--slashnotes-hover-background-color);
-    }
+      &:hover{
+        background-color: var(--slashnotes-hover-background-color);
+      }
 
-    .item.active {
-      background-color: var(--slashnotes-active-background-color);
+      &.active {
+        background-color: var(--slashnotes-active-background-color);
+      }
     }
   }
 
@@ -59,15 +59,44 @@
         border-right: 1px solid var(--slashnotes-main-background-color);
         padding: 0 10px;
         cursor: pointer;
-      }
 
-      .tab.active {
-        background-color: var(--slashnotes-main-background-color);
+        &.active {
+          background-color: var(--slashnotes-main-background-color);
+        }
       }
     }
 
     .show {
       height: calc(100% - 30px);
+
+      .mode {
+        float: left;
+        overflow: hidden;
+        background-color: var(--slashnotes-hover-background-color);
+        margin: 10px 0 10px 20px;
+
+        div {
+          cursor: pointer;
+          float: left;
+          padding: 4px 10px;
+          border-right: 1px solid var(--slashnotes-main-background-color);
+
+          &.active{
+            background-color: var(--slashnotes-active-background-color);
+          }
+        }
+      }
+
+      .view {
+        clear: both;
+        padding: 0 20px;
+      }
+
+      .editor {
+        clear: both;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
