@@ -4,9 +4,11 @@ import { Editor } from './editor'
 import { View } from './view'
 
 export function Show ({ item }: {
-  item: Item
+  item?: Item
 }) {
   const [mode, setMode] = useState<'view' | 'edit'>('view')
+
+  if (!item) return null
 
   return <div className="show">
     <div className='mode'>

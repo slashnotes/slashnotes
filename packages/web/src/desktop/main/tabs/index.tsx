@@ -1,8 +1,6 @@
-import { Item } from '..'
-import { Tabs } from './tabs'
-import { Show } from './show'
+import { Tab, CurrentTab } from './tab'
 
-export function Main ({
+export function Tabs ({
   items,
   setItems,
   currentItem,
@@ -13,15 +11,19 @@ export function Main ({
   currentItem?: Item
   setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
 }) {
-  return <div className="main">
-    <Tabs
-      items={ items }
+  if (!items.length) return null
+
+  return <div className='tabs'>
+    {items.map(item => (currentItem === item ? <CurrentTab
+      key={ item.path }
+      item={ item }
+      setItems={ setItems }
+    /> : <Tab
+      key={ item.path }
+      item={ item }
       setItems={ setItems }
       currentItem={ currentItem }
       setCurrentItem={ setCurrentItem }
-    />
-    <Show
-      item={ currentItem }
-    />
+    />))}
   </div>
 }

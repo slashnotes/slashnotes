@@ -26,16 +26,18 @@
       padding: 10px;
     }
 
-    .item {
-      padding: 5px 20px;
-      cursor: pointer;
+    .node {
+      .name {
+        padding: 5px 0;
+        cursor: pointer;
 
-      &:hover{
-        background-color: var(--slashnotes-hover-background-color);
-      }
+        &:hover{
+          background-color: var(--slashnotes-hover-background-color);
+        }
 
-      &.active {
-        background-color: var(--slashnotes-active-background-color);
+        &.current {
+          background-color: var(--slashnotes-active-background-color);
+        }
       }
     }
   }
@@ -57,11 +59,38 @@
       .tab {
         float: left;
         border-right: 1px solid var(--slashnotes-main-background-color);
-        padding: 0 10px;
-        cursor: pointer;
 
-        &.active {
+        .name {
+          float: left;
+          cursor: pointer;
+          margin-left: 10px;
+        }
+
+        .close {
+          float: right;
+          cursor: pointer;
+          margin: 5px;
+          height: 25px;
+          line-height: 25px;
+          width: 25px;
+          text-align: center;
+
+          &:hover {
+            background-color: var(--slashnotes-hover-background-color);
+          }
+        }
+
+        &.current {
           background-color: var(--slashnotes-main-background-color);
+
+          .name input {
+            background-color: transparent;
+            color: var(--slashnotes-color);
+            border: 0 none;
+            font-family: monospace;
+            font-size: inherit;
+            outline: none;
+          }
         }
       }
     }

@@ -8,6 +8,13 @@ import {
 import { compileSync } from '@mdx-js/mdx'
 import { createRequire } from 'module'
 
+type Item = {
+  type: string
+  path: string
+  paths: string[]
+}
+
+
 const require = createRequire(import.meta.url)
 
 const ContentTypes = {
@@ -16,12 +23,7 @@ const ContentTypes = {
   '.css': 'text/css',
 }
 
-type FilePath = {
-  path: string
-  type: string
-}
-
-function findFiles (dir: string, cwd: string, prev?: FilePath[]): FilePath[] {
+function findFiles (dir: string, cwd: string, prev?: Item[]): Item[] {
   if (!prev) prev = []
 
   readdirSync(dir).forEach(f => {
@@ -33,6 +35,7 @@ function findFiles (dir: string, cwd: string, prev?: FilePath[]): FilePath[] {
       const path = subPath.replace(cwd, '').replace('.md', '')
       prev.push({
         path,
+        paths: path.split(sep),
         type: 'default'
       })
     }
