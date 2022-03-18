@@ -23,7 +23,7 @@
     "build": "tsup-node src/index.ts --format esm"
   },
   "dependencies": {
-    "commander": "^9.0.0",
+    "commander": "^9.1.0",
     "@slashnotes/server": "*",
     "@slashnotes/web": "*"
   },
