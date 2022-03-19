@@ -27,16 +27,16 @@
     }
 
     .node {
+      &.current {
+        background-color: var(--slashnotes-active-background-color);
+      }
+
       .name {
         padding: 5px 0;
         cursor: pointer;
 
         &:hover{
           background-color: var(--slashnotes-hover-background-color);
-        }
-
-        &.current {
-          background-color: var(--slashnotes-active-background-color);
         }
       }
     }

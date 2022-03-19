@@ -2,7 +2,8 @@ import { action } from 'libs/action'
 import {
   Fragment, useEffect, useState
 } from 'react'
-import { runSync } from '@mdx-js/mdx'
+import { MDXProvider } from '@mdx-js/react'
+import { run } from '@mdx-js/mdx'
 import * as runtime from 'react/jsx-runtime.js'
 
 export function View ({ item }: { item: Item }) {
@@ -11,9 +12,14 @@ export function View ({ item }: { item: Item }) {
 
   useEffect(() => {
     action('view', item).then(data => {
-      setMdxModule(runSync(data.body, runtime))
+      console.log(data.body)
+      run(data.body, runtime)
+        .then(mdxModule => setMdxModule(mdxModule))
+        .catch(err => {
+          console.error(err)
+        })
     })
   }, [item])
 
-  return <div className="view"><Content /></div>
+  return <div className="view"><MDXProvider><Content /></MDXProvider></div>
 }

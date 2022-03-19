@@ -110,12 +110,21 @@ export class Server {
               }
               case 'view': {
                 const data = JSON.parse(body)
+                const file = readFileSync(join(this.folder, data.path + '.md')).toString()
                 res
                   .writeHead(200, headers)
-                  .end(JSON.stringify({ body: String(compileSync(readFileSync(join(this.folder, data.path + '.md')).toString(), { outputFormat: 'function-body' })) }))
+                  .end(JSON.stringify({
+                    body: String(compileSync(file, {
+                      outputFormat: 'function-body',
+                      useDynamicImport: true,
+                      format: 'mdx',
+                      development: true,
+                    }))
+                  }))
                 return
               }
               default:
+                console.error('Unknown command', command)
                 res
                   .writeHead(500, {
                     ...headers,
@@ -145,6 +154,7 @@ export class Server {
             })
             .end('Not found file: ' + path)
         } catch (error) {
+          console.error(error)
           res
             .writeHead(500, {
               ...headers,

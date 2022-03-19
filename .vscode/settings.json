@@ -16,5 +16,8 @@
   "cSpell.words": [
     "slashnotes",
     "tsup"
-  ]
+  ],
+  "files.associations": {
+    "*.md": "mdx"
+  }
 }
