@@ -1,9 +1,9 @@
 import { createServer as createHttpServer } from 'http'
 import {
-  readFileSync, existsSync, readdirSync, statSync, writeFileSync
+  readFileSync, existsSync, readdirSync, statSync, writeFileSync, renameSync, mkdirSync
 } from 'fs'
 import {
-  join, extname, sep
+  join, extname, sep, dirname,
 } from 'path'
 import { compileSync } from '@mdx-js/mdx'
 import { createRequire } from 'module'
@@ -121,6 +121,17 @@ export class Server {
                       development: true,
                     }))
                   }))
+                return
+              }
+              case 'rename': {
+                const data = JSON.parse(body)
+                const dir = join(this.folder, dirname(data.to))
+                if (!existsSync(dir))
+                  mkdirSync(dir, { recursive: true })
+                renameSync(join(this.folder, data.from + '.md'), join(this.folder, data.to + '.md'))
+                res
+                  .writeHead(201, headers)
+                  .end()
                 return
               }
               default:

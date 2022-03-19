@@ -22,11 +22,13 @@ export function FileTree ({
   setItems,
   currentItem,
   setCurrentItem,
+  loadAllItems,
 }: {
   items: Item[]
   setItems: React.Dispatch<React.SetStateAction<Item[]>>
   currentItem?: Item
   setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
+  loadAllItems(): void
 }) {
   const [tree, setTree] = useState<TNode[]>([])
 
@@ -69,24 +71,28 @@ export function FileTree ({
     setTree(tree)
   }, [items])
 
-  return tree.map(node => (node.type === 'folder' ?
-    <FolderNode
-      key={ node.type + node.name }
-      name={ node.name }
-      subs={ node.subs }
-      depth={ 1 }
-      currentItem={ currentItem }
-      setCurrentItem={ setCurrentItem }
-      setItems={ setItems }
-    />
-    :
-    <FileNode
-      key={ node.type + node.name }
-      name={ node.name }
-      item={ node.item }
-      depth={ 1 }
-      currentItem={ currentItem }
-      setCurrentItem={ setCurrentItem }
-      setItems={ setItems }
-    />))
+  return <>{
+    tree.map(node => (node.type === 'folder' ?
+      <FolderNode
+        key={ node.type + node.name }
+        name={ node.name }
+        subs={ node.subs }
+        depth={ 1 }
+        currentItem={ currentItem }
+        setCurrentItem={ setCurrentItem }
+        setItems={ setItems }
+        loadAllItems={ loadAllItems }
+      />
+      :
+      <FileNode
+        key={ node.type + node.name }
+        name={ node.name }
+        item={ node.item }
+        depth={ 1 }
+        currentItem={ currentItem }
+        setCurrentItem={ setCurrentItem }
+        setItems={ setItems }
+        loadAllItems={ loadAllItems }
+      />))
+  }</>
 }

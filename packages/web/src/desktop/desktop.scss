@@ -1,6 +1,7 @@
 :root {
   --slashnotes-background-color: #252526;
   --slashnotes-color: #ccc;
+  --slashnotes-secondary-color: #666;
   --slashnotes-hover-background-color: #2B2D2E;
   --slashnotes-active-background-color: #37363D;
   --slashnotes-main-background-color: #1E1E1E;
@@ -31,12 +32,53 @@
         background-color: var(--slashnotes-active-background-color);
       }
 
-      .name {
+      .view {
         padding: 5px 0;
         cursor: pointer;
 
         &:hover{
           background-color: var(--slashnotes-hover-background-color);
+        }
+
+        .rename-button {
+          float: right;
+          margin-right: 10px;
+          color: var(--slashnotes-secondary-color);
+
+          &:hover {
+            color: var(--slashnotes-color);
+          }
+        }
+      }
+
+      .rename {
+        overflow: hidden;
+        padding: 5px 0;
+
+        input {
+          float: left;
+          margin-left: 20px;
+          background-color: transparent;
+          border: 0 none;
+          color: var(--slashnotes-color);
+          font-size: inherit;
+          width: calc(100% - 60px);
+          outline: none;
+          font-family: monospace;
+        }
+
+        .button {
+          color: var(--slashnotes-secondary-color);
+          float: left;
+          cursor: pointer;
+
+          &:hover {
+            color: var(--slashnotes-color);
+          }
+        }
+
+        .save-button {
+          margin-right: 8px;
         }
       }
     }

@@ -8,6 +8,7 @@ export function FolderNode ({
   currentItem,
   setItems,
   setCurrentItem,
+  loadAllItems,
 }:{
   name: string
   subs: TNode[]
@@ -15,10 +16,11 @@ export function FolderNode ({
   currentItem?: Item
   setItems: React.Dispatch<React.SetStateAction<Item[]>>
   setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
+  loadAllItems(): void
 }) {
   return <div className={ 'node folder' }>
     <div
-      className='name'
+      className='view'
       style={ { paddingLeft: (depth * 20) + 'px' } }
     >{name}/</div>
     <div className='subs'>
@@ -31,6 +33,7 @@ export function FolderNode ({
           currentItem={ currentItem }
           setCurrentItem={ setCurrentItem }
           setItems={ setItems }
+          loadAllItems={ loadAllItems }
         />
         :
         <FileNode
@@ -41,6 +44,7 @@ export function FolderNode ({
           currentItem={ currentItem }
           setItems={ setItems }
           setCurrentItem={ setCurrentItem }
+          loadAllItems={ loadAllItems }
         />))}
     </div>
   </div>

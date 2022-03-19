@@ -1,11 +1,26 @@
 import './desktop.scss'
 import { Sidebar } from './sidebar'
 import { Main } from './main'
-import { useEffect, useState } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
+import { action } from 'libs/action'
 
 export function Desktop () {
   const [items, setItems] = useState<Item[]>([])
   const [currentItem, setCurrentItem] = useState<Item>()
+  const [allItems, setAllItems] = useState<Item[]>([])
+
+  const loadAllItems = useCallback(() => {
+    action('list')
+      .then(setAllItems)
+  }, [])
+
+  useEffect(() => {
+    loadAllItems()
+  }, [])
 
   useEffect(() => {
     if (!items.length) {
@@ -19,10 +34,11 @@ export function Desktop () {
 
   return <div className='desktop'>
     <Sidebar
-      items={ items }
       setItems={ setItems }
       currentItem={ currentItem }
       setCurrentItem={ setCurrentItem }
+      allItems={ allItems }
+      loadAllItems={ loadAllItems }
     />
     <Main
       items={ items }
