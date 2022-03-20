@@ -1,9 +1,12 @@
-name: Build Nightly Package
+name: Build Nightly Packages
 
 on:
   push:
     branches:
       - main
+    paths:
+      - packages/**
+      - .github/workflows/build-nightly.yml
 
 jobs:
   build:
