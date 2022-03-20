@@ -77,6 +77,7 @@ export function FileTree ({
         key={ node.type + node.name }
         name={ node.name }
         subs={ node.subs }
+        paths={ [node.name] }
         depth={ 1 }
         currentItem={ currentItem }
         setCurrentItem={ setCurrentItem }

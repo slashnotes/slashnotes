@@ -27,12 +27,23 @@
       padding: 10px;
     }
 
+    .button {
+      color: var(--slashnotes-secondary-color);
+      float: right;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--slashnotes-color);
+      }
+    }
+
     .node {
       &.current {
         background-color: var(--slashnotes-active-background-color);
       }
 
       .view {
+        overflow: hidden;
         padding: 5px 0;
         cursor: pointer;
 
@@ -40,14 +51,16 @@
           background-color: var(--slashnotes-hover-background-color);
         }
 
-        .rename-button {
-          float: right;
-          margin-right: 10px;
-          color: var(--slashnotes-secondary-color);
+        .name {
+          float: left;
+        }
 
-          &:hover {
-            color: var(--slashnotes-color);
-          }
+        .rename-button {
+          margin-right: 10px;
+        }
+
+        .add-button {
+          margin-right: 10px;
         }
       }
 
@@ -58,7 +71,7 @@
         input {
           float: left;
           margin-left: 20px;
-          background-color: transparent;
+          background-color: var(--slashnotes-hover-background-color);
           border: 0 none;
           color: var(--slashnotes-color);
           font-size: inherit;
@@ -67,14 +80,25 @@
           font-family: monospace;
         }
 
-        .button {
-          color: var(--slashnotes-secondary-color);
-          float: right;
-          cursor: pointer;
+        .cancel-button {
+          margin: 0 8px;
+        }
+      }
 
-          &:hover {
-            color: var(--slashnotes-color);
-          }
+      .add {
+        overflow: hidden;
+        padding: 5px 0;
+
+        input {
+          float: left;
+          margin-left: 20px;
+          background-color: var(--slashnotes-hover-background-color);
+          border: 0 none;
+          color: var(--slashnotes-color);
+          font-size: inherit;
+          width: calc(100% - 64px);
+          outline: none;
+          font-family: monospace;
         }
 
         .cancel-button {

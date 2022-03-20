@@ -134,6 +134,18 @@ export class Server {
                   .end()
                 return
               }
+              case 'add': {
+                const data = JSON.parse(body)
+                const path = data.path.join(sep)
+                const dir = join(this.folder, dirname(path))
+                if (!existsSync(dir))
+                  mkdirSync(dir, { recursive: true })
+                writeFileSync(join(this.folder, path + '.md'), '')
+                res
+                  .writeHead(201, headers)
+                  .end()
+                return
+              }
               default:
                 console.error('Unknown command', command)
                 res

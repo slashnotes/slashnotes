@@ -44,6 +44,7 @@ function RenameMode ({
             break
         }
       } }
+      autoFocus
     />
     <div
       className='button cancel-button'
@@ -81,17 +82,19 @@ export function FileNode ({
     {mode === 'view' && <div
       className='view'
       style={ { paddingLeft: (depth * 20) + 'px' } }
-      onClick={ () => {
-        setItems(prev => (prev.includes(item) ? prev : [...prev, item]))
-        setCurrentItem(item)
-      } }>
-      {name}
+    >
       <div
-        className="rename-button"
-        title="Rename"
+        className='name'
         onClick={ () => {
-          setMode('rename')
+          setItems(prev => (prev.includes(item) ? prev : [...prev, item]))
+          setCurrentItem(item)
         } }
+        style={ { width: `${300 - (depth * 20) - 26}px` } }
+      >{name}</div>
+      <div
+        className="rename-button button"
+        title="Rename"
+        onClick={ () => setMode('rename') }
       >R</div>
     </div>}
     {mode === 'rename' && <RenameMode
