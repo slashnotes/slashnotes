@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "@slashnotes/web": "*",
-    "@mdx-js/mdx": "*"
+    "@mdx-js/mdx": "*",
+    "@faasjs/logger": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

@@ -7,6 +7,7 @@ import {
 } from 'path'
 import { compileSync } from '@mdx-js/mdx'
 import { createRequire } from 'module'
+import { Logger } from '@faasjs/logger'
 
 type Item = {
   type: string
@@ -14,7 +15,6 @@ type Item = {
   path: string
   paths: string[]
 }
-
 
 const require = createRequire(import.meta.url)
 
@@ -50,17 +50,19 @@ function findFiles (dir: string, cwd: string, prev?: Item[]): Item[] {
 export class Server {
   public readonly port: number | string
   public readonly folder: string
+  public readonly logger: Logger
 
   constructor () {
     this.port = process.env.PORT || 3000
     this.folder = process.env.FOLDER ? join(process.cwd(), process.env.FOLDER) : process.cwd()
+    this.logger = new Logger()
   }
 
   public async start () {
     const webPath = require.resolve('@slashnotes/web').replace(/index.js$/, 'dist')
 
     createHttpServer(async (req, res) => {
-      console.log(req.method, req.url)
+      this.logger.debug('%s %s', req.method, req.url)
       const headers: {
         [key: string]: string
       } = {
@@ -199,6 +201,8 @@ export class Server {
       })
     })
       .listen(this.port)
+
+    this.logger.info('Slashnotes running at http://localhost:' + this.port)
 
     return this
   }

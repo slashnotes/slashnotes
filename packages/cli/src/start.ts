@@ -2,7 +2,6 @@ import type { Command } from 'commander'
 import { Server } from '@slashnotes/server'
 
 export function action () {
-  console.log('Start')
   const server = new Server()
   server.start()
 }
