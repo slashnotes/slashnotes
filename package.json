@@ -1,11 +1,13 @@
 {
   "name": "slashnotes",
+  "version": "1.0.0",
   "scripts": {
     "test": "CI=true jest",
     "build": "npm run build --workspaces",
     "dev": "concurrently \"npm:dev:*\"",
     "dev:server": "nodemon --exec 'npm run dev --workspace=packages/server' --watch packages/server/src --ext ts",
-    "dev:web": "npm run dev --workspace=packages/web"
+    "dev:web": "npm run dev --workspace=packages/web",
+    "build:nightly": "node build-nightly.js"
   },
   "workspaces": [
     "packages/*"

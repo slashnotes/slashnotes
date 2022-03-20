@@ -1,0 +1,23 @@
+name: Build Nightly Package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+      - name: Install
+        run: |
+          npm install -g npm@latest
+          npm install
+      - run: npm run build:nightly
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
