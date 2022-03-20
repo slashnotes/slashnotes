@@ -46,11 +46,15 @@ function RenameMode ({
       } }
     />
     <div
-      className='button save-button'
-      onClick={ submit }>Y</div>
-    <div
       className='button cancel-button'
-      onClick={ () => setMode('view') }>X</div>
+      onClick={ () => setMode('view') }
+      title='Cancel'
+    >X</div>
+    <div
+      className='button save-button'
+      onClick={ submit }
+      title='Save'
+    >Y</div>
   </div>
 }
 

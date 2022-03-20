@@ -62,14 +62,14 @@
           border: 0 none;
           color: var(--slashnotes-color);
           font-size: inherit;
-          width: calc(100% - 60px);
+          width: calc(100% - 64px);
           outline: none;
           font-family: monospace;
         }
 
         .button {
           color: var(--slashnotes-secondary-color);
-          float: left;
+          float: right;
           cursor: pointer;
 
           &:hover {
@@ -77,8 +77,8 @@
           }
         }
 
-        .save-button {
-          margin-right: 8px;
+        .cancel-button {
+          margin: 0 8px;
         }
       }
     }

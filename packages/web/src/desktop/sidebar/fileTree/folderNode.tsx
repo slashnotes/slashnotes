@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { TNode } from '.'
 import { FileNode } from './fileNode'
 
@@ -18,13 +19,18 @@ export function FolderNode ({
   setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
   loadAllItems(): void
 }) {
+  const [collapsed, setCollapsed] = useState(false)
+
   return <div className={ 'node folder' }>
     <div
       className='view'
       style={ { paddingLeft: (depth * 20) + 'px' } }
+      onClick={ () => setCollapsed(prev => !prev) }
     >{name}/</div>
-    <div className='subs'>
-      {subs!.map((sub, i) => (sub.type === 'folder' ?
+    <div
+      className='subs'
+      style={ { display: collapsed ? 'none' : 'block' } }>
+      {subs.map((sub, i) => (sub.type === 'folder' ?
         <FolderNode
           key={ sub.type + sub.name }
           name={ sub.name }
