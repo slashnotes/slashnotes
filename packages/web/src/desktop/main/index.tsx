@@ -1,4 +1,3 @@
-import { Item } from '..'
 import { Tabs } from './tabs'
 import { Show } from './show'
 

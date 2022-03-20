@@ -139,11 +139,11 @@ export class Server {
               }
               case 'add': {
                 const data = JSON.parse(body)
-                const path = data.path.join(sep)
+                const path = data.paths.join(sep)
                 const dir = join(this.folder, dirname(path))
                 if (!existsSync(dir))
                   mkdirSync(dir, { recursive: true })
-                writeFileSync(join(this.folder, path + '.md'), '')
+                writeFileSync(join(this.folder, path + '.md'), `# ${data.paths[data.paths.length - 1]}\n`)
                 res
                   .writeHead(201, headers)
                   .end()

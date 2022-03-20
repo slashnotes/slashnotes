@@ -3,6 +3,54 @@ import { useCallback, useState } from 'react'
 import { TNode } from '.'
 import { FileNode } from './fileNode'
 
+function AddMode ({
+  paths,
+  setIsAdd,
+  loadAllItems,
+}: {
+  paths: string[]
+  setIsAdd: React.Dispatch<React.SetStateAction<boolean>>
+  loadAllItems(): void
+}) {
+  const [name, setName] = useState<string>()
+  const add = useCallback(() => {
+    action('add', { paths: [...paths, name] })
+      .then(() => {
+        setIsAdd(false)
+        loadAllItems()
+      })
+  }, [paths, name])
+
+  return <div className='add'>
+    <input
+      autoFocus
+      value={ name }
+      onChange={ e => setName(e.target.value) }
+      onKeyUp={ e => {
+        switch (e.code) {
+          case 'Enter':
+            console.log(name)
+            if (name) add()
+            break
+          case 'Escape':
+            setIsAdd(false)
+            break
+        }
+      } }
+    />
+    <div
+      className='button cancel-button'
+      title='Cancel'
+      onClick={ () => setIsAdd(false) }
+    >X</div>
+    <div
+      className='button save-button'
+      title='Save'
+      onClick={ add }
+    >Y</div>
+  </div>
+}
+
 export function FolderNode ({
   name,
   subs,
@@ -24,12 +72,6 @@ export function FolderNode ({
 }) {
   const [collapsed, setCollapsed] = useState(false)
   const [isAdd, setIsAdd] = useState(false)
-  const [path, setPath] = useState<string>()
-  const add = useCallback(() => {
-    action('add', { path: [...paths, path] })
-    setIsAdd(false)
-    loadAllItems()
-  }, [])
 
   return <div className='node folder'>
     <div
@@ -49,33 +91,11 @@ export function FolderNode ({
         onClick={ () => setIsAdd(true) }
       >+</div>
     </div>
-    {isAdd && <div className='add'>
-      <input
-        autoFocus
-        value={ path }
-        onChange={ e => setPath(e.target.value) }
-        onKeyUp={ e => {
-          switch (e.code) {
-            case 'Enter':
-              add()
-              break
-            case 'Escape':
-              setIsAdd(false)
-              break
-          }
-        } }
-      />
-      <div
-        className='button cancel-button'
-        title='Cancel'
-        onClick={ () => setIsAdd(false) }
-      >X</div>
-      <div
-        className='button save-button'
-        title='Save'
-        onClick={ add }
-      >Y</div>
-    </div>}
+    {isAdd && <AddMode
+      paths={ paths }
+      setIsAdd={ setIsAdd }
+      loadAllItems={ loadAllItems }
+    />}
     <div
       className='subs'
       style={ { display: collapsed ? 'none' : 'block' } }>
