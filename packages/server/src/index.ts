@@ -22,6 +22,7 @@ const ContentTypes = {
   '.html': 'text/html',
   '.js': 'application/javascript',
   '.css': 'text/css',
+  '.ttf': 'font/ttf',
 }
 
 function findFiles (dir: string, cwd: string, prev?: Item[]): Item[] {
