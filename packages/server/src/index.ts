@@ -148,10 +148,19 @@ export class Server {
                 const dir = join(this.folder, dirname(path))
                 if (!existsSync(dir))
                   mkdirSync(dir, { recursive: true })
-                writeFileSync(join(this.folder, path + '.md'), `# ${data.paths[data.paths.length - 1]}\n`)
+                const name = data.paths[data.paths.length - 1]
+                writeFileSync(join(this.folder, path + '.md'), `# ${name}\n`)
                 res
-                  .writeHead(201, headers)
-                  .end()
+                  .writeHead(200, headers)
+                  .end(JSON.stringify({
+                    item: {
+                      type: 'default',
+                      name,
+                      path,
+                      paths: data.paths,
+                    },
+                    body: readFileSync(join(this.folder, path + '.md')).toString()
+                  }))
                 return
               }
               case 'delete': {

@@ -23,6 +23,7 @@ export function Desktop () {
   }, [])
 
   useEffect(() => {
+    console.log(items)
     if (!items.length) {
       setCurrentItem(undefined)
       return

@@ -14,7 +14,6 @@ export function Sidebar ({
   loadAllItems(): void
 }) {
   return <div className='sidebar'>
-    <div className='header'>Files</div>
     <FileTree
       items={ allItems }
       setItems={ setItems }

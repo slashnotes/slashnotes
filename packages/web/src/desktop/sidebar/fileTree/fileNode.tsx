@@ -24,11 +24,11 @@ function RenameMode ({
         loadAllItems()
         setMode('view')
       })
-  }, [])
+  }, [item.path, path])
 
   useEffect(() => {
     setPath(item.path)
-  }, [item])
+  }, [item.path])
 
   return <div className='rename'>
     <input
@@ -78,7 +78,9 @@ export function FileNode ({
 }) {
   const [mode, setMode] = useState<Mode>('view')
 
-  return <div className={ `node file ${item === currentItem ? 'current' : ''}` }>
+  useEffect(() => setMode('view'), [item])
+
+  return <div className={ `node file ${item.path === currentItem?.path ? 'current' : ''}` }>
     {mode === 'view' && <div
       className='view'
       style={ { paddingLeft: (depth * 20) + 'px' } }
@@ -116,7 +118,10 @@ export function FileNode ({
         className='button submit-button'
         onClick={ () => {
           action('delete', { path: item.path })
-            .then(loadAllItems)
+            .then(() => {
+              setItems(prev => prev.filter(i => i.path !== item.path))
+              loadAllItems()
+            })
         } }
       >Y</div>
     </div>}

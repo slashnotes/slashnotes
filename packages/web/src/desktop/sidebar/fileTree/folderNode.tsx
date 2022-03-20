@@ -3,21 +3,28 @@ import { useCallback, useState } from 'react'
 import { TNode } from '.'
 import { FileNode } from './fileNode'
 
-function AddMode ({
+export function AddMode ({
   paths,
   setIsAdd,
   loadAllItems,
+  setCurrentItem,
+  setItems,
 }: {
   paths: string[]
   setIsAdd: React.Dispatch<React.SetStateAction<boolean>>
   loadAllItems(): void
+  setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
+  setItems: React.Dispatch<React.SetStateAction<Item[]>>
 }) {
-  const [name, setName] = useState<string>()
+  const [name, setName] = useState<string>('')
+
   const add = useCallback(() => {
     action('add', { paths: [...paths, name] })
-      .then(() => {
+      .then((res) => {
         setIsAdd(false)
         loadAllItems()
+        setItems(prev => [...prev, res.item])
+        setCurrentItem(res.item)
       })
   }, [paths, name])
 
@@ -29,7 +36,6 @@ function AddMode ({
       onKeyUp={ e => {
         switch (e.code) {
           case 'Enter':
-            console.log(name)
             if (name) add()
             break
           case 'Escape':
@@ -95,6 +101,8 @@ export function FolderNode ({
       paths={ paths }
       setIsAdd={ setIsAdd }
       loadAllItems={ loadAllItems }
+      setCurrentItem={ setCurrentItem }
+      setItems={ setItems }
     />}
     <div
       className='subs'

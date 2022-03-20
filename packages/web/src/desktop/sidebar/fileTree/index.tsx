@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useEffect, useState } from 'react'
 import { FileNode } from './fileNode'
-import { FolderNode } from './folderNode'
+import { AddMode, FolderNode } from './folderNode'
 
 export type TFolderNode = {
   type: 'folder'
@@ -31,6 +31,7 @@ export function FileTree ({
   loadAllItems(): void
 }) {
   const [tree, setTree] = useState<TNode[]>([])
+  const [isAdd, setIsAdd] = useState(false)
 
   useEffect(() => {
     const tree: TNode[] = []
@@ -71,8 +72,23 @@ export function FileTree ({
     setTree(tree)
   }, [items])
 
-  return <>{
-    tree.map(node => (node.type === 'folder' ?
+  return <div className='file-tree'>
+    <div className='header'>Files
+      <div
+        className='button add-button'
+        onClick={ () => setIsAdd(prev => !prev) }>
+        +
+      </div>
+    </div>
+    {isAdd &&
+      <AddMode
+        paths={ [] }
+        setIsAdd={ setIsAdd }
+        loadAllItems={ loadAllItems }
+        setCurrentItem={ setCurrentItem }
+        setItems={ setItems }
+      />}
+    {tree.map(node => (node.type === 'folder' ?
       <FolderNode
         key={ node.type + node.name }
         name={ node.name }
@@ -94,6 +110,6 @@ export function FileTree ({
         setCurrentItem={ setCurrentItem }
         setItems={ setItems }
         loadAllItems={ loadAllItems }
-      />))
-  }</>
+      />))}
+  </div>
 }

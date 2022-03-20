@@ -35,6 +35,18 @@
       }
     }
 
+    input {
+      float: left;
+      margin-left: 20px;
+      background-color: var(--slashnotes-hover-background-color);
+      border: 0 none;
+      color: var(--slashnotes-color);
+      font-size: inherit;
+      width: calc(100% - 70px);
+      outline: none;
+      font-family: monospace;
+    }
+
     .node {
       &.current {
         background-color: var(--slashnotes-active-background-color);
@@ -70,26 +82,14 @@
         overflow: hidden;
         padding: 5px 0;
 
-        input {
-          float: left;
-          margin-left: 20px;
-          background-color: var(--slashnotes-hover-background-color);
-          border: 0 none;
-          color: var(--slashnotes-color);
-          font-size: inherit;
-          width: calc(100% - 64px);
-          outline: none;
-          font-family: monospace;
-        }
-
         .cancel-button {
-          margin: 0 8px;
+          margin: 0 10px;
         }
       }
 
       .delete {
         clear: both;
-        padding: 0 10px 5px 20px;
+        padding: 5px 10px 5px 20px;
         font-style: italic;
         cursor: default;
 
@@ -99,29 +99,17 @@
         }
 
         .submit-button {
-          margin-right: 8px;
+          margin-right: 10px;
         }
       }
+    }
 
-      .add {
-        overflow: hidden;
-        padding: 5px 0;
+    .add {
+      overflow: hidden;
+      padding: 5px 0;
 
-        input {
-          float: left;
-          margin-left: 20px;
-          background-color: var(--slashnotes-hover-background-color);
-          border: 0 none;
-          color: var(--slashnotes-color);
-          font-size: inherit;
-          width: calc(100% - 64px);
-          outline: none;
-          font-family: monospace;
-        }
-
-        .cancel-button {
-          margin: 0 8px;
-        }
+      .cancel-button {
+        margin: 0 10px;
       }
     }
   }
