@@ -1,0 +1,21 @@
+{
+  "name": "slashnotes",
+  "version": "1.0.0",
+  "license": "AGPL-3.0",
+  "homepage": "https://github.com/slashnotes/slashnotes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slashnotes/slashnotes.git",
+    "directory": "packages/slashnotes"
+  },
+  "bugs": {
+    "url": "https://github.com/slashnotes/slashnotes/issues"
+  },
+  "dependencies": {
+    "@slashnotes/cli": "*"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
+  }
+}

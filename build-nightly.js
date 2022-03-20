@@ -8,7 +8,8 @@ const newVersion = version + '-nightly-' + Date.now()
 for (const name of [
   'cli',
   'server',
-  'web'
+  'web',
+  // 'slashnotes',
 ]) {
   const packagePath = __dirname + '/packages/' + name + '/package.json'
   const package = JSON.parse(readFileSync(packagePath).toString())
