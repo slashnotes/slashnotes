@@ -47,7 +47,7 @@ export function FolderNode ({
         className='add-button button'
         title='Add'
         onClick={ () => setIsAdd(true) }
-      >A</div>
+      >+</div>
     </div>
     {isAdd && <div className='add'>
       <input

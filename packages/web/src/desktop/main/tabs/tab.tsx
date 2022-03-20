@@ -14,7 +14,7 @@ export function Tab ({
     <div
       className="name"
       onClick={ () => setCurrentItem(item) }>
-      {item.path}
+      {item.name}
     </div>
     <div
       className="close"
@@ -32,7 +32,7 @@ export function CurrentTab ({
 }) {
   return <div className='tab current'>
     <div className="name">
-      {item.path}
+      {item.name}
     </div>
     <div
       className="close"

@@ -3,7 +3,7 @@ import {
   useCallback, useEffect, useState
 } from 'react'
 
-type Mode = 'view' | 'rename'
+type Mode = 'view' | 'rename' | 'delete'
 
 function RenameMode ({
   item,
@@ -89,8 +89,13 @@ export function FileNode ({
           setItems(prev => (prev.includes(item) ? prev : [...prev, item]))
           setCurrentItem(item)
         } }
-        style={ { width: `${300 - (depth * 20) - 26}px` } }
+        style={ { width: `${300 - (depth * 20) - 46}px` } }
       >{name}</div>
+      <div
+        className="delete-button button"
+        title="Delete"
+        onClick={ () => setMode('delete') }
+      >D</div>
       <div
         className="rename-button button"
         title="Rename"
@@ -102,5 +107,18 @@ export function FileNode ({
       setMode={ setMode }
       loadAllItems={ loadAllItems }
     />}
+    {mode === 'delete' && <div className='delete'>
+      Sure to delete <span>{name}</span>?
+      <div
+        className='button cancel-button'
+        onClick={ () => setMode('view') }>N</div>
+      <div
+        className='button submit-button'
+        onClick={ () => {
+          action('delete', { path: item.path })
+            .then(loadAllItems)
+        } }
+      >Y</div>
+    </div>}
   </div>
 }

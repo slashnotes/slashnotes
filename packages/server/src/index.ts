@@ -1,6 +1,6 @@
 import { createServer as createHttpServer } from 'http'
 import {
-  readFileSync, existsSync, readdirSync, statSync, writeFileSync, renameSync, mkdirSync
+  readFileSync, existsSync, readdirSync, statSync, writeFileSync, renameSync, mkdirSync, rmSync
 } from 'fs'
 import {
   join, extname, sep, dirname,
@@ -10,6 +10,7 @@ import { createRequire } from 'module'
 
 type Item = {
   type: string
+  name: string
   path: string
   paths: string[]
 }
@@ -33,9 +34,11 @@ function findFiles (dir: string, cwd: string, prev?: Item[]): Item[] {
 
     if (f.endsWith('.md')) {
       const path = subPath.replace(cwd, '').replace('.md', '')
+      const paths = path.split(sep)
       prev.push({
         path,
-        paths: path.split(sep),
+        name: paths[paths.length - 1],
+        paths,
         type: 'default'
       })
     }
@@ -141,6 +144,14 @@ export class Server {
                 if (!existsSync(dir))
                   mkdirSync(dir, { recursive: true })
                 writeFileSync(join(this.folder, path + '.md'), '')
+                res
+                  .writeHead(201, headers)
+                  .end()
+                return
+              }
+              case 'delete': {
+                const data = JSON.parse(body)
+                rmSync(join(this.folder, data.path + '.md'))
                 res
                   .writeHead(201, headers)
                   .end()
