@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "silvenon.mdx"
+    "dbaeumer.vscode-eslint"
   ]
 }

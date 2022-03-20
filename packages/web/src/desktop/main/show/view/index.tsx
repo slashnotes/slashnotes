@@ -12,7 +12,6 @@ export function View ({ item }: { item: Item }) {
 
   useEffect(() => {
     action('view', item).then(data => {
-      console.log(data.body)
       run(data.body, runtime)
         .then(mdxModule => setMdxModule(mdxModule))
         .catch(err => {

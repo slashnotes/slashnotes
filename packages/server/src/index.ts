@@ -8,6 +8,7 @@ import {
 import { compileSync } from '@mdx-js/mdx'
 import { createRequire } from 'module'
 import { Logger } from '@faasjs/logger'
+import remarkGfm from 'remark-gfm'
 
 type Item = {
   type: string
@@ -125,6 +126,7 @@ export class Server {
                       useDynamicImport: true,
                       format: 'mdx',
                       development: true,
+                      remarkPlugins: [remarkGfm]
                     }))
                   }))
                 return

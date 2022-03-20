@@ -23,7 +23,8 @@
   "dependencies": {
     "@slashnotes/web": "*",
     "@mdx-js/mdx": "*",
-    "@faasjs/logger": "*"
+    "@faasjs/logger": "*",
+    "remark-gfm": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
