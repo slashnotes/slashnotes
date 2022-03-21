@@ -1,15 +1,11 @@
-import { useState } from 'react'
+import { DesktopContext } from 'desktop/context'
+import { useContext } from 'react'
 
-export function Tab ({
-  item,
-  setItems,
-  setCurrentItem,
-}: {
+export function Tab ({ item }: {
   item: Item
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>
-  currentItem?: Item
-  setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
 }) {
+  const { setCurrentItem, setItems } = useContext(DesktopContext)
+
   return <div className='tab'>
     <div
       className="name"
@@ -23,13 +19,11 @@ export function Tab ({
   </div>
 }
 
-export function CurrentTab ({
-  item,
-  setItems,
-}: {
+export function CurrentTab ({ item }: {
   item: Item
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>
 }) {
+  const { setItems } = useContext(DesktopContext)
+
   return <div className='tab current'>
     <div className="name">
       {item.name}

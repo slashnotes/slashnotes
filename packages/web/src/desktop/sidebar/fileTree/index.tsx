@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useEffect, useState } from 'react'
+import { DesktopContext } from 'desktop/context'
+import {
+  useContext, useEffect, useState
+} from 'react'
 import { FileNode } from './fileNode'
 import { AddMode, FolderNode } from './folderNode'
 
@@ -17,26 +20,20 @@ export type TFileNode = {
 
 export type TNode = TFolderNode | TFileNode
 
-export function FileTree ({
-  items,
-  setItems,
-  currentItem,
-  setCurrentItem,
-  loadAllItems,
-}: {
-  items: Item[]
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>
-  currentItem?: Item
-  setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
-  loadAllItems(): void
-}) {
+export function FileTree () {
+  const { allItems, loadAllItems } = useContext(DesktopContext)
   const [tree, setTree] = useState<TNode[]>([])
   const [isAdd, setIsAdd] = useState(false)
 
   useEffect(() => {
+    loadAllItems()
+  }, [])
+
+  useEffect(() => {
+    console.log(allItems)
     const tree: TNode[] = []
 
-    items.forEach(item => {
+    allItems.forEach(item => {
       if (item.paths.length === 1)
         tree.push({
           name: item.paths[0],
@@ -70,7 +67,7 @@ export function FileTree ({
     })
 
     setTree(tree)
-  }, [items])
+  }, [allItems])
 
   return <div className='file-tree'>
     <div className='header'>Files
@@ -84,9 +81,6 @@ export function FileTree ({
       <AddMode
         paths={ [] }
         setIsAdd={ setIsAdd }
-        loadAllItems={ loadAllItems }
-        setCurrentItem={ setCurrentItem }
-        setItems={ setItems }
       />}
     {tree.map(node => (node.type === 'folder' ?
       <FolderNode
@@ -95,10 +89,6 @@ export function FileTree ({
         subs={ node.subs }
         paths={ [node.name] }
         depth={ 1 }
-        currentItem={ currentItem }
-        setCurrentItem={ setCurrentItem }
-        setItems={ setItems }
-        loadAllItems={ loadAllItems }
       />
       :
       <FileNode
@@ -106,10 +96,6 @@ export function FileTree ({
         name={ node.name }
         item={ node.item }
         depth={ 1 }
-        currentItem={ currentItem }
-        setCurrentItem={ setCurrentItem }
-        setItems={ setItems }
-        loadAllItems={ loadAllItems }
       />))}
   </div>
 }

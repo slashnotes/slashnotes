@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { DesktopContext } from 'desktop/context'
+import { useContext, useState } from 'react'
 import { Editor } from './editor'
 import { View } from './view'
 
-export function Show ({ item }: {
-  item?: Item
-}) {
+export function Show () {
+  const { currentItem } = useContext(DesktopContext)
   const [mode, setMode] = useState<'view' | 'edit'>('view')
 
-  if (!item) return null
+  if (!currentItem) return null
 
   return <div className="show">
     <div className='mode'>
@@ -18,7 +18,7 @@ export function Show ({ item }: {
         className={ mode === 'edit' ? 'active' : '' }
         onClick={ () => setMode('edit') }>Edit</div>
     </div>
-    {mode === 'view' && <View item={ item } />}
-    {mode === 'edit' && <Editor item={ item } />}
+    {mode === 'view' && <View item={ currentItem } />}
+    {mode === 'edit' && <Editor item={ currentItem } />}
   </div>
 }

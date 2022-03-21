@@ -1,25 +1,7 @@
 import { FileTree } from './fileTree'
 
-export function Sidebar ({
-  allItems,
-  setItems,
-  currentItem,
-  setCurrentItem,
-  loadAllItems,
-}: {
-  allItems: Item[]
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>
-  currentItem?: Item
-  setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
-  loadAllItems(): void
-}) {
+export function Sidebar () {
   return <div className='sidebar'>
-    <FileTree
-      items={ allItems }
-      setItems={ setItems }
-      currentItem={ currentItem }
-      setCurrentItem={ setCurrentItem }
-      loadAllItems={ loadAllItems }
-    />
+    <FileTree />
   </div>
 }

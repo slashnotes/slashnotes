@@ -12,6 +12,7 @@ export function View ({ item }: { item: Item }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    setLoading(true)
     action('view', item).then(data => {
       run(data.body, runtime)
         .then(mdxModule => {
@@ -22,6 +23,9 @@ export function View ({ item }: { item: Item }) {
           console.error(err)
         })
     })
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    return () => {}
   }, [item])
 
   return <div className="view">{loading ? <div>Loading..</div> : <MDXProvider><Content /></MDXProvider>}</div>

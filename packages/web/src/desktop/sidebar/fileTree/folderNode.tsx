@@ -1,23 +1,21 @@
 import { action } from 'libs/action'
 import {
-  useCallback, useEffect, useState
+  useCallback, useContext, useEffect, useState
 } from 'react'
 import { TNode } from '.'
 import { FileNode } from './fileNode'
+import { DesktopContext } from 'desktop/context'
 
 export function AddMode ({
   paths,
   setIsAdd,
-  loadAllItems,
-  setCurrentItem,
-  setItems,
 }: {
   paths: string[]
   setIsAdd: React.Dispatch<React.SetStateAction<boolean>>
-  loadAllItems(): void
-  setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>
 }) {
+  const {
+    loadAllItems, setCurrentItem, setItems
+  } = useContext(DesktopContext)
   const [name, setName] = useState<string>('')
   const [placeholder, setPlaceholder] = useState<string>('')
 
@@ -76,19 +74,11 @@ export function FolderNode ({
   subs,
   paths,
   depth,
-  currentItem,
-  setItems,
-  setCurrentItem,
-  loadAllItems,
 }:{
   name: string
   subs: TNode[]
   paths: string[]
   depth: number
-  currentItem?: Item
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>
-  setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
-  loadAllItems(): void
 }) {
   const [collapsed, setCollapsed] = useState(false)
   const [isAdd, setIsAdd] = useState(false)
@@ -114,9 +104,6 @@ export function FolderNode ({
     {isAdd && <AddMode
       paths={ paths }
       setIsAdd={ setIsAdd }
-      loadAllItems={ loadAllItems }
-      setCurrentItem={ setCurrentItem }
-      setItems={ setItems }
     />}
     <div
       className='subs'
@@ -128,10 +115,6 @@ export function FolderNode ({
           subs={ sub.subs }
           paths={ [...paths, sub.name] }
           depth={ depth + 1 }
-          currentItem={ currentItem }
-          setCurrentItem={ setCurrentItem }
-          setItems={ setItems }
-          loadAllItems={ loadAllItems }
         />
         :
         <FileNode
@@ -139,10 +122,6 @@ export function FolderNode ({
           name={ sub.name }
           item={ sub.item }
           depth={ depth + 1 }
-          currentItem={ currentItem }
-          setItems={ setItems }
-          setCurrentItem={ setCurrentItem }
-          loadAllItems={ loadAllItems }
         />))}
     </div>
   </div>

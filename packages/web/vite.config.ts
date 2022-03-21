@@ -9,6 +9,10 @@ export default defineConfig({
       {
         find: 'libs',
         replacement: __dirname + '/src/libs',
+      },
+      {
+        find: 'desktop',
+        replacement: __dirname + '/src/desktop',
       }
     ]
   }

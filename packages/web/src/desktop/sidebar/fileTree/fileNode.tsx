@@ -1,6 +1,7 @@
+import { DesktopContext } from 'desktop/context'
 import { action } from 'libs/action'
 import {
-  useCallback, useEffect, useState
+  useCallback, useContext, useEffect, useState
 } from 'react'
 
 type Mode = 'view' | 'rename' | 'delete'
@@ -8,12 +9,11 @@ type Mode = 'view' | 'rename' | 'delete'
 function RenameMode ({
   item,
   setMode,
-  loadAllItems,
 } : {
   item: Item
   setMode: React.Dispatch<React.SetStateAction<Mode>>
-  loadAllItems(): void
 }) {
+  const { loadAllItems } = useContext(DesktopContext)
   const [path, setPath] = useState(item.path)
   const submit = useCallback(() => {
     action('rename', {
@@ -63,20 +63,15 @@ export function FileNode ({
   name,
   item,
   depth,
-  currentItem,
-  setItems,
-  setCurrentItem,
-  loadAllItems,
 } : {
   name: string
   item: Item
   depth: number
-  currentItem?: Item
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>
-  setCurrentItem: React.Dispatch<React.SetStateAction<Item | undefined>>
-  loadAllItems(): void
 }) {
   const [mode, setMode] = useState<Mode>('view')
+  const {
+    setItems, currentItem, setCurrentItem, loadAllItems
+  } = useContext(DesktopContext)
 
   useEffect(() => setMode('view'), [item])
 
@@ -107,7 +102,6 @@ export function FileNode ({
     {mode === 'rename' && <RenameMode
       item={ item }
       setMode={ setMode }
-      loadAllItems={ loadAllItems }
     />}
     {mode === 'delete' && <div className='delete'>
       Sure to delete <span>{name}</span>?
