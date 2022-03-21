@@ -1,5 +1,7 @@
 import { action } from 'libs/action'
-import { useCallback, useState } from 'react'
+import {
+  useCallback, useEffect, useState
+} from 'react'
 import { TNode } from '.'
 import { FileNode } from './fileNode'
 
@@ -17,16 +19,27 @@ export function AddMode ({
   setItems: React.Dispatch<React.SetStateAction<Item[]>>
 }) {
   const [name, setName] = useState<string>('')
+  const [placeholder, setPlaceholder] = useState<string>('')
+
+  useEffect(() => {
+    const date = new Date()
+    setPlaceholder(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' +
+      date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds())
+  }, [])
 
   const add = useCallback(() => {
-    action('add', { paths: [...paths, name] })
+    action('add', { paths: [...paths, name || placeholder] })
       .then((res) => {
         setIsAdd(false)
         loadAllItems()
         setItems(prev => [...prev, res.item])
         setCurrentItem(res.item)
       })
-  }, [paths, name])
+  }, [
+    paths,
+    name,
+    placeholder
+  ])
 
   return <div className='add'>
     <input
@@ -36,13 +49,14 @@ export function AddMode ({
       onKeyUp={ e => {
         switch (e.code) {
           case 'Enter':
-            if (name) add()
+            add()
             break
           case 'Escape':
             setIsAdd(false)
             break
         }
       } }
+      placeholder={ placeholder }
     />
     <div
       className='button cancel-button'
