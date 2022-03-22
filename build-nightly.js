@@ -17,4 +17,5 @@ for (const name of [
   writeFileSync(packagePath, JSON.stringify(package, null, 2))
   execSync('npm run build -w packages/' + name, { stdio: 'inherit' })
   execSync('npm publish -w packages/' + name + ' --access public', { stdio: 'inherit' })
+  execSync(`npm dist-tag add ${package.name}@${newVersion} nightly`)
 }
