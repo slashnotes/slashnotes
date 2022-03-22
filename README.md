@@ -17,8 +17,7 @@ A note taking app for your whole life.
 ## For early access
 
 1. Create a new repository
-2. In local directory, run `npx @slashnotes/cli init`
-3. In local directory, run `npm start` then visit http://localhost:3000
+2. In the repo directory, run `npx slashnotes init`
 
 ## Road map
 
