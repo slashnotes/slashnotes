@@ -9,7 +9,7 @@ for (const name of [
   'cli',
   'server',
   'web',
-  // 'slashnotes',
+  'slashnotes',
 ]) {
   const packagePath = __dirname + '/packages/' + name + '/package.json'
   const package = JSON.parse(readFileSync(packagePath).toString())
