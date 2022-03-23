@@ -5,10 +5,9 @@ import {
 import {
   join, extname, sep, dirname,
 } from 'path'
-import { compileSync } from '@mdx-js/mdx'
 import { createRequire } from 'module'
 import { Logger } from '@faasjs/logger'
-import remarkGfm from 'remark-gfm'
+import { parse } from './markdown'
 
 type Item = {
   type: string
@@ -17,14 +16,16 @@ type Item = {
   paths: string[]
 }
 
-const require = createRequire(import.meta.url)
-
-const ContentTypes = {
+const ContentTypes: {
+  [key: string]: string
+} = {
   '.html': 'text/html',
   '.js': 'application/javascript',
   '.css': 'text/css',
   '.ttf': 'font/ttf',
 }
+
+const require = createRequire(import.meta.url)
 
 function findFiles (dir: string, cwd: string, prev?: Item[]): Item[] {
   if (!prev) prev = []
@@ -120,15 +121,7 @@ export class Server {
                 const file = readFileSync(join(this.folder, data.path + '.md')).toString()
                 res
                   .writeHead(200, headers)
-                  .end(JSON.stringify({
-                    body: String(compileSync(file, {
-                      outputFormat: 'function-body',
-                      useDynamicImport: true,
-                      format: 'mdx',
-                      development: true,
-                      remarkPlugins: [remarkGfm]
-                    }))
-                  }))
+                  .end(JSON.stringify({ body: parse(file) }))
                 return
               }
               case 'rename': {
@@ -201,7 +194,7 @@ export class Server {
               'Content-Type': 'text/plain'
             })
             .end('Not found file: ' + path)
-        } catch (error) {
+        } catch (error: any) {
           console.error(error)
           res
             .writeHead(500, {

@@ -1,8 +1,9 @@
 {
-  "name": "slashnotes",
+  "name": "@slashnotes/mono",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "test": "CI=true jest",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
     "build": "npm run build --workspaces --if-present",
     "dev": "concurrently \"npm:dev:*\"",
     "dev:server": "nodemon --exec 'npm run dev --workspace=packages/server' --watch packages/server/src --ext ts",
@@ -37,6 +38,7 @@
     "transform": {
       ".(jsx|tsx?)": "@faasjs/jest"
     },
+    "extensionsToTreatAsEsm": [".ts"],
     "collectCoverageFrom": [
       "**/packages/**/*.ts",
       "**/packages/**/*.tsx",
@@ -49,7 +51,8 @@
       "!*.d.ts"
     ],
     "moduleNameMapper": {
-      "\\.(css|less|sass|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "@faasjs/jest"
+      "\\.(css|less|sass|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "@faasjs/jest",
+      "@slashnotes/(.*)": "<rootDir>/packages/$1"
     }
   },
   "engines": {

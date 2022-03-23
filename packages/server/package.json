@@ -22,9 +22,17 @@
   },
   "dependencies": {
     "@slashnotes/web": "*",
-    "@mdx-js/mdx": "*",
     "@faasjs/logger": "*",
-    "remark-gfm": "*"
+    "remark": "*",
+    "remark-gfm": "*",
+    "remark-mdx": "*",
+    "unified": "*",
+    "remark-parse": "*",
+    "remark-rehype": "*",
+    "rehype-sanitize": "*",
+    "rehype-stringify": "*",
+    "remark-frontmatter": "*",
+    "remark-html": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

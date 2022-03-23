@@ -1,8 +1,14 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "target": "esnext",
+    "declaration": true,
+    "strict": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "strictNullChecks": false,
+    "jsx": "react-jsx",
     "moduleResolution": "node",
+    "target": "ES2019",
+    "module": "ESNext",
     "baseUrl": ".",
     "paths": {
       "@slashnotes/*": ["./packages/*/src"]
