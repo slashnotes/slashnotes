@@ -8,7 +8,7 @@
     "dev": "concurrently \"npm:dev:*\"",
     "dev:server": "nodemon --exec 'npm run dev --workspace=packages/server' --watch packages/server/src --ext ts",
     "dev:web": "npm run dev --workspace=packages/web",
-    "publish:nightly": "node nightly.js"
+    "publish:nightly": "node nightly.cjs"
   },
   "workspaces": [
     "packages/*"
