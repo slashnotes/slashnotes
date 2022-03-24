@@ -13,6 +13,6 @@ describe('mark', () => {
   })
 
   it('javascript', () => {
-    expect(parse('1 + 1 = {1+1}')).toEqual('<p>1 + 1 = <script type="module">1+1</script></p>\n')
+    expect(parse('1 + 1 = {1+1}')).toMatch(/<p>1 \+ 1 = <span id="user-content-[0-9a-z-]+"><\/span><script type="module">document\.getElementById\('user-content-[0-9a-z-]+'\)\.innerHTML = 1\+1<\/script><\/p>/)
   })
 })

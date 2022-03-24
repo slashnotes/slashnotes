@@ -12,9 +12,9 @@ for (const name of [
   'slashnotes',
 ]) {
   const packagePath = __dirname + '/packages/' + name + '/package.json'
-  const package = JSON.parse(readFileSync(packagePath).toString())
-  package.version = newVersion
-  writeFileSync(packagePath, JSON.stringify(package, null, 2))
+  const pkg = JSON.parse(readFileSync(packagePath).toString())
+  pkg.version = newVersion
+  writeFileSync(packagePath, JSON.stringify(pkg, null, 2))
   execSync('npm publish -w packages/' + name + ' --access public', { stdio: 'inherit' })
-  execSync(`npm dist-tag add ${package.name}@${newVersion} nightly`)
+  execSync(`npm dist-tag add ${pkg.name}@${newVersion} nightly`)
 }
