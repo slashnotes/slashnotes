@@ -22,14 +22,50 @@
 
 ## JSX
 
-export const Cat = function () {
-  return <img src="https://placekitten.com/200/200" />
-}
+```js
+export const Cat = () => <img src="https://placekitten.com/200/200" />
+
+<Cat />
+```
+
+=>
+
+export const Cat = () => <img src="https://placekitten.com/200/200" />
 
 <Cat />
 
 ## ESM
 
-import dayjs from 'https://esm.sh/dayjs'
+```js
+import dayjs from 'https://esm.run/dayjs'
 
 Tomorrow is { dayjs().add(1, 'd').format('dddd, YYYY-MM-DD.') }
+```
+
+=>
+
+import dayjs from 'https://esm.run/dayjs'
+
+Tomorrow is { dayjs().add(1, 'd').format('dddd, YYYY-MM-DD.') }
+
+## React
+
+```js
+export const Clicker = () => {
+  const [count, setCount] = useState(0)
+
+  return <div>
+    <button onClick={() => setCount(p => p + 1)}>Clicked {count} times</button>
+  </div>
+}
+```
+
+export const Clicker = () => {
+  const [count, setCount] = useState(0)
+
+  return <div>
+    <button onClick={() => setCount(p => p + 1)}>Clicked {count} times</button>
+  </div>
+}
+
+<Clicker />

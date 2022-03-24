@@ -1,28 +1,31 @@
 import { action } from 'libs/action'
 import {
-  useEffect, useRef, useState
+  Fragment, useEffect, useState
 } from 'react'
+import { run } from '@mdx-js/mdx'
+import * as runtime from 'react/jsx-runtime.js'
 
 export function View ({ item }: { item: Item }) {
+  const [mdxModule, setMdxModule] = useState<{ default: typeof Fragment }>()
+  const Content = mdxModule ? mdxModule.default : Fragment
   const [loading, setLoading] = useState(true)
-  const divRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!divRef.current) return
-
-    divRef.current.innerHTML = ''
     setLoading(true)
     action('view', item).then(data => {
-      if (!divRef.current) return
-      setLoading(false)
-      const slotHtml = document.createRange().createContextualFragment(data.body)
-      divRef.current.innerHTML = ''
-      divRef.current.appendChild(slotHtml)
+      run(data.body, runtime)
+        .then(mdxModule => {
+          setMdxModule(mdxModule)
+          setLoading(false)
+        })
+        .catch(err => {
+          console.error(err)
+        })
     })
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     return () => {}
   }, [item])
 
-  return <div className="view">{loading && <div>Loading..</div>}<div ref={ divRef }></div></div>
+  return <div className="view">{loading ? <div>Loading..</div> : <Content />}</div>
 }

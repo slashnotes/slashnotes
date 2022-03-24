@@ -25,14 +25,8 @@
     "@faasjs/logger": "*",
     "remark": "*",
     "remark-gfm": "*",
-    "remark-mdx": "*",
-    "unified": "*",
-    "remark-parse": "*",
-    "remark-rehype": "*",
-    "rehype-sanitize": "*",
-    "rehype-stringify": "*",
-    "remark-frontmatter": "*",
-    "remark-html": "*"
+    "@mdx-js/mdx": "*",
+    "rehype-highlight": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

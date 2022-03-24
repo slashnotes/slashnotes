@@ -23,7 +23,8 @@
   "dependencies": {
     "react": "*",
     "react-dom": "*",
-    "monaco-editor": "*"
+    "monaco-editor": "*",
+    "@mdx-js/mdx": "*"
   },
   "devDependencies": {
     "@types/react": "*",
