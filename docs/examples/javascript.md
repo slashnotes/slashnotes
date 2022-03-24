@@ -2,7 +2,23 @@
 
 ## Math
 
-1 + Math.PI = { 1 + Math.PI }
+`1 + Math.PI`
+
+=> { 1 + Math.PI }
+
+## Function
+
+```js
+(function now() {
+  return Date.now()
+})()
+```
+
+=> {
+  (function now() {
+    return Date.now()
+  })()
+}
 
 ## JSX
 
@@ -16,4 +32,4 @@ export const Cat = function () {
 
 import dayjs from 'https://esm.sh/dayjs'
 
-Tommorrow is { dayjs().add(1, 'd').format('dddd, YYYY-MM-DD.') }
+Tomorrow is { dayjs().add(1, 'd').format('dddd, YYYY-MM-DD.') }

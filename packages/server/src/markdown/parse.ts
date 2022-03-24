@@ -8,7 +8,7 @@ import { randomUUID } from 'crypto'
 
 const test: Plugin = function () {
   function replaceMdxTextExpression (node: any) {
-    if (node.type === 'mdxTextExpression') {
+    if (['mdxTextExpression', 'mdxFlowExpression'].includes(node.type)) {
       node.type = 'script'
       node.children = []
     } else if (node.children)
@@ -54,7 +54,7 @@ export function parse (body: string): string {
               children: [
                 {
                   type: 'text',
-                  value: `document.getElementById('user-content-${id}').innerHTML = ${node.value}`
+                  value: `document.getElementById('user-content-${id}').innerHTML=${node.value}`
                 }
               ]
             },
