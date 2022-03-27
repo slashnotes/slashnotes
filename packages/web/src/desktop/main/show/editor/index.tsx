@@ -1,7 +1,7 @@
 import {
   useEffect, useRef, useState
 } from 'react'
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
+import { monaco } from '@slashnotes/monaco-editor-esm'
 import { action } from 'libs/action'
 import './worker'
 

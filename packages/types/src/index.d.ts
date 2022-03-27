@@ -1,5 +1,11 @@
 export type SlashnotesFile = {
+  /**
+   * extension of the file, e.g. `.md`
+   */
   extname: string
+  /**
+   * read the file
+   */
   read(props: {
     folder: string
     path: string
@@ -8,6 +14,7 @@ export type SlashnotesFile = {
     folder: string
     path: string
   }): string
+
 }
 
 export type SlashnotesItem = {
