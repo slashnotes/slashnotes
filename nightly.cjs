@@ -7,6 +7,7 @@ const newVersion = version + '-nightly-' + Date.now()
 
 for (const name of [
   'cli',
+  'md',
   'server',
   'web',
   'slashnotes',
