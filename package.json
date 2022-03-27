@@ -2,6 +2,7 @@
   "name": "@slashnotes/mono",
   "version": "1.0.0",
   "type": "module",
+  "license": "AGPL-3.0",
   "scripts": {
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
     "ci": "node --experimental-vm-modules ./node_modules/.bin/jest --ci --coverage",
