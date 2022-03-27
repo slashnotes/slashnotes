@@ -16,5 +16,8 @@
     "target": "ES2019",
     "module": "ESNext",
     "composite": true
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }

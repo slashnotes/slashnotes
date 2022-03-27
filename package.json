@@ -4,10 +4,10 @@
   "type": "module",
   "license": "AGPL-3.0",
   "scripts": {
-    "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
-    "ci": "node --experimental-vm-modules ./node_modules/.bin/jest --ci --coverage",
+    "test": "npm run test --workspaces --if-present",
+    "ci": "npm run ci --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",
-    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo",
+    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo packages/*/coverage",
     "dev": "concurrently \"npm:dev:*\"",
     "dev:server": "npm run dev --workspace=packages/server",
     "dev:web": "npm run dev --workspace=packages/web",
@@ -17,11 +17,9 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@faasjs/jest": "*",
     "@faasjs/eslint-config-recommended": "*",
     "@faasjs/eslint-config-react": "*",
-    "concurrently": "*",
-    "typescript": "*"
+    "concurrently": "*"
   },
   "eslintConfig": {
     "ignorePatterns": [
@@ -34,28 +32,6 @@
       "@faasjs/recommended",
       "@faasjs/react"
     ]
-  },
-  "jest": {
-    "transform": {
-      ".(jsx|tsx?)": "@faasjs/jest"
-    },
-    "extensionsToTreatAsEsm": [".ts", ".tsx"],
-    "coverageProvider": "v8",
-    "collectCoverageFrom": [
-      "**/packages/**/*.ts",
-      "**/packages/**/*.tsx",
-      "!**/local/**"
-    ],
-    "testRegex": "/*\\.test\\.tsx?$",
-    "coveragePathIgnorePatterns": [
-      "/dist/",
-      "/__tests__/",
-      "!*.d.ts"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|less|sass|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "@faasjs/jest",
-      "@slashnotes/(.*)": "<rootDir>/packages/$1"
-    }
   },
   "engines": {
     "npm": ">=8.0.0",

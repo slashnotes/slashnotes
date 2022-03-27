@@ -18,7 +18,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "test": "node --experimental-specifier-resolution=node --loader ts-node/esm ../../node_modules/.bin/uvu src/__tests__",
+    "ci": "c8 --all=true --reporter=lcov --reporter=text npm test"
   },
   "dependencies": {
     "remark": "*",
@@ -27,7 +29,10 @@
     "rehype-highlight": "*"
   },
   "devDependencies": {
-    "@slashnotes/types": "*"
+    "@slashnotes/types": "*",
+    "ts-node": "*",
+    "uvu": "*",
+    "c8": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
