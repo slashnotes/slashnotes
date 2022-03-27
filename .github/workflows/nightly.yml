@@ -22,9 +22,12 @@ jobs:
         run: |
           npm install -g npm@latest
           npm install
-      # - name: Test
-      #   run: |
-      #     CI=true npm run test
+      - name: Test
+        run: |
+          npm run ci
+      - uses: codecov/codecov-action@v2.1.0
+        with:
+          token: ${{ secrets.CODECOVTOKEN }}
       - name: Build
         run: |
           npm run build

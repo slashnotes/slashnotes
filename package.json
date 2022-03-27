@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
+    "ci": "node --experimental-vm-modules ./node_modules/.bin/jest --ci --coverage",
     "build": "npm run build --workspaces --if-present",
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo",
     "dev": "concurrently \"npm:dev:*\"",
