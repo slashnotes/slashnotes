@@ -39,6 +39,7 @@
       ".(jsx|tsx?)": "@faasjs/jest"
     },
     "extensionsToTreatAsEsm": [".ts", ".tsx"],
+    "coverageProvider": "v8",
     "collectCoverageFrom": [
       "**/packages/**/*.ts",
       "**/packages/**/*.tsx",
