@@ -7,6 +7,7 @@ export default defineConfig({
     coverage: {
       all: true,
       extension: ['ts', 'tsx'],
+      reporter: ['text', 'lcov']
     }
   }
 })
