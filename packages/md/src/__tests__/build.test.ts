@@ -1,0 +1,6 @@
+import { build } from '../build'
+
+it('should work', () => {
+  expect(build('```ts\nconst a = 1\n```'))
+    .toEqual('<pre data-reactroot=""><code class="hljs language-ts"><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>\n</code></pre>')
+})

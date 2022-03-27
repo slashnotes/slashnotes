@@ -1,3 +1,21 @@
 {
-  "extends": "../../tsconfig.json"
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "paths": {
+      "@slashnotes/server": [
+        "../../server/src/index"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "../types"
+    },
+    {
+      "path": "../server"
+    }
+  ]
 }

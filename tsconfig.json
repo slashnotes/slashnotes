@@ -1,17 +1,20 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "declarationMap": true,
     "strict": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
     "strictNullChecks": false,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipDefaultLibCheck": true,
+		"incremental": true,
+    "skipLibCheck": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "target": "ES2019",
     "module": "ESNext",
-    "baseUrl": ".",
-    "paths": {
-      "@slashnotes/*": ["./packages/*/src"]
-    }
+    "composite": true
   }
 }

@@ -7,24 +7,12 @@
     "paths": {
       "@slashnotes/types": [
         "../../types/src/index"
-      ],
-      "@slashnotes/md": [
-        "../../md/src/index"
       ]
     }
-  },
-  "ts-node": {
-    "esm": true,
-    "require": ["tsconfig-paths/register"],
-    "experimentalResolverFeatures": true,
-    "experimentalPathMapping": "esm"
   },
   "references": [
     {
       "path": "../types"
-    },
-    {
-      "path": "../md"
     }
   ]
 }

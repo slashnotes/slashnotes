@@ -7,13 +7,11 @@ import {
 } from 'path'
 import { createRequire } from 'module'
 import { Logger } from '@faasjs/logger'
-import { parse } from './markdown'
+import { Md } from '@slashnotes/md'
+import { SlashnotesItem, SlashnotesFile } from '@slashnotes/types'
 
-type Item = {
-  type: string
-  name: string
-  path: string
-  paths: string[]
+type Files = {
+  [type: string]: SlashnotesFile
 }
 
 const ContentTypes: {
@@ -27,22 +25,23 @@ const ContentTypes: {
 
 const require = createRequire(import.meta.url)
 
-function findFiles (dir: string, cwd: string, prev?: Item[]): Item[] {
+function findFiles (dir: string, cwd: string, files: Files, prev?: SlashnotesItem[]): SlashnotesItem[] {
   if (!prev) prev = []
 
   readdirSync(dir).forEach(f => {
     const subPath = join(dir, f)
     if (statSync(subPath).isDirectory() && !subPath.includes('node_modules'))
-      return findFiles(subPath, cwd, prev)
+      return findFiles(subPath, cwd, files, prev)
 
-    if (f.endsWith('.md')) {
-      const path = subPath.replace(cwd, '').replace('.md', '')
+    const ext = extname(f)
+    if (files[ext]) {
+      const path = subPath.replace(cwd, '')
       const paths = path.split(sep)
       prev.push({
         path,
         name: paths[paths.length - 1],
         paths,
-        type: 'default'
+        type: ext
       })
     }
   })
@@ -54,11 +53,13 @@ export class Server {
   public readonly port: number | string
   public readonly folder: string
   public readonly logger: Logger
+  public readonly files: Files
 
-  constructor () {
-    this.port = process.env.PORT || 3000
+  constructor (options?: { port: number | string }) {
+    this.port = process.env.PORT || options?.port || 3000
     this.folder = process.env.FOLDER ? join(process.cwd(), process.env.FOLDER) : process.cwd()
     this.logger = new Logger()
+    this.files = { '.md': Md }
   }
 
   public async start () {
@@ -99,18 +100,18 @@ export class Server {
               case 'list':
                 res
                   .writeHead(200, headers)
-                  .end(JSON.stringify(findFiles(this.folder, this.folder + sep)))
+                  .end(JSON.stringify(findFiles(this.folder, this.folder + sep, this.files)))
                 return
               case 'read': {
                 const data = JSON.parse(body)
                 res
                   .writeHead(200, headers)
-                  .end(JSON.stringify({ body: readFileSync(join(this.folder, data.path + '.md')).toString() }))
+                  .end(JSON.stringify({ body: readFileSync(join(this.folder, data.path)).toString() }))
                 return
               }
               case 'write': {
                 const data = JSON.parse(body)
-                writeFileSync(join(this.folder, data.path + '.md'), data.body)
+                writeFileSync(join(this.folder, data.path), data.body)
                 res
                   .writeHead(201, headers)
                   .end()
@@ -118,10 +119,13 @@ export class Server {
               }
               case 'view': {
                 const data = JSON.parse(body)
-                const file = readFileSync(join(this.folder, data.path + '.md')).toString()
+                if (!this.files[data.type]) throw Error('Unknown file type: ' + data.type)
                 res
                   .writeHead(200, headers)
-                  .end(JSON.stringify({ body: parse(file) }))
+                  .end(this.files[data.type].parse({
+                    folder: this.folder,
+                    path: data.path
+                  }))
                 return
               }
               case 'rename': {
@@ -129,7 +133,7 @@ export class Server {
                 const dir = join(this.folder, dirname(data.to))
                 if (!existsSync(dir))
                   mkdirSync(dir, { recursive: true })
-                renameSync(join(this.folder, data.from + '.md'), join(this.folder, data.to + '.md'))
+                renameSync(join(this.folder, data.from), join(this.folder, data.to))
                 res
                   .writeHead(201, headers)
                   .end()
@@ -137,28 +141,28 @@ export class Server {
               }
               case 'add': {
                 const data = JSON.parse(body)
-                const path = data.paths.join(sep)
+                const path = data.paths.join(sep) + '.md'
                 const dir = join(this.folder, dirname(path))
                 if (!existsSync(dir))
                   mkdirSync(dir, { recursive: true })
                 const name = data.paths[data.paths.length - 1]
-                writeFileSync(join(this.folder, path + '.md'), `# ${name}\n`)
+                writeFileSync(join(this.folder, path), `# ${name.replace('.md', '')}\n`)
                 res
                   .writeHead(200, headers)
                   .end(JSON.stringify({
                     item: {
-                      type: 'default',
+                      type: '.md',
                       name,
                       path,
                       paths: data.paths,
                     },
-                    body: readFileSync(join(this.folder, path + '.md')).toString()
+                    body: readFileSync(join(this.folder, path)).toString()
                   }))
                 return
               }
               case 'delete': {
                 const data = JSON.parse(body)
-                rmSync(join(this.folder, data.path + '.md'))
+                rmSync(join(this.folder, data.path))
                 res
                   .writeHead(201, headers)
                   .end()

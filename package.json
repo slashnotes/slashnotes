@@ -5,8 +5,9 @@
   "scripts": {
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
     "build": "npm run build --workspaces --if-present",
+    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo",
     "dev": "concurrently \"npm:dev:*\"",
-    "dev:server": "nodemon --exec 'npm run dev --workspace=packages/server' --watch packages/server/src --ext ts",
+    "dev:server": "npm run dev --workspace=packages/server",
     "dev:web": "npm run dev --workspace=packages/web",
     "publish:nightly": "node nightly.cjs"
   },
@@ -17,10 +18,8 @@
     "@faasjs/jest": "*",
     "@faasjs/eslint-config-recommended": "*",
     "@faasjs/eslint-config-react": "*",
-    "tsup": "*",
     "concurrently": "*",
-    "nodemon": "*",
-    "ts-node": "*"
+    "typescript": "*"
   },
   "eslintConfig": {
     "ignorePatterns": [
@@ -38,7 +37,7 @@
     "transform": {
       ".(jsx|tsx?)": "@faasjs/jest"
     },
-    "extensionsToTreatAsEsm": [".ts"],
+    "extensionsToTreatAsEsm": [".ts", ".tsx"],
     "collectCoverageFrom": [
       "**/packages/**/*.ts",
       "**/packages/**/*.tsx",

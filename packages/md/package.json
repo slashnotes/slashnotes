@@ -1,21 +1,19 @@
 {
-  "name": "@slashnotes/cli",
+  "name": "@slashnotes/md",
   "version": "1.0.0",
   "license": "AGPL-3.0",
   "homepage": "https://github.com/slashnotes/slashnotes",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/slashnotes/slashnotes.git",
-    "directory": "packages/cli"
+    "directory": "packages/md"
   },
   "bugs": {
     "url": "https://github.com/slashnotes/slashnotes/issues"
   },
-  "bin": {
-    "slashnotes": "dist/index.js"
-  },
   "main": "dist/index.js",
   "type": "module",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -23,10 +21,13 @@
     "build": "tsc -b"
   },
   "dependencies": {
-    "commander": "^9.1.0",
-    "@slashnotes/server": "*",
-    "@slashnotes/md": "*",
-    "@slashnotes/web": "*"
+    "remark": "*",
+    "remark-gfm": "*",
+    "@mdx-js/mdx": "*",
+    "rehype-highlight": "*"
+  },
+  "devDependencies": {
+    "@slashnotes/types": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

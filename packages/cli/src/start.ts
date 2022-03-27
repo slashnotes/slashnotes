@@ -3,12 +3,18 @@ import { Server } from '@slashnotes/server'
 import { platform } from 'os'
 import { exec } from 'child_process'
 
-export function action () {
-  const server = new Server()
+export function action (
+  _: any,
+  options: {
+    port: number | string
+  }
+) {
+  const server = new Server(options)
   server.start()
+
   switch (platform()) {
     case 'darwin':
-      exec('open http://localhost:3000')
+      exec('open http://localhost:' + server.port)
       break
   }
 }
@@ -16,6 +22,7 @@ export function action () {
 export function Start (program: Command) {
   program
     .command('start')
-    .description('Start Slashnotes')
+    .description('Start server')
+    .option('-p --port <port>', 'Port to listen on', '3000')
     .action(action)
 }

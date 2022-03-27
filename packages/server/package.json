@@ -17,16 +17,21 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup-node src/index.ts --format esm",
-    "dev": "PORT=4000 FOLDER=../../docs node --experimental-specifier-resolution=node --loader ts-node/esm src/start.ts"
+    "build": "tsc -b",
+    "dev": "PORT=4000 FOLDER=../../docs node --experimental-specifier-resolution=node --loader ./loader.js src/start.ts"
   },
   "dependencies": {
+    "@slashnotes/md": "*",
     "@slashnotes/web": "*",
     "@faasjs/logger": "*",
-    "remark": "*",
-    "remark-gfm": "*",
-    "@mdx-js/mdx": "*",
-    "rehype-highlight": "*"
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "@slashnotes/types": "*",
+    "nodemon": "*",
+    "ts-node": "*",
+    "tsconfig-paths": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

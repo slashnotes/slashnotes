@@ -14,6 +14,7 @@
   },
   "eslint.packageManager": "npm",
   "cSpell.words": [
+    "faasjs",
     "rehype",
     "slashnotes",
     "tsup"
