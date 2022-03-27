@@ -4,10 +4,10 @@
   "type": "module",
   "license": "AGPL-3.0",
   "scripts": {
-    "test": "npm run test --workspaces --if-present",
-    "ci": "npm run ci --workspaces --if-present",
+    "test": "vitest run",
+    "ci": "vitest run --coverage",
     "build": "npm run build --workspaces --if-present",
-    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo packages/*/coverage",
+    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo coverage",
     "dev": "concurrently \"npm:dev:*\"",
     "dev:server": "npm run dev --workspace=packages/server",
     "dev:web": "npm run dev --workspace=packages/web",
@@ -19,7 +19,11 @@
   "devDependencies": {
     "@faasjs/eslint-config-recommended": "*",
     "@faasjs/eslint-config-react": "*",
-    "concurrently": "*"
+    "concurrently": "*",
+    "vitest": "*",
+    "@vitejs/plugin-react": "*",
+    "@testing-library/react": "*",
+    "jsdom": "*"
   },
   "eslintConfig": {
     "ignorePatterns": [

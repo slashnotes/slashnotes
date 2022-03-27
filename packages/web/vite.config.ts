@@ -15,5 +15,5 @@ export default defineConfig({
         replacement: __dirname + '/src/desktop',
       }
     ]
-  }
+  },
 })
