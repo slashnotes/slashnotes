@@ -23,7 +23,8 @@
     "vitest": "*",
     "@vitejs/plugin-react": "*",
     "@testing-library/react": "*",
-    "jsdom": "*"
+    "jsdom": "*",
+    "c8": "*"
   },
   "eslintConfig": {
     "ignorePatterns": [
