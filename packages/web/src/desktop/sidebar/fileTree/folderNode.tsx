@@ -26,7 +26,10 @@ export function AddMode ({
   }, [])
 
   const add = useCallback(() => {
-    action('add', { paths: [...paths, name || placeholder] })
+    action('add', {
+      paths: [...paths, name || placeholder],
+      type: '.md',
+    })
       .then((res) => {
         setIsAdd(false)
         loadAllItems()

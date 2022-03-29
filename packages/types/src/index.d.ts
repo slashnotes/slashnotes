@@ -4,17 +4,30 @@ export type SlashnotesFile = {
    */
   extname: string
   /**
-   * read the file
+   * read the file to editor
    */
   read(props: {
-    folder: string
-    path: string
+    filename: string
   }): string
-  parse(props: {
-    folder: string
-    path: string
+  /**
+   * write to local file
+   */
+  write(props: {
+    filename: string
+    body: string
+  }): void
+  /**
+   * render file to MDX component
+   */
+  render(props: {
+    filename: string
   }): string
-
+  /**
+   * create a new file
+   */
+  create(props: {
+    filename: string
+  })
 }
 
 export type SlashnotesItem = {

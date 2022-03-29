@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "build": "tsc -b",
-    "dev": "PORT=4000 FOLDER=../../docs nodemon --exec 'node --experimental-specifier-resolution=node --loader ./loader.js src/start.ts' --watch src"
+    "dev": "PORT=4000 FOLDER=../../docs nodemon --exec 'node --experimental-specifier-resolution=node --loader ./loader.js src/start.ts' --watch src --watch ../md/src -e ts"
   },
   "dependencies": {
     "@slashnotes/md": "*",

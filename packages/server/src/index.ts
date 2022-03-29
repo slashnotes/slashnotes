@@ -1,9 +1,9 @@
 import { createServer as createHttpServer } from 'http'
 import {
-  readFileSync, existsSync, readdirSync, statSync, writeFileSync, renameSync, mkdirSync, rmSync
+  readFileSync, existsSync, readdirSync, statSync, renameSync, mkdirSync, rmSync
 } from 'fs'
 import {
-  join, extname, sep, dirname,
+  join, extname, sep, dirname, basename
 } from 'path'
 import { createRequire } from 'module'
 import { Logger } from '@faasjs/logger'
@@ -58,6 +58,7 @@ export class Server {
   constructor (options?: { port: number | string }) {
     this.port = process.env.PORT || options?.port || 3000
     this.folder = process.env.FOLDER ? join(process.cwd(), process.env.FOLDER) : process.cwd()
+    console.log(this.folder)
     this.logger = new Logger()
     this.files = { '.md': Md }
   }
@@ -104,14 +105,23 @@ export class Server {
                 return
               case 'read': {
                 const data = JSON.parse(body)
+
+                if (!this.files[data.type]) throw Error('Unknown file type: ' + data.type)
+
                 res
                   .writeHead(200, headers)
-                  .end(JSON.stringify({ body: readFileSync(join(this.folder, data.path)).toString() }))
+                  .end(this.files[data.type].read({ filename: join(this.folder, data.path) }))
                 return
               }
               case 'write': {
                 const data = JSON.parse(body)
-                writeFileSync(join(this.folder, data.path), data.body)
+
+                if (!this.files[data.type]) throw Error('Unknown file type: ' + data.type)
+
+                this.files[data.type].write({
+                  filename: join(this.folder, data.path),
+                  body: data.body
+                })
                 res
                   .writeHead(201, headers)
                   .end()
@@ -119,13 +129,12 @@ export class Server {
               }
               case 'view': {
                 const data = JSON.parse(body)
+
                 if (!this.files[data.type]) throw Error('Unknown file type: ' + data.type)
+
                 res
                   .writeHead(200, headers)
-                  .end(this.files[data.type].parse({
-                    folder: this.folder,
-                    path: data.path
-                  }))
+                  .end(this.files[data.type].render({ filename: join(this.folder, data.path) }))
                 return
               }
               case 'rename': {
@@ -141,22 +150,25 @@ export class Server {
               }
               case 'add': {
                 const data = JSON.parse(body)
-                const path = data.paths.join(sep) + '.md'
-                const dir = join(this.folder, dirname(path))
+
+                if (!this.files[data.type]) throw Error('Unknown file type: ' + data.type)
+
+                const path = join(this.folder, ...data.paths) + data.type
+                const dir = dirname(path)
                 if (!existsSync(dir))
                   mkdirSync(dir, { recursive: true })
-                const name = data.paths[data.paths.length - 1]
-                writeFileSync(join(this.folder, path), `# ${name.replace('.md', '')}\n`)
+
+                this.files[data.type].create({ filename: path })
+
                 res
                   .writeHead(200, headers)
                   .end(JSON.stringify({
                     item: {
-                      type: '.md',
-                      name,
-                      path,
-                      paths: data.paths,
-                    },
-                    body: readFileSync(join(this.folder, path)).toString()
+                      type: data.type,
+                      name: basename(path),
+                      path: path.replace(this.folder + sep, ''),
+                      paths: path.replace(this.folder + sep, '').split(sep),
+                    }
                   }))
                 return
               }
