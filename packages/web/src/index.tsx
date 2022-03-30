@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Desktop } from './desktop'
 import { Mobile } from './mobile'
 
@@ -31,9 +31,5 @@ window.useImperativeHandle = React.useImperativeHandle
 window.useLayoutEffect = React.useLayoutEffect
 window.useDebugValue = React.useDebugValue
 
-ReactDOM.render(
-  <React.StrictMode>
-    {window.innerWidth < 600 ? <Mobile /> : <Desktop />}
-  </React.StrictMode>,
-  document.getElementById('root')
-)
+createRoot(document.getElementById('root'))
+  .render(<React.StrictMode>{window.innerWidth < 600 ? <Mobile /> : <Desktop />}</React.StrictMode>)

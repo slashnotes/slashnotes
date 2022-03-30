@@ -13,7 +13,11 @@ export default defineConfig({
       {
         find: 'desktop',
         replacement: __dirname + '/src/desktop',
+      },
+      {
+        find: 'react/jsx-runtime',
+        replacement: __dirname + '/../../node_modules/react/jsx-runtime.js'
       }
-    ]
+    ],
   },
 })

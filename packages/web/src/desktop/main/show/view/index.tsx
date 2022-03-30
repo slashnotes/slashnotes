@@ -3,7 +3,7 @@ import {
   Fragment, useEffect, useState
 } from 'react'
 import { run } from '@mdx-js/mdx'
-import * as runtime from 'react/jsx-runtime.js'
+import * as runtime from 'react/jsx-runtime'
 
 export function View ({ item }: { item: Item }) {
   const [mdxModule, setMdxModule] = useState<{ default: typeof Fragment }>()
