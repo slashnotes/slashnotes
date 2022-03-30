@@ -55,9 +55,12 @@ export class Server {
   public readonly logger: Logger
   public readonly files: Files
 
-  constructor (options?: { port: number | string }) {
+  constructor (options?: {
+    port: number | string
+    folder: string
+  }) {
     this.port = process.env.PORT || options?.port || 3000
-    this.folder = process.env.FOLDER ? join(process.cwd(), process.env.FOLDER) : process.cwd()
+    this.folder = options.folder
     console.log(this.folder)
     this.logger = new Logger()
     this.files = { '.md': Md }

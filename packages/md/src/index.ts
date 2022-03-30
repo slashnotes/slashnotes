@@ -19,5 +19,8 @@ export const Md: SlashnotesFile = {
   },
   create ({ filename }) {
     writeFileSync(filename, `# ${basename(filename).replace('.md', '')}\n`)
+  },
+  build ({ source, destination }) {
+    writeFileSync(destination, build(readFileSync(source).toString()))
   }
 }

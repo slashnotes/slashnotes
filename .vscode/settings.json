@@ -18,6 +18,7 @@
     "faasjs",
     "rehype",
     "slashnotes",
-    "tsup"
+    "tsup",
+    "vitest"
   ]
 }

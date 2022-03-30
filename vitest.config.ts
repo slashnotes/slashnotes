@@ -15,6 +15,10 @@ export default defineConfig({
       {
         find: 'react/jsx-runtime',
         replacement: __dirname + '/node_modules/react/jsx-runtime.js'
+      },
+      {
+        find: '@slashnotes/md',
+        replacement: __dirname + '/packages/md/src'
       }
     ]
   }

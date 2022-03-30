@@ -28,6 +28,13 @@ export type SlashnotesFile = {
   create(props: {
     filename: string
   })
+  /**
+   * build file to html
+   */
+  build(props: {
+    source: string
+    destination: string
+  })
 }
 
 export type SlashnotesItem = {
