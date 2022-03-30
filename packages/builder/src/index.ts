@@ -47,8 +47,6 @@ export class Builder {
   public build (destination: string): void {
     const files = findFiles(this.folder, this.folder + sep, this.files)
 
-    console.log(files)
-
     for (const file of files) {
       const to = join(destination, file.path).replace('.md', '.html')
 
