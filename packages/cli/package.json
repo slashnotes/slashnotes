@@ -20,7 +20,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -b"
+    "build": "tsc -b",
+    "dev": "PORT=4000 FOLDER=../../docs nodemon --exec 'node --experimental-specifier-resolution=node --loader ./loader.js src/index.ts start --no-open' --watch src --watch ../builder/src --watch ../md/src --watch ../server/src -e ts"
   },
   "dependencies": {
     "commander": "^9.1.0",

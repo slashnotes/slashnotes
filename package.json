@@ -9,7 +9,7 @@
     "build": "npm run build --workspaces --if-present",
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo coverage",
     "dev": "concurrently \"npm:dev:*\"",
-    "dev:server": "npm run dev --workspace=packages/server",
+    "dev:cli": "npm run dev --workspace=packages/cli",
     "dev:web": "npm run dev --workspace=packages/web",
     "publish:nightly": "node nightly.cjs"
   },
