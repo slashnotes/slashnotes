@@ -9,5 +9,13 @@ export default defineConfig({
       extension: ['ts', 'tsx'],
       reporter: ['text', 'lcov']
     }
+  },
+  resolve: {
+    alias: [
+      {
+        find: 'react/jsx-runtime',
+        replacement: __dirname + '/node_modules/react/jsx-runtime.js'
+      }
+    ]
   }
 })

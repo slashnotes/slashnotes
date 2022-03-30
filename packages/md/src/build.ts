@@ -1,7 +1,7 @@
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import { renderToString } from 'react-dom/server'
-import * as runtime from 'react/jsx-runtime.js'
+import * as runtime from 'react/jsx-runtime'
 import { evaluateSync } from '@mdx-js/mdx'
 import { createElement } from 'react'
 
