@@ -6,11 +6,13 @@ const { readFileSync, writeFileSync } = require('fs')
 const newVersion = version + '-nightly-' + Date.now()
 
 for (const name of [
+  'builder',
   'cli',
   'md',
   'server',
-  'web',
   'slashnotes',
+  'types',
+  'web',
 ]) {
   const packagePath = __dirname + '/packages/' + name + '/package.json'
   const pkg = JSON.parse(readFileSync(packagePath).toString())

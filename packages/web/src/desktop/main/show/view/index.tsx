@@ -4,8 +4,9 @@ import {
 } from 'react'
 import { run } from '@mdx-js/mdx'
 import * as runtime from 'react/jsx-runtime'
+import { SlashnotesItem } from '@slashnotes/types'
 
-export function View ({ item }: { item: Item }) {
+export function View ({ item }: { item: SlashnotesItem }) {
   const [mdxModule, setMdxModule] = useState<{ default: typeof Fragment }>()
   const Content = mdxModule ? mdxModule.default : Fragment
   const [loading, setLoading] = useState(true)

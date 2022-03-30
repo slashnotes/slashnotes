@@ -1,3 +1,4 @@
+import { SlashnotesItem } from '@slashnotes/types'
 import { DesktopContext } from 'desktop/context'
 import { action } from 'libs/action'
 import {
@@ -10,7 +11,7 @@ function RenameMode ({
   item,
   setMode,
 } : {
-  item: Item
+  item: SlashnotesItem
   setMode: React.Dispatch<React.SetStateAction<Mode>>
 }) {
   const { loadAllItems } = useContext(DesktopContext)
@@ -65,7 +66,7 @@ export function FileNode ({
   depth,
 } : {
   name: string
-  item: Item
+  item: SlashnotesItem
   depth: number
 }) {
   const [mode, setMode] = useState<Mode>('view')

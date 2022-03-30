@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { SlashnotesItem } from '@slashnotes/types'
 import { DesktopContext } from 'desktop/context'
 import {
   useContext, useEffect, useState
@@ -15,7 +15,7 @@ export type TFolderNode = {
 export type TFileNode = {
   type: 'file'
   name: string
-  item: Item
+  item: SlashnotesItem
 }
 
 export type TNode = TFolderNode | TFileNode

@@ -1,0 +1,36 @@
+{
+  "name": "@slashnotes/builder",
+  "version": "1.0.0",
+  "license": "AGPL-3.0",
+  "homepage": "https://github.com/slashnotes/slashnotes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slashnotes/slashnotes.git",
+    "directory": "packages/builder"
+  },
+  "bugs": {
+    "url": "https://github.com/slashnotes/slashnotes/issues"
+  },
+  "main": "dist/index.js",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@slashnotes/md": "*",
+    "@faasjs/logger": "*",
+    "react": "*",
+    "react-dom": "*"
+  },
+  "devDependencies": {
+    "@slashnotes/types": "*",
+    "typescript": "*"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
+  }
+}

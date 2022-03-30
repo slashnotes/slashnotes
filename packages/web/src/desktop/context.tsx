@@ -3,14 +3,15 @@ import { action } from 'libs/action'
 import {
   createContext, useCallback, useEffect, useMemo, useState
 } from 'react'
+import { SlashnotesItem } from '@slashnotes/types'
 
 export const DesktopContext = createContext<{
-  items: Item[]
-  setItems: React.Dispatch<React.SetStateAction<Item[]>>
-  allItems: Item[]
-  setAllItems: React.Dispatch<React.SetStateAction<Item[]>>
-  currentItem?: Item
-  setCurrentItem:React.Dispatch<React.SetStateAction<Item | undefined>>
+  items: SlashnotesItem[]
+  setItems: React.Dispatch<React.SetStateAction<SlashnotesItem[]>>
+  allItems: SlashnotesItem[]
+  setAllItems: React.Dispatch<React.SetStateAction<SlashnotesItem[]>>
+  currentItem?: SlashnotesItem
+  setCurrentItem:React.Dispatch<React.SetStateAction<SlashnotesItem | undefined>>
   loadAllItems(): void
 }>({
       items: [],
@@ -23,9 +24,9 @@ export const DesktopContext = createContext<{
     })
 
 export function DesktopContextProvider ({ children }: { children: JSX.Element | JSX.Element[] }) {
-  const [items, setItems] = useState<Item[]>([])
-  const [currentItem, setCurrentItem] = useState<Item>()
-  const [allItems, setAllItems] = useState<Item[]>([])
+  const [items, setItems] = useState<SlashnotesItem[]>([])
+  const [currentItem, setCurrentItem] = useState<SlashnotesItem>()
+  const [allItems, setAllItems] = useState<SlashnotesItem[]>([])
 
   const loadAllItems = useCallback(() => {
     action('list')

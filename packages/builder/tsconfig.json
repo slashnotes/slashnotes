@@ -5,11 +5,11 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      "@slashnotes/builder": [
-        "../../builder/src/index"
+      "@slashnotes/types": [
+        "../../types/src/index"
       ],
-      "@slashnotes/server": [
-        "../../server/src/index"
+      "@slashnotes/md": [
+        "../../md/src/index"
       ]
     }
   },
@@ -18,10 +18,7 @@
       "path": "../types"
     },
     {
-      "path": "../builder"
-    },
-    {
-      "path": "../server"
+      "path": "../md"
     }
   ]
 }

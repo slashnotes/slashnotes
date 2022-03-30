@@ -1,8 +1,9 @@
+import { SlashnotesItem } from '@slashnotes/types'
 import { DesktopContext } from 'desktop/context'
 import { useContext } from 'react'
 
 export function Tab ({ item }: {
-  item: Item
+  item: SlashnotesItem
 }) {
   const { setCurrentItem, setItems } = useContext(DesktopContext)
 
@@ -20,7 +21,7 @@ export function Tab ({ item }: {
 }
 
 export function CurrentTab ({ item }: {
-  item: Item
+  item: SlashnotesItem
 }) {
   const { setItems } = useContext(DesktopContext)
 
