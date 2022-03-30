@@ -31,9 +31,9 @@ export function Editor ({ item }: {
       ed.onDidChangeModelContent(() => {
         setValue(ed.getValue())
       })
-    }
 
-    return () => editor?.dispose()
+      return () => ed.dispose()
+    }
   }, [])
 
   useEffect(() => {
