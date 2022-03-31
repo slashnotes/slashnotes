@@ -68,7 +68,7 @@ export function FileTree () {
   }, [allItems, config?.sep])
 
   return <div className='file-tree'>
-    <div className='header'>Files
+    <div className='header'><i className="codicon codicon-folder"></i>Files
       <div
         className='button add-button'
         onClick={ () => setIsAdd(prev => !prev) }>

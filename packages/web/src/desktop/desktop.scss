@@ -22,6 +22,11 @@
 
     .header {
       padding: 10px;
+      i {
+        display: inline-block;
+        margin-right: 6px;
+        vertical-align: text-bottom;
+      }
     }
 
     .button {
