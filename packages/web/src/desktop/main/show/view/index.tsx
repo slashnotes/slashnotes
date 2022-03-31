@@ -1,13 +1,33 @@
 import { action } from 'libs/action'
 import {
-  Fragment, useEffect, useState
+  Fragment, useContext, useEffect, useState
 } from 'react'
 import { run } from '@mdx-js/mdx'
+import type { MDXProvider } from '@mdx-js/react'
 import * as runtime from 'react/jsx-runtime'
-import { Item } from 'desktop/context'
+import { DesktopContext, Item } from 'desktop/context'
+
+function Link (props: {
+  href?: string
+  children?: any
+}): JSX.Element {
+  const { setCurrent, setOpens } = useContext(DesktopContext)
+
+  return <a onClick={ () => {
+    if (!props.href) return
+
+    if (!props.href.startsWith('http:') && !props.href.startsWith('https:')) {
+      setOpens(prev => (prev.includes(props.href) ? prev : [...prev, props.href]))
+      setCurrent(props.href)
+      return
+    }
+
+    window.open(props.href, '_blank')
+  } }>{props.children}</a>
+}
 
 export function View ({ item }: { item: Item }) {
-  const [mdxModule, setMdxModule] = useState<{ default: typeof Fragment }>()
+  const [mdxModule, setMdxModule] = useState<{ default: typeof MDXProvider }>()
   const Content = mdxModule ? mdxModule.default : Fragment
   const [loading, setLoading] = useState(true)
 
@@ -28,5 +48,7 @@ export function View ({ item }: { item: Item }) {
     return () => {}
   }, [item])
 
-  return <div className="view">{loading ? <div>Loading..</div> : <Content />}</div>
+  return <div className="view">
+    {loading ? <div>Loading..</div> : <Content components={ { a: Link } } />}
+  </div>
 }

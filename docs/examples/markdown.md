@@ -34,7 +34,13 @@ const a = 1
 
 ## Link
 
-[Link](/)
+### Inner link
+
+[Javascript](examples/javascript.md)
+
+### Outer link
+
+[Github](https://github.com/slashnotes)
 
 ## Image
 

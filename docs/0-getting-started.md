@@ -2,12 +2,4 @@
 
 Working in progress.
 
-## sub1
-
-## sub2
-
-```ts
-const a = 1
-```
-
-{1+2}
+[Faq](1-faq.md)
