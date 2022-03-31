@@ -15,10 +15,6 @@
   font-family: monospace;
   font-size: 14px;
 
-  .codicon {
-    vertical-align: text-bottom;
-  }
-
   .sidebar {
     float: left;
     min-height: 100vh;
@@ -96,6 +92,7 @@
         padding: 5px 10px 5px 20px;
         font-style: italic;
         cursor: default;
+        overflow: hidden;
 
         span {
           font-style: normal;

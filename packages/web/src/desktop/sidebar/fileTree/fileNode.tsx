@@ -3,6 +3,9 @@ import { action } from 'libs/action'
 import {
   useCallback, useContext, useEffect, useState
 } from 'react'
+import {
+  PencilIcon, TrashIcon, CheckIcon, XIcon
+} from '@primer/octicons-react'
 
 type Mode = 'view' | 'rename' | 'delete'
 
@@ -50,12 +53,12 @@ function RenameMode ({
       className='button cancel-button'
       onClick={ () => setMode('view') }
       title='Cancel'
-    ><i className="codicon codicon-close"></i></div>
+    ><XIcon /></div>
     <div
       className='button save-button'
       onClick={ submit }
       title='Save'
-    ><i className="codicon codicon-check"></i></div>
+    ><CheckIcon /></div>
   </div>
 }
 
@@ -96,12 +99,12 @@ export function FileNode ({
           className="delete-button button"
           title="Delete"
           onClick={ () => setMode('delete') }
-        ><i className="codicon codicon-trash"></i></div>
+        ><TrashIcon /></div>
         <div
           className="rename-button button"
           title="Rename"
           onClick={ () => setMode('rename') }
-        ><i className="codicon codicon-edit"></i></div>
+        ><PencilIcon /></div>
       </>}
     </div>}
     {mode === 'rename' && <RenameMode
@@ -109,10 +112,12 @@ export function FileNode ({
       setMode={ setMode }
     />}
     {mode === 'delete' && <div className='delete'>
-      Sure to delete <span>{name}</span>?
+      <div className='message'>
+        Sure to delete <span>{name}</span>?
+      </div>
       <div
         className='button cancel-button'
-        onClick={ () => setMode('view') }><i className="codicon codicon-close"></i></div>
+        onClick={ () => setMode('view') }><XIcon /></div>
       <div
         className='button submit-button'
         onClick={ () => {
@@ -122,7 +127,7 @@ export function FileNode ({
               loadAllItems()
             })
         } }
-      ><i className="codicon codicon-check"></i></div>
+      ><CheckIcon /></div>
     </div>}
   </div>
 }

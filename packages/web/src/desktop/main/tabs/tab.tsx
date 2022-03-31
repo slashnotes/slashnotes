@@ -1,5 +1,6 @@
 import { DesktopContext, Item } from 'desktop/context'
 import { useContext } from 'react'
+import { XIcon } from '@primer/octicons-react'
 
 export function Tab ({ item }: {
   item: Item
@@ -15,7 +16,7 @@ export function Tab ({ item }: {
     <div
       className="close"
       onClick={ () => setOpens(prev => prev.filter(i => i !== item.path)) }
-    ><i className="codicon codicon-close"></i></div>
+    ><XIcon /></div>
   </div>
 }
 
@@ -31,6 +32,6 @@ export function CurrentTab ({ item }: {
     <div
       className="close"
       onClick={ () => setOpens(prev => prev.filter(i => i !== item.path)) }
-    ><i className="codicon codicon-close"></i></div>
+    ><XIcon /></div>
   </div>
 }

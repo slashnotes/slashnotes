@@ -4,6 +4,7 @@ import {
 } from 'react'
 import { FileNode } from './fileNode'
 import { AddMode, FolderNode } from './folderNode'
+import { PlusIcon } from '@primer/octicons-react'
 
 export type TFolderNode = {
   type: 'folder'
@@ -74,7 +75,7 @@ export function FileTree () {
         onClick={ () => setIsAdd(prev => !prev) }
         title='Add'
       >
-        <i className="codicon codicon-new-file"></i>
+        <PlusIcon />
       </div>
     </div>
     {isAdd &&

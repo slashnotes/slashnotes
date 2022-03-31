@@ -1,5 +1,4 @@
 import 'highlight.js/styles/github-dark-dimmed.css'
-import '@vscode/codicons/dist/codicon.css'
 import './desktop.scss'
 import { Sidebar } from './sidebar'
 import { Main } from './main'

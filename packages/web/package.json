@@ -27,7 +27,7 @@
     "@slashnotes/monaco-editor-esm": "*",
     "@mdx-js/mdx": "*",
     "@mdx-js/react": "*",
-    "@vscode/codicons": "*"
+    "@primer/octicons-react": "*"
   },
   "devDependencies": {
     "@types/react": "*",

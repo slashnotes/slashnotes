@@ -6,6 +6,9 @@ import { TNode } from '.'
 import { FileNode } from './fileNode'
 import { DesktopContext } from 'desktop/context'
 import { SlashnotesItem } from '@slashnotes/types'
+import {
+  PlusIcon, CheckIcon, XIcon 
+} from '@primer/octicons-react'
 
 export function AddMode ({
   paths,
@@ -70,12 +73,12 @@ export function AddMode ({
       className='button cancel-button'
       title='Cancel'
       onClick={ () => setIsAdd(false) }
-    ><i className="codicon codicon-close"></i></div>
+    ><XIcon /></div>
     <div
       className='button save-button'
       title='Save'
       onClick={ add }
-    ><i className="codicon codicon-check"></i></div>
+    ><CheckIcon /></div>
   </div>
 }
 
@@ -112,7 +115,7 @@ export function FolderNode ({
         className='add-button button'
         title='Add'
         onClick={ () => setIsAdd(true) }
-      ><i className="codicon codicon-new-file"></i></div>}
+      ><PlusIcon /></div>}
     </div>
     {isAdd && <AddMode
       paths={ paths }
