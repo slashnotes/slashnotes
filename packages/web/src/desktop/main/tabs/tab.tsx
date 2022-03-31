@@ -1,29 +1,28 @@
-import { SlashnotesItem } from '@slashnotes/types'
-import { DesktopContext } from 'desktop/context'
+import { DesktopContext, Item } from 'desktop/context'
 import { useContext } from 'react'
 
 export function Tab ({ item }: {
-  item: SlashnotesItem
+  item: Item
 }) {
-  const { setCurrentItem, setItems } = useContext(DesktopContext)
+  const { setCurrent, setOpens } = useContext(DesktopContext)
 
   return <div className='tab'>
     <div
       className="name"
-      onClick={ () => setCurrentItem(item) }>
+      onClick={ () => setCurrent(item.path) }>
       {item.name}
     </div>
     <div
       className="close"
-      onClick={ () => setItems(prev => prev.filter(i => i !== item)) }
+      onClick={ () => setOpens(prev => prev.filter(i => i !== item.path)) }
     >x</div>
   </div>
 }
 
 export function CurrentTab ({ item }: {
-  item: SlashnotesItem
+  item: Item
 }) {
-  const { setItems } = useContext(DesktopContext)
+  const { setOpens } = useContext(DesktopContext)
 
   return <div className='tab current'>
     <div className="name">
@@ -31,7 +30,7 @@ export function CurrentTab ({ item }: {
     </div>
     <div
       className="close"
-      onClick={ () => setItems(prev => prev.filter(i => i !== item)) }
+      onClick={ () => setOpens(prev => prev.filter(i => i !== item.path)) }
     >x</div>
   </div>
 }

@@ -1,5 +1,4 @@
-import { SlashnotesItem } from '@slashnotes/types'
-import { DesktopContext } from 'desktop/context'
+import { DesktopContext, Item } from 'desktop/context'
 import { action } from 'libs/action'
 import {
   useCallback, useContext, useEffect, useState
@@ -11,7 +10,7 @@ function RenameMode ({
   item,
   setMode,
 } : {
-  item: SlashnotesItem
+  item: Item
   setMode: React.Dispatch<React.SetStateAction<Mode>>
 }) {
   const { loadAllItems } = useContext(DesktopContext)
@@ -66,17 +65,17 @@ export function FileNode ({
   depth,
 } : {
   name: string
-  item: SlashnotesItem
+  item: Item
   depth: number
 }) {
   const [mode, setMode] = useState<Mode>('view')
   const {
-    setItems, currentItem, setCurrentItem, loadAllItems
+    setOpens, current, setCurrent, loadAllItems
   } = useContext(DesktopContext)
 
   useEffect(() => setMode('view'), [item])
 
-  return <div className={ `node file ${item.path === currentItem?.path ? 'current' : ''}` }>
+  return <div className={ `node file ${item.path === current ? 'current' : ''}` }>
     {mode === 'view' && <div
       className='view'
       style={ { paddingLeft: (depth * 20) + 'px' } }
@@ -84,8 +83,8 @@ export function FileNode ({
       <div
         className='name'
         onClick={ () => {
-          setItems(prev => (prev.includes(item) ? prev : [...prev, item]))
-          setCurrentItem(item)
+          setOpens(prev => (prev.includes(item.path) ? prev : [...prev, item.path]))
+          setCurrent(item.path)
         } }
         style={ { width: `${300 - (depth * 20) - 46}px` } }
       >{name}</div>
@@ -114,7 +113,7 @@ export function FileNode ({
         onClick={ () => {
           action('delete', { path: item.path })
             .then(() => {
-              setItems(prev => prev.filter(i => i.path !== item.path))
+              setOpens(prev => prev.filter(i => i !== item.path))
               loadAllItems()
             })
         } }

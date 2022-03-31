@@ -25,8 +25,14 @@ const ContentTypes: {
 
 const require = createRequire(import.meta.url)
 
-function findFiles (dir: string, cwd: string, files: Files, prev?: SlashnotesItem[]): SlashnotesItem[] {
-  if (!prev) prev = []
+type AllFiles = {
+  [path: string]: SlashnotesItem & {
+    mode: 'view'
+  }
+}
+
+function findFiles (dir: string, cwd: string, files: Files, prev?: AllFiles): AllFiles {
+  if (!prev) prev = {}
 
   readdirSync(dir).forEach(f => {
     const subPath = join(dir, f)
@@ -37,11 +43,12 @@ function findFiles (dir: string, cwd: string, files: Files, prev?: SlashnotesIte
     if (files[ext]) {
       const path = subPath.replace(cwd, '')
       const paths = path.split(sep)
-      prev.push({
+      prev[path] = {
         path,
         name: paths[paths.length - 1],
-        type: ext
-      })
+        type: ext,
+        mode: 'view',
+      }
     }
   })
 
@@ -170,12 +177,9 @@ export class Server {
                 res
                   .writeHead(200, headers)
                   .end(JSON.stringify({
-                    item: {
-                      type: data.type,
-                      name: basename(path),
-                      path: path.replace(this.folder + sep, ''),
-                      paths: path.replace(this.folder + sep, '').split(sep),
-                    }
+                    type: data.type,
+                    name: basename(path),
+                    path: path.replace(this.folder + sep, ''),
                   }))
                 return
               }

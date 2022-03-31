@@ -1,24 +1,31 @@
 import { DesktopContext } from 'desktop/context'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { Editor } from './editor'
 import { View } from './view'
 
 export function Show () {
-  const { currentItem } = useContext(DesktopContext)
-  const [mode, setMode] = useState<'view' | 'edit'>('view')
+  const {
+    current, allItems, setAllItems
+  } = useContext(DesktopContext)
 
-  if (!currentItem) return null
+  if (!current) return null
 
   return <div className="show">
     <div className='mode'>
       <div
-        className={ mode === 'view' ? 'active' : '' }
-        onClick={ () => setMode('view') }>View</div>
+        className={ allItems[current].mode === 'view' ? 'active' : '' }
+        onClick={ () => {
+          allItems[current].mode = 'view'
+          setAllItems({ ...allItems })
+        } }>View</div>
       <div
-        className={ mode === 'edit' ? 'active' : '' }
-        onClick={ () => setMode('edit') }>Edit</div>
+        className={ allItems[current].mode === 'edit' ? 'active' : '' }
+        onClick={ () => {
+          allItems[current].mode = 'edit'
+          setAllItems({ ...allItems })
+        } }>Edit</div>
     </div>
-    {mode === 'view' && <View item={ currentItem } />}
-    {mode === 'edit' && <Editor item={ currentItem } />}
+    {allItems[current].mode === 'view' && <View item={ allItems[current] } />}
+    {allItems[current].mode === 'edit' && <Editor item={ allItems[current] } />}
   </div>
 }

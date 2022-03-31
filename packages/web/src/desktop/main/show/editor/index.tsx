@@ -4,10 +4,10 @@ import {
 import { monaco } from '@slashnotes/monaco-editor-esm'
 import { action } from 'libs/action'
 import './worker'
-import { SlashnotesItem } from '@slashnotes/types'
+import { Item } from 'desktop/context'
 
 export function Editor ({ item }: {
-  item: SlashnotesItem
+  item: Item
 }) {
   const [editor, setEditor] = useState<monaco.editor.IStandaloneCodeEditor | null>(null)
   const monacoEl = useRef(null)

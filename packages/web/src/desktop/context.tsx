@@ -5,31 +5,41 @@ import {
 } from 'react'
 import { SlashnotesItem, SlashnotesConfig } from '@slashnotes/types'
 
+export type ItemMode = 'view' | 'edit'
+
+export type Item = SlashnotesItem & {
+  mode: ItemMode
+}
+
+export type AllItems = {
+  [path: string]: Item
+}
+
 export const DesktopContext = createContext<{
   config: SlashnotesConfig
-  items: SlashnotesItem[]
-  setItems: React.Dispatch<React.SetStateAction<SlashnotesItem[]>>
-  allItems: SlashnotesItem[]
-  setAllItems: React.Dispatch<React.SetStateAction<SlashnotesItem[]>>
-  currentItem?: SlashnotesItem
-  setCurrentItem:React.Dispatch<React.SetStateAction<SlashnotesItem | undefined>>
+  opens: string[]
+  setOpens: React.Dispatch<React.SetStateAction<string[]>>
+  allItems: AllItems
+  setAllItems: React.Dispatch<React.SetStateAction<AllItems>>
+  current?: string
+  setCurrent:React.Dispatch<React.SetStateAction< string | undefined>>
   loadAllItems(): void
 }>({
-      config: { sep: '/' },
-      items: [],
-      setItems: () => {},
-      allItems: [],
+      config: { sep: '' },
+      opens: [],
+      setOpens: () => {},
+      allItems: {},
       setAllItems: () => {},
-      currentItem: undefined,
-      setCurrentItem: () => {},
+      current: undefined,
+      setCurrent: () => {},
       loadAllItems: () => {},
     })
 
 export function DesktopContextProvider ({ children }: { children: JSX.Element | JSX.Element[] }) {
   const [config, setConfig] = useState<SlashnotesConfig>()
-  const [items, setItems] = useState<SlashnotesItem[]>([])
-  const [currentItem, setCurrentItem] = useState<SlashnotesItem>()
-  const [allItems, setAllItems] = useState<SlashnotesItem[]>([])
+  const [opens, setOpens] = useState<string[]>([])
+  const [current, setCurrent] = useState<string>()
+  const [allItems, setAllItems] = useState<AllItems>({})
 
   const loadAllItems = useCallback(() => {
     action('config/get').then(setConfig)
@@ -38,32 +48,32 @@ export function DesktopContextProvider ({ children }: { children: JSX.Element | 
 
   const itemsValue = useMemo(() => ({
     config,
-    items,
-    setItems,
+    opens,
+    setOpens,
     allItems,
     setAllItems,
-    currentItem,
-    setCurrentItem,
+    current,
+    setCurrent,
     loadAllItems,
   }), [
     config,
-    items,
-    setItems,
+    opens,
+    setOpens,
     allItems,
     setAllItems,
-    currentItem,
-    setCurrentItem,
+    current,
+    setCurrent,
   ])
 
   useEffect(() => {
-    if (!items.length) {
-      setCurrentItem(undefined)
+    if (!opens.length) {
+      setCurrent(undefined)
       return
     }
 
-    if (currentItem && !items.includes(currentItem))
-      setCurrentItem(items[0])
-  }, [items])
+    if (current && !opens.includes(current))
+      setCurrent(opens[opens.length - 1])
+  }, [opens])
 
   return <DesktopContext.Provider value={ itemsValue }>
     {children}

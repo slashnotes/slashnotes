@@ -1,5 +1,4 @@
-import { SlashnotesItem } from '@slashnotes/types'
-import { DesktopContext } from 'desktop/context'
+import { DesktopContext, Item } from 'desktop/context'
 import {
   useContext, useEffect, useState
 } from 'react'
@@ -15,7 +14,7 @@ export type TFolderNode = {
 export type TFileNode = {
   type: 'file'
   name: string
-  item: SlashnotesItem
+  item: Item
 }
 
 export type TNode = TFolderNode | TFileNode
@@ -32,9 +31,11 @@ export function FileTree () {
   }, [])
 
   useEffect(() => {
+    if (!config?.sep) return
+
     const tree: TNode[] = []
 
-    allItems.forEach(item => {
+    Object.values(allItems).forEach(item => {
       const paths = item.path.split(config.sep)
 
       if (paths.length === 1)
@@ -70,7 +71,7 @@ export function FileTree () {
     })
 
     setTree(tree)
-  }, [allItems])
+  }, [allItems, config?.sep])
 
   return <div className='file-tree'>
     <div className='header'>Files

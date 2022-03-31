@@ -3,17 +3,19 @@ import { useContext } from 'react'
 import { Tab, CurrentTab } from './tab'
 
 export function Tabs () {
-  const { items, currentItem } = useContext(DesktopContext)
+  const {
+    opens, current, allItems 
+  } = useContext(DesktopContext)
 
-  if (!items.length) return null
+  if (!opens.length) return null
 
   return <div className='tabs'>
-    {items.map(item => (currentItem === item ? <CurrentTab
-      key={ item.path }
-      item={ item }
+    {opens.map(path => (current === path ? <CurrentTab
+      key={ path }
+      item={ allItems[path] }
     /> : <Tab
-      key={ item.path }
-      item={ item }
+      key={ path }
+      item={ allItems[path] }
     />))}
   </div>
 }

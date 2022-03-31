@@ -5,6 +5,7 @@ import {
 import { TNode } from '.'
 import { FileNode } from './fileNode'
 import { DesktopContext } from 'desktop/context'
+import { SlashnotesItem } from '@slashnotes/types'
 
 export function AddMode ({
   paths,
@@ -14,7 +15,7 @@ export function AddMode ({
   setIsAdd: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const {
-    loadAllItems, setCurrentItem, setItems
+    setCurrent, setOpens, setAllItems
   } = useContext(DesktopContext)
   const [name, setName] = useState<string>('')
   const [placeholder, setPlaceholder] = useState<string>('')
@@ -26,15 +27,21 @@ export function AddMode ({
   }, [])
 
   const add = useCallback(() => {
-    action('add', {
+    action<SlashnotesItem>('add', {
       paths: [...paths, name || placeholder],
       type: '.md',
     })
       .then((res) => {
         setIsAdd(false)
-        loadAllItems()
-        setItems(prev => [...prev, res.item])
-        setCurrentItem(res.item)
+        setAllItems(prev => ({
+          ...prev,
+          [res.path]: {
+            ...res,
+            mode: 'edit'
+          }
+        }))
+        setOpens(prev => [...prev, res.path])
+        setCurrent(res.path)
       })
   }, [
     paths,

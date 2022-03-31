@@ -15,9 +15,9 @@
 ```
 
 => {
-  (function now() {
-    return Date.now()
-  })()
+(function now() {
+  return Date.now()
+})()
 }
 
 ## JSX
@@ -59,6 +59,8 @@ export const Clicker = () => {
   </div>
 }
 ```
+
+=>
 
 export const Clicker = () => {
   const [count, setCount] = useState(0)
