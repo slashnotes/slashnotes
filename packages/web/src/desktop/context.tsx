@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { action } from 'libs/action'
 import {
-  createContext, useCallback, useEffect, useMemo, useState
+  createContext, useEffect, useMemo, useState
 } from 'react'
 import { SlashnotesItem, SlashnotesConfig } from '@slashnotes/types'
 
@@ -35,16 +35,12 @@ export const DesktopContext = createContext<{
       loadAllItems: () => {},
     })
 
-export function DesktopContextProvider ({ children }: { children: JSX.Element | JSX.Element[] }) {
+export function DesktopContextProvider (props: { children: JSX.Element | JSX.Element[] }) {
   const [config, setConfig] = useState<SlashnotesConfig>()
   const [opens, setOpens] = useState<string[]>([])
   const [current, setCurrent] = useState<string>()
   const [allItems, setAllItems] = useState<AllItems>({})
-
-  const loadAllItems = useCallback(() => {
-    action('config/get').then(setConfig)
-    action('list').then(setAllItems)
-  }, [setAllItems])
+  const [loaded, setLoaded] = useState(false)
 
   const itemsValue = useMemo(() => ({
     config,
@@ -54,7 +50,9 @@ export function DesktopContextProvider ({ children }: { children: JSX.Element | 
     setAllItems,
     current,
     setCurrent,
-    loadAllItems,
+    loadAllItems: () => {
+      action('list').then(setAllItems)
+    },
   }), [
     config,
     opens,
@@ -66,16 +64,30 @@ export function DesktopContextProvider ({ children }: { children: JSX.Element | 
   ])
 
   useEffect(() => {
-    if (!opens.length) {
-      setCurrent(undefined)
-      return
+    function loadConfig () {
+      action('config/get')
+        .then(setConfig)
+        .catch(loadConfig)
     }
 
-    if (current && !opens.includes(current))
-      setCurrent(opens[opens.length - 1])
-  }, [opens])
+    loadConfig()
+
+    function loadList () {
+      action('list')
+        .then(setAllItems)
+        .catch(loadList)
+    }
+
+    loadList()
+  }, [])
+
+  useEffect(()=> {
+    if (!loaded && config?.sep) setLoaded(true)
+  }, [config?.sep])
+
+  if (!loaded) return null
 
   return <DesktopContext.Provider value={ itemsValue }>
-    {children}
+    {props.children}
   </DesktopContext.Provider>
 }

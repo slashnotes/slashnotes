@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Desktop } from './desktop'
 import { Mobile } from './mobile'
@@ -32,4 +32,4 @@ window.useLayoutEffect = React.useLayoutEffect
 window.useDebugValue = React.useDebugValue
 
 createRoot(document.getElementById('root'))
-  .render(<React.StrictMode>{window.innerWidth < 600 ? <Mobile /> : <Desktop />}</React.StrictMode>)
+  .render(window.innerWidth < 600 ? <Mobile /> : <Desktop />)

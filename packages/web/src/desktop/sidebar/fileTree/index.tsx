@@ -20,15 +20,9 @@ export type TFileNode = {
 export type TNode = TFolderNode | TFileNode
 
 export function FileTree () {
-  const {
-    allItems, loadAllItems, config
-  } = useContext(DesktopContext)
+  const { allItems, config } = useContext(DesktopContext)
   const [tree, setTree] = useState<TNode[]>([])
   const [isAdd, setIsAdd] = useState(false)
-
-  useEffect(() => {
-    loadAllItems()
-  }, [])
 
   useEffect(() => {
     if (!config?.sep) return
