@@ -72,6 +72,7 @@ export function FileNode ({
   const {
     setOpens, current, setCurrent, loadAllItems
   } = useContext(DesktopContext)
+  const [hover, setHover] = useState(false)
 
   useEffect(() => setMode('view'), [item])
 
@@ -79,6 +80,8 @@ export function FileNode ({
     {mode === 'view' && <div
       className='view'
       style={ { paddingLeft: (depth * 20) + 'px' } }
+      onMouseEnter={ () => setHover(true) }
+      onMouseLeave={ () => setHover(false) }
     >
       <div
         className='name'
@@ -88,16 +91,18 @@ export function FileNode ({
         } }
         style={ { width: `${300 - (depth * 20) - 46}px` } }
       >{name}</div>
-      <div
-        className="delete-button button"
-        title="Delete"
-        onClick={ () => setMode('delete') }
-      ><i className="codicon codicon-trash"></i></div>
-      <div
-        className="rename-button button"
-        title="Rename"
-        onClick={ () => setMode('rename') }
-      ><i className="codicon codicon-edit"></i></div>
+      {hover && <>
+        <div
+          className="delete-button button"
+          title="Delete"
+          onClick={ () => setMode('delete') }
+        ><i className="codicon codicon-trash"></i></div>
+        <div
+          className="rename-button button"
+          title="Rename"
+          onClick={ () => setMode('rename') }
+        ><i className="codicon codicon-edit"></i></div>
+      </>}
     </div>}
     {mode === 'rename' && <RenameMode
       item={ item }

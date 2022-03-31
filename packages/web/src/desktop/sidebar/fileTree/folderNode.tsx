@@ -92,11 +92,14 @@ export function FolderNode ({
 }) {
   const [collapsed, setCollapsed] = useState(false)
   const [isAdd, setIsAdd] = useState(false)
+  const [hover, setHover] = useState(false)
 
   return <div className='node folder'>
     <div
       className='view'
       style={ { paddingLeft: (depth * 20) + 'px' } }
+      onMouseEnter={ () => setHover(true) }
+      onMouseLeave={ () => setHover(false) }
     >
       <div
         className='name'
@@ -105,11 +108,11 @@ export function FolderNode ({
       >
         {name}/
       </div>
-      <div
+      {hover && <div
         className='add-button button'
         title='Add'
         onClick={ () => setIsAdd(true) }
-      ><i className="codicon codicon-new-file"></i></div>
+      ><i className="codicon codicon-new-file"></i></div>}
     </div>
     {isAdd && <AddMode
       paths={ paths }

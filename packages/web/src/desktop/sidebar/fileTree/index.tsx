@@ -71,7 +71,9 @@ export function FileTree () {
     <div className='header'>Files
       <div
         className='button add-button'
-        onClick={ () => setIsAdd(prev => !prev) }>
+        onClick={ () => setIsAdd(prev => !prev) }
+        title='Add'
+      >
         <i className="codicon codicon-new-file"></i>
       </div>
     </div>
