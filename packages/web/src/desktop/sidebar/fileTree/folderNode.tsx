@@ -70,12 +70,12 @@ export function AddMode ({
       className='button cancel-button'
       title='Cancel'
       onClick={ () => setIsAdd(false) }
-    >X</div>
+    ><i className="codicon codicon-close"></i></div>
     <div
       className='button save-button'
       title='Save'
       onClick={ add }
-    >Y</div>
+    ><i className="codicon codicon-check"></i></div>
   </div>
 }
 
@@ -109,7 +109,7 @@ export function FolderNode ({
         className='add-button button'
         title='Add'
         onClick={ () => setIsAdd(true) }
-      >+</div>
+      ><i className="codicon codicon-new-file"></i></div>
     </div>
     {isAdd && <AddMode
       paths={ paths }

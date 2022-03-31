@@ -15,7 +15,7 @@ export function Tab ({ item }: {
     <div
       className="close"
       onClick={ () => setOpens(prev => prev.filter(i => i !== item.path)) }
-    >x</div>
+    ><i className="codicon codicon-close"></i></div>
   </div>
 }
 
@@ -31,6 +31,6 @@ export function CurrentTab ({ item }: {
     <div
       className="close"
       onClick={ () => setOpens(prev => prev.filter(i => i !== item.path)) }
-    >x</div>
+    ><i className="codicon codicon-close"></i></div>
   </div>
 }

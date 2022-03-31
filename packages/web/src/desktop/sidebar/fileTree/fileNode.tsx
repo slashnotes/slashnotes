@@ -50,12 +50,12 @@ function RenameMode ({
       className='button cancel-button'
       onClick={ () => setMode('view') }
       title='Cancel'
-    >X</div>
+    ><i className="codicon codicon-close"></i></div>
     <div
       className='button save-button'
       onClick={ submit }
       title='Save'
-    >Y</div>
+    ><i className="codicon codicon-check"></i></div>
   </div>
 }
 
@@ -92,12 +92,12 @@ export function FileNode ({
         className="delete-button button"
         title="Delete"
         onClick={ () => setMode('delete') }
-      >D</div>
+      ><i className="codicon codicon-trash"></i></div>
       <div
         className="rename-button button"
         title="Rename"
         onClick={ () => setMode('rename') }
-      >R</div>
+      ><i className="codicon codicon-edit"></i></div>
     </div>}
     {mode === 'rename' && <RenameMode
       item={ item }
@@ -107,7 +107,7 @@ export function FileNode ({
       Sure to delete <span>{name}</span>?
       <div
         className='button cancel-button'
-        onClick={ () => setMode('view') }>N</div>
+        onClick={ () => setMode('view') }><i className="codicon codicon-close"></i></div>
       <div
         className='button submit-button'
         onClick={ () => {
@@ -117,7 +117,7 @@ export function FileNode ({
               loadAllItems()
             })
         } }
-      >Y</div>
+      ><i className="codicon codicon-check"></i></div>
     </div>}
   </div>
 }
