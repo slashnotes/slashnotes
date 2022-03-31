@@ -195,8 +195,7 @@
         line-height: 1.6;
 
         h1, h2, h3, h4, h5, h6 {
-          margin: 0;
-          margin-top: 20px;
+          margin: 0 0 20px 0;
           padding: 0;
         }
 
@@ -207,6 +206,10 @@
 
         h4, h5, h6 {
           font-size: inherit;
+        }
+
+        p {
+          margin: 0 0 20px 0;
         }
 
         blockquote {
@@ -223,7 +226,7 @@
 
         pre code {
           display: block;
-          margin-top: 20px;
+          margin: 0 0 20px 0;
           padding: 10px;
         }
 
@@ -233,6 +236,7 @@
         }
 
         ul, ol {
+          margin: 0 0 20px 0;
           list-style-position: inside;
           padding-left: 10px;
         }
@@ -242,7 +246,7 @@
         }
 
         img {
-          margin-top: 20px;
+          margin: 0 0 20px 0;
           display: block;
         }
 
@@ -254,7 +258,7 @@
         }
 
         table {
-          margin-top: 20px;
+          margin: 0 0 20px 0;
           width: max-content;
           max-width: 100%;
           overflow: auto;
@@ -268,6 +272,10 @@
 
         th {
           background-color: #2F323B;
+        }
+
+        .footnotes h2 {
+          margin: 0;
         }
       }
 

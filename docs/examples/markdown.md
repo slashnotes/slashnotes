@@ -28,8 +28,8 @@
 
 Quoting `code`
 
-```
-Quoting code block
+```js
+const a = 1
 ```
 
 ## Link
