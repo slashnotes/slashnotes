@@ -1,8 +1,8 @@
 import {
-  readFileSync, existsSync, readdirSync, statSync, renameSync, mkdirSync, rmSync
+  existsSync, readdirSync, statSync, mkdirSync,
 } from 'fs'
 import {
-  join, extname, sep, resolve, dirname
+  join, extname, sep, dirname
 } from 'path'
 import { SlashnotesItem, SlashnotesFile } from '@slashnotes/types'
 import { Md } from '@slashnotes/md'
@@ -26,7 +26,6 @@ function findFiles (dir: string, cwd: string, files: Files, prev?: SlashnotesIte
       prev.push({
         path,
         name: paths[paths.length - 1],
-        paths,
         type: ext
       })
     }

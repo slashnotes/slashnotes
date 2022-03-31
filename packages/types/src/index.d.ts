@@ -41,5 +41,8 @@ export type SlashnotesItem = {
   type: string
   name: string
   path: string
-  paths: string[]
+}
+
+export type SlashnotesConfig = {
+  sep: string
 }

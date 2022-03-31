@@ -40,7 +40,6 @@ function findFiles (dir: string, cwd: string, files: Files, prev?: SlashnotesIte
       prev.push({
         path,
         name: paths[paths.length - 1],
-        paths,
         type: ext
       })
     }
@@ -101,6 +100,11 @@ export class Server {
           if (path.startsWith('/__slashnotes/')) {
             const command = path.replace('/__slashnotes/', '')
             switch (command) {
+              case 'config/get':
+                res
+                  .writeHead(200, headers)
+                  .end(JSON.stringify({ sep }))
+                return
               case 'list':
                 res
                   .writeHead(200, headers)

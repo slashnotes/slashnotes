@@ -21,7 +21,9 @@ export type TFileNode = {
 export type TNode = TFolderNode | TFileNode
 
 export function FileTree () {
-  const { allItems, loadAllItems } = useContext(DesktopContext)
+  const {
+    allItems, loadAllItems, config
+  } = useContext(DesktopContext)
   const [tree, setTree] = useState<TNode[]>([])
   const [isAdd, setIsAdd] = useState(false)
 
@@ -30,13 +32,14 @@ export function FileTree () {
   }, [])
 
   useEffect(() => {
-    console.log(allItems)
     const tree: TNode[] = []
 
     allItems.forEach(item => {
-      if (item.paths.length === 1)
+      const paths = item.path.split(config.sep)
+
+      if (paths.length === 1)
         tree.push({
-          name: item.paths[0],
+          name: paths[0],
           type: 'file',
           item,
         })
@@ -44,12 +47,12 @@ export function FileTree () {
         let root = tree
         let parent: TFolderNode
 
-        for (let i = 0; i < item.paths.length - 1; i++) {
-          parent = root.find(node => node.type === 'folder' && node.name === item.paths[i]) as TFolderNode
+        for (let i = 0; i < paths.length - 1; i++) {
+          parent = root.find(node => node.type === 'folder' && node.name === paths[i]) as TFolderNode
 
           if (!parent) {
             parent = {
-              name: item.paths[i],
+              name: paths[i],
               type: 'folder',
               subs: []
             }
@@ -58,8 +61,8 @@ export function FileTree () {
           root = parent.subs
         }
 
-        parent!.subs.push({
-          name: item.paths[item.paths.length - 1],
+        parent.subs.push({
+          name: paths[paths.length - 1],
           type: 'file',
           item,
         })
