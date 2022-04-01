@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/github/license/slashnotes/slashnotes?color=blue)](https://github.com/slashnotes/slashnotes/blob/main/LICENSE.md)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fslashnotes%2Fslashnotes.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fslashnotes%2Fslashnotes?ref=badge_shield)
 [![NPM Stable Version](https://img.shields.io/npm/v/@slashnotes/cli.svg)](https://www.npmjs.com/package/@slashnotes/cli)
-[![Unit Status](https://github.com/slashnotes/slashnotes/actions/workflows/nightly.yml/badge.svg)](https://github.com/slashnotes/slashnotes/actions/workflows/nightly.yml)
+[![Testing Status](https://github.com/slashnotes/slashnotes/actions/workflows/testing.yml/badge.svg)](https://github.com/slashnotes/slashnotes/actions/workflows/testing.yml)
 [![Coverage Status](https://img.shields.io/codecov/c/github/slashnotes/slashnotes.svg)](https://app.codecov.io/gh/slashnotes/slashnotes)
 
 A note taking app for your whole life.

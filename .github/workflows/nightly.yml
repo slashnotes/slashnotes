@@ -1,4 +1,4 @@
-name: Nightly packages
+name: Publish nightly version
 
 on:
   workflow_run:
@@ -6,6 +6,10 @@ on:
       - Testing
     types:
       - completed
+    branches:
+      - main
+    paths:
+      - packages/**
 
 jobs:
   publish:
