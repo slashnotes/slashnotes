@@ -8,8 +8,6 @@ on:
       - completed
     branches:
       - main
-    paths:
-      - packages/**
 
 jobs:
   publish:
@@ -18,9 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: 'npm'
       - uses: actions/cache@v3
         id: cache-npm-install
         with:
