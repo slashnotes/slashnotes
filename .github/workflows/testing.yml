@@ -40,3 +40,6 @@ jobs:
       - name: Test
         run: |
           npm run ci
+      - uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOVTOKEN }}

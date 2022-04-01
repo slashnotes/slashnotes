@@ -1,16 +1,15 @@
 name: Nightly packages
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - packages/**
-      - .github/workflows/nightly.yml
+  workflow_run:
+    workflows:
+      - Testing
+    types:
+      - completed
 
 jobs:
-  build:
+  publish:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,19 +17,11 @@ jobs:
         with:
           node-version: '16'
           cache: 'npm'
-      - name: Install
-        run: |
-          npm install -g npm@latest
-          npm install
-      - name: Test
-        run: |
-          npm run ci
-      - uses: codecov/codecov-action@v2
+      - uses: actions/cache@v3
+        id: cache-npm-install
         with:
-          token: ${{ secrets.CODECOVTOKEN }}
-      - name: Build
-        run: |
-          npm run build
+          path: ./*
+          key: ${{ github.sha }}
       - name: Publish
         run: |
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
