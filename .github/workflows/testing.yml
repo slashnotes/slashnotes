@@ -1,0 +1,42 @@
+name: Testing
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+      - name: Install
+        run: |
+          npm install -g npm@latest
+          npm install
+      - uses: actions/cache@v3
+        id: cache-npm-install
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+  test:
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+      - uses: actions/cache@v3
+        id: cache-npm-install
+        with:
+          path: ./*
+          key: ${{ github.sha }}
+      - name: Test
+        run: |
+          npm run ci
