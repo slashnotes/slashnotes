@@ -1,8 +1,8 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --experimental-specifier-resolution=node
 
 import { Command } from 'commander'
 import { Init } from './init'
-import { Build } from 'build'
+import { Build } from './build'
 import { Start } from './start'
 
 const program = new Command()
