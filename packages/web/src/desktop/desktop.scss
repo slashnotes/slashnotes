@@ -125,7 +125,6 @@
     .tabs {
       background-color: var(--slashnotes-background-color);
       overflow: auto;
-      height: 35px;
       line-height: 35px;
 
       .tab {
@@ -168,7 +167,7 @@
     }
 
     .show {
-      height: calc(100% - 30px);
+      min-height: calc(100% - 35px);
 
       .mode {
         float: left;
