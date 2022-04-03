@@ -73,7 +73,7 @@ export class Server {
   }
 
   public async start () {
-    const webPath = require.resolve('@slashnotes/web').replace(/index.js$/, 'dist')
+    const webPath = require.resolve('@slashnotes/desktop').replace(/index.js$/, 'dist')
 
     createHttpServer(async (req, res) => {
       this.logger.debug('%s %s', req.method, req.url)

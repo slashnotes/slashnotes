@@ -1,12 +1,12 @@
 {
-  "name": "@slashnotes/web",
+  "name": "@slashnotes/desktop",
   "version": "1.0.0",
   "license": "AGPL-3.0",
   "homepage": "https://github.com/slashnotes/slashnotes",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/slashnotes/slashnotes.git",
-    "directory": "packages/cli"
+    "directory": "packages/desktop"
   },
   "bugs": {
     "url": "https://github.com/slashnotes/slashnotes/issues"

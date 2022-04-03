@@ -1,7 +1,6 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Desktop } from './desktop'
-import { Mobile } from './mobile'
 
 declare global {
   interface Window {
@@ -32,4 +31,4 @@ window.useLayoutEffect = React.useLayoutEffect
 window.useDebugValue = React.useDebugValue
 
 createRoot(document.getElementById('root'))
-  .render(window.innerWidth < 600 ? <Mobile /> : <Desktop />)
+  .render(<Desktop />)

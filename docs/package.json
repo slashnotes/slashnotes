@@ -7,6 +7,6 @@
   "dependencies": {
     "@slashnotes/cli": "file:../packages/cli",
     "@slashnotes/server": "file:../packages/server",
-    "@slashnotes/web": "file:../packages/web"
+    "@slashnotes/desktop": "file:../packages/desktop"
   }
 }

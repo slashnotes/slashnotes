@@ -10,7 +10,7 @@
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo coverage",
     "dev": "concurrently \"npm:dev:*\"",
     "dev:cli": "npm run dev --workspace=packages/cli",
-    "dev:web": "npm run dev --workspace=packages/web",
+    "dev:desktop": "npm run dev --workspace=packages/desktop",
     "publish:nightly": "node nightly.cjs"
   },
   "workspaces": [

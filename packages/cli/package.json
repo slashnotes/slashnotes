@@ -28,7 +28,7 @@
     "@slashnotes/builder": "*",
     "@slashnotes/server": "*",
     "@slashnotes/md": "*",
-    "@slashnotes/web": "*"
+    "@slashnotes/desktop": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
