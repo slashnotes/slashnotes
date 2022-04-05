@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { app, BrowserWindow } = require('electron');
-const Server = require(__dirname + '/../node_modules/@slashnotes/server/dist/index.cjs').Server
+const { join, dirname } = require('path')
+const Server = require(join(dirname(require.resolve('@slashnotes/server')), 'index.cjs')).Server
 
 const port = Math.floor(Math.random() * 10000)
 
@@ -11,14 +12,12 @@ if (require('electron-squirrel-startup')) {
 }
 
 const createWindow = () => {
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-  });
+  const mainWindow = new BrowserWindow({ backgroundColor: '#252526' })
+  mainWindow.maximize()
 
   mainWindow.loadURL(`http://localhost:${port}/`)
 
-  mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools()
 };
 
 // This method will be called when Electron has finished

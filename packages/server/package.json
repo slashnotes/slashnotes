@@ -26,9 +26,11 @@
   "scripts": {
     "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.json && tsup src/index.ts --format esm,cjs"
   },
+  "dependencies": {
+    "@slashnotes/desktop": "*"
+  },
   "devDependencies": {
     "@slashnotes/md": "*",
-    "@slashnotes/desktop": "*",
     "@faasjs/logger": "*",
     "@slashnotes/types": "*",
     "tsup": "*",
