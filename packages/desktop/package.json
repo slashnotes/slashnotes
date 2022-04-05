@@ -21,15 +21,13 @@
     "build": "tsc && vite build",
     "test": "vitest run"
   },
-  "dependencies": {
+  "devDependencies": {
     "react": "*",
     "react-dom": "*",
     "@slashnotes/monaco-editor-esm": "*",
     "@mdx-js/mdx": "*",
     "@mdx-js/react": "*",
-    "@primer/octicons-react": "*"
-  },
-  "devDependencies": {
+    "@primer/octicons-react": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
     "@types/node": "*",

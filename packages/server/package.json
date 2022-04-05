@@ -23,9 +23,7 @@
   "dependencies": {
     "@slashnotes/md": "*",
     "@slashnotes/desktop": "*",
-    "@faasjs/logger": "*",
-    "react": "*",
-    "react-dom": "*"
+    "@faasjs/logger": "*"
   },
   "devDependencies": {
     "@slashnotes/types": "*",
