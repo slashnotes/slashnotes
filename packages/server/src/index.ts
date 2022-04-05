@@ -1,6 +1,6 @@
 import { createServer as createHttpServer } from 'http'
 import {
-  readFileSync, existsSync, readdirSync, statSync, renameSync, mkdirSync, rmSync
+  existsSync, readdirSync, statSync, renameSync, mkdirSync, rmSync, createReadStream
 } from 'fs'
 import {
   join, extname, sep, dirname, basename
@@ -211,7 +211,7 @@ export class Server {
                 ...headers,
                 'Content-Type': ContentTypes[extname(path)]
               })
-              .end(readFileSync(join(webPath, path)))
+              .end(createReadStream(join(webPath, path)))
             return
           }
 
