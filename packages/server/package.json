@@ -11,27 +11,25 @@
   "bugs": {
     "url": "https://github.com/slashnotes/slashnotes/issues"
   },
-  "main": "dist/index.mjs",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.json && tsup-node src/index.ts --format esm,cjs"
-  },
-  "dependencies": {
-    "@slashnotes/md": "*",
-    "@slashnotes/desktop": "*",
-    "@faasjs/logger": "*"
+    "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.json && tsup src/index.ts --format esm,cjs"
   },
   "devDependencies": {
+    "@slashnotes/md": "*",
+    "@slashnotes/desktop": "*",
+    "@faasjs/logger": "*",
     "@slashnotes/types": "*",
     "tsup": "*",
     "typescript": "*"

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { app, BrowserWindow } = require('electron');
-const Server = require('@slashnotes/server').Server
+const Server = require(__dirname + '/../node_modules/@slashnotes/server/dist/index.cjs').Server
 
 const port = Math.floor(Math.random() * 10000)
 
