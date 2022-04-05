@@ -30,6 +30,11 @@
     "@slashnotes/md": "*",
     "@slashnotes/desktop": "*"
   },
+  "devDependencies": {
+    "nodemon": "*",
+    "ts-node": "*",
+    "tsconfig-paths": "*"
+  },
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=16.0.0"

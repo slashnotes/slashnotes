@@ -7,18 +7,15 @@
     "paths": {
       "@slashnotes/types": [
         "../../types/src/index"
-      ],
-      "@slashnotes/md": [
-        "../../md/src/index"
       ]
     }
   },
+  "exclude": [
+    "src/**/*.test.ts"
+  ],
   "references": [
     {
       "path": "../types"
-    },
-    {
-      "path": "../md"
     }
   ]
 }

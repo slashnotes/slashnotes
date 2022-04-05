@@ -1,0 +1,46 @@
+{
+  "name": "@slashnotes/desktop-app",
+  "productName": "Slashnotes",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
+  },
+  "license": "AGPL-3.0",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "Slashnotes"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "@slashnotes/server": "*",
+    "electron-squirrel-startup": "*"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "*",
+    "@electron-forge/maker-squirrel": "*",
+    "@electron-forge/maker-zip": "*",
+    "electron": "*"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
+  }
+}

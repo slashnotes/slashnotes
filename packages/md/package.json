@@ -12,22 +12,21 @@
     "url": "https://github.com/slashnotes/slashnotes/issues"
   },
   "main": "dist/index.js",
-  "type": "module",
   "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc -b"
+    "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.build.json && tsup src/index.ts --format esm,cjs"
   },
-  "dependencies": {
+  "devDependencies": {
     "remark": "*",
     "remark-gfm": "*",
     "@mdx-js/mdx": "*",
-    "rehype-highlight": "*"
-  },
-  "devDependencies": {
+    "rehype-highlight": "*",
     "@slashnotes/types": "*",
+    "tsup": "*",
     "typescript": "*"
   },
   "engines": {

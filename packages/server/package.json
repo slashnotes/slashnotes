@@ -12,12 +12,13 @@
     "url": "https://github.com/slashnotes/slashnotes/issues"
   },
   "main": "dist/index.js",
-  "type": "module",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc -b"
+    "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.json && tsup-node src/index.ts --format esm,cjs"
   },
   "dependencies": {
     "@slashnotes/md": "*",
@@ -28,9 +29,8 @@
   },
   "devDependencies": {
     "@slashnotes/types": "*",
-    "nodemon": "*",
-    "ts-node": "*",
-    "tsconfig-paths": "*"
+    "tsup": "*",
+    "typescript": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
