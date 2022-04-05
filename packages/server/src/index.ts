@@ -211,7 +211,9 @@ export class Server {
                 ...headers,
                 'Content-Type': ContentTypes[extname(path)]
               })
-              .end(createReadStream(join(webPath, path)))
+            const stream = createReadStream(join(webPath, path))
+            stream.on('open', () => stream.pipe(res))
+            stream.on('error', err => res.end(err))
             return
           }
 
