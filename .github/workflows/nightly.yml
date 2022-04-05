@@ -21,6 +21,9 @@ jobs:
         with:
           path: ./*
           key: ${{ github.sha }}
+      - name: Build
+        run: |
+          npm run build
       - name: Publish
         run: |
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
