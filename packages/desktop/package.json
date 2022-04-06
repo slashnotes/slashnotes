@@ -34,7 +34,9 @@
     "vite": "*",
     "@vitejs/plugin-react": "*",
     "typescript": "*",
-    "sass": "*"
+    "sass": "*",
+    "@types/mermaid": "*",
+    "mermaid": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

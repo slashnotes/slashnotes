@@ -170,16 +170,14 @@
       min-height: calc(100% - 35px);
 
       .mode {
-        float: left;
         overflow: hidden;
-        background-color: var(--slashnotes-hover-background-color);
         margin: 10px 0 10px 20px;
 
         div {
           cursor: pointer;
           float: left;
           padding: 4px 10px;
-          border-right: 1px solid var(--slashnotes-main-background-color);
+          border: 1px solid var(--slashnotes-active-background-color);
 
           &.active{
             background-color: var(--slashnotes-active-background-color);
@@ -188,11 +186,20 @@
       }
 
       .view {
-        clear: both;
+        position: fixed;
+        top: 80px;
+        bottom: 0;
         padding: 0 20px;
-        height: calc(100% - 60px);
-        overflow-y: auto;
+        min-height: calc(100% - 60px);
+        width: calc(100% - 300px);
+        overflow: auto;
         line-height: 1.6;
+        &::after{
+          content: " ";
+          display: block;
+          clear: both;
+          padding: 20px;
+        }
 
         h1, h2, h3, h4, h5, h6 {
           margin: 0 0 20px 0;
@@ -222,12 +229,17 @@
           background-color: #2F323B;
           padding: 2px 4px;
           border-radius: 5px;
+          width: max-content;
         }
 
         pre code {
           display: block;
           margin: 0 0 20px 0;
-          padding: 10px;
+          padding: 10px 20px;
+        }
+
+        .mermaid {
+          margin-bottom: 20px;
         }
 
         a {

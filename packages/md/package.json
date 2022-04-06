@@ -29,6 +29,7 @@
   "devDependencies": {
     "remark": "*",
     "remark-gfm": "*",
+    "remark-directive": "*",
     "@mdx-js/mdx": "*",
     "rehype-highlight": "*",
     "@slashnotes/types": "*",

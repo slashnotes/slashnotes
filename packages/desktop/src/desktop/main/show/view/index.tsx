@@ -6,6 +6,7 @@ import { run } from '@mdx-js/mdx'
 import type { MDXProvider } from '@mdx-js/react'
 import * as runtime from 'react/jsx-runtime'
 import { DesktopContext, Item } from 'desktop/context'
+import mermaid from 'mermaid'
 
 function Link (props: {
   href?: string
@@ -24,6 +25,36 @@ function Link (props: {
 
     window.open(props.href, '_blank')
   } }>{props.children}</a>
+}
+
+function Mermaid (props: {
+  className?: string
+  children?: any
+}) {
+  const [svg, setSvg] = useState('')
+
+  if (typeof props.children !== 'string')
+    return null
+
+  useEffect(() => {
+    mermaid.render('Mermaid_' + window.crypto.getRandomValues(new Uint32Array(1))[0].toString(),
+      props.children.includes('%%{init') ? props.children : '%%{init:{\'theme\':\'dark\'}}%%\n' + props.children,
+      html => setSvg(html))
+  }, [props.children])
+
+  return <div
+    className={ props.className }
+    dangerouslySetInnerHTML={ { __html: svg } }
+  ></div>
+}
+
+function Pre (props: {
+  className?: string
+  children?: any
+}) {
+  if (props.className === 'mermaid') return <Mermaid { ...props } />
+
+  return <pre className={ props.className }>{props.children}</pre>
 }
 
 export function View ({ item }: { item: Item }) {
@@ -49,6 +80,9 @@ export function View ({ item }: { item: Item }) {
   }, [item])
 
   return <div className="view">
-    {loading ? <div>Loading..</div> : <Content components={ { a: Link } } />}
+    {loading ? <div>Loading..</div> : <Content components={ {
+      a: Link,
+      pre: Pre,
+    } } />}
   </div>
 }
