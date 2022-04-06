@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  publish:
+  publish_npm:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -30,3 +30,19 @@ jobs:
           npm run publish:nightly
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+  publish_mac:
+    needs: [publish_npm]
+    if: github.ref == 'refs/heads/main'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Install
+        run: |
+          npm install -g npm@latest
+          cd app/desktop
+          npm install
+      - name: Build
+        run: |
+          cd app/desktop
+          npm run publish
