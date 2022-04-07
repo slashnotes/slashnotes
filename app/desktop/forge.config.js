@@ -16,10 +16,10 @@ const makers = [
 
 switch (process.platform) {
   case 'win32':
-    packagerConfig['icon'] = './icon.ico'
+    packagerConfig['icon'] = './logo.ico'
     break
   case 'darwin':
-    packagerConfig['icon'] = './icon.icns'
+    packagerConfig['icon'] = './logo.icns'
     break
 }
 
