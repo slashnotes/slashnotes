@@ -7,7 +7,14 @@ const packagerConfig = {
 }
 
 const makers = [
-  { name: '@electron-forge/maker-squirrel' },
+  {
+    name: '@electron-forge/maker-squirrel',
+    config: {
+      name: 'Slashnotes',
+      author: 'Slashnotes',
+      description: 'A note taking app for your whole life.'
+    }
+  },
   {
     name: '@electron-forge/maker-zip',
     platforms: ['darwin', 'linux'],
@@ -25,5 +32,5 @@ switch (process.platform) {
 
 module.exports = {
   packagerConfig,
-  makers
+  makers,
 }
