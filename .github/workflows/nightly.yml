@@ -51,3 +51,24 @@ jobs:
         with:
           name: Slashnotes-darwin-x64
           path: app/desktop/out/make/zip/darwin/x64/Slashnotes-darwin-x64-1.0.0.zip
+  publish_win:
+    needs: [publish_npm]
+    if: github.ref == 'refs/heads/main'
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Install
+        run: |
+          npm install -g npm@latest
+          cd app/desktop
+          npm install
+      - name: Build
+        run: |
+          cd app/desktop
+          npm run publish
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Slashnotes-win32-x64
+          path: app/desktop/out/make/zip/win32/x64/Slashnotes-win32-x64-1.0.0.zip

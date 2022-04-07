@@ -11,23 +11,7 @@
   },
   "license": "AGPL-3.0",
   "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "Slashnotes"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        }
-      ]
-    }
+    "forge": "./forge.config.js"
   },
   "dependencies": {
     "@slashnotes/server": "*",
