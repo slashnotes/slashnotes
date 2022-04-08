@@ -68,7 +68,8 @@ jobs:
         run: |
           cd app/desktop
           npm run publish
-          ls out
+          ls out\make
+          ls out\Slashnotes-win32-x64
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
