@@ -68,7 +68,7 @@ jobs:
         run: |
           cd app/desktop
           npm run publish
-          ls out\make
+          ls out\make\squirrel.windows
           ls out\Slashnotes-win32-x64
       - name: Upload
         uses: actions/upload-artifact@v3
