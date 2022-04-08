@@ -68,10 +68,9 @@ jobs:
         run: |
           cd app/desktop
           npm run publish
-          ls out\make\squirrel.windows\x64
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
           name: Slashnotes-win32-x64
-          path: app\desktop\out\make\squirrel.windows\x64\Slashnotes-win32-x64-1.0.0.zip
+          path: app\desktop\out\make\squirrel.windows\x64\Slashnotes-1.0.0 Setup.exe
           if-no-files-found: error
