@@ -68,9 +68,7 @@ jobs:
         run: |
           cd app/desktop
           npm run publish
-          ls out\make\zip
-          ls out\make\zip\win32
-          ls out\make\zip\win32\x64
+          ls out
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
