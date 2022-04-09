@@ -8,11 +8,6 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "search.exclude": {
-    ".temp": true,
-    "**/.git": true,
-    "**/node_modules": true,
-  },
   "eslint.packageManager": "npm",
   "cSpell.words": [
     "faasjs",
