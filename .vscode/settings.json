@@ -11,6 +11,7 @@
   "eslint.packageManager": "npm",
   "cSpell.words": [
     "faasjs",
+    "octicons",
     "rehype",
     "slashnotes",
     "tsup",

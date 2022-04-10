@@ -12,15 +12,15 @@
 
 ## Emphasis
 
-**Bold** __Bold__
+`**Bold** __Bold__` => **Bold** __Bold__
 
-*Italic* _Italic_
+`*Italic* _Italic_` => *Italic* _Italic_
 
-~~Strikethrough~~
+`~~Strikethrough~~` => ~~Strikethrough~~
 
-**Bold and _nested italic_**
+`**Bold and _nested italic_**` => **Bold and _nested italic_**
 
-***All bold and italic***
+`***All bold and italic***` => ***All bold and italic***
 
 ## Quoting and Code
 
@@ -46,25 +46,27 @@ const a = 1
 
 ![image](https://placekitten.com/100/100)
 
-## Normal list
+## List
+
+### Normal list
 
 - Normal list
 - Normal list
 - Normal list
 
-## Numberic list
+### Numberic list
 
 1. Numberic list
 2. Numberic list
 3. Numberic list
 
-## Nested list
+### Nested list
 
 - Nested list
   - Nested list
     - Nested list
 
-## Task list
+### Task list
 
 - [x] Task list
 - [ ] Task list

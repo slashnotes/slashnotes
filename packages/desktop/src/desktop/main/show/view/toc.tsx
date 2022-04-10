@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { TriangleUpIcon, TriangleDownIcon } from '@primer/octicons-react'
 
 type Heading = {
   id: string
@@ -45,6 +46,7 @@ function nest (headings: Heading[]) {
 
 export function Toc () {
   const [headings, setHeadings] = useState([])
+  const [collapsed, setCollapsed] = useState(false)
 
   useEffect(() => {
     const newHeadings = document.querySelectorAll<HTMLHeadingElement>('.view h2, .view h3, .view h4, .view h5, .view h6')
@@ -59,6 +61,8 @@ export function Toc () {
   }, [])
 
   return headings.length ? <div className="toc">
-    <Content items={ headings } />
+    <div onClick={ () => setCollapsed(prev => !prev) }>Contents{collapsed ?
+      <TriangleDownIcon /> : <TriangleUpIcon />}</div>
+    {!collapsed && <Content items={ headings } />}
   </div> : null
 }

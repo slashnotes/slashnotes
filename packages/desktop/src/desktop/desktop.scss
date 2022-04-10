@@ -310,9 +310,18 @@
           position: fixed;
           top: 160px;
           right: 21px;
+          bottom: 0;
+          overflow-y: auto;
           border: 1px solid #333;
           width: max-content;
+          height: max-content;
           padding: 10px 20px;
+          background: rgba(0,0,0,0.5);
+
+          div {
+            margin-bottom: 0;
+            cursor: pointer;
+          }
 
           ul {
             margin-bottom: 0;
