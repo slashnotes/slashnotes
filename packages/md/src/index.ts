@@ -1,28 +1,53 @@
-import { readFileSync, writeFileSync, } from 'fs'
-import { basename } from 'path'
-import { SlashnotesFile } from '@slashnotes/types'
+import type { SlashnotesFile } from '@slashnotes/types'
+import type { Plugin } from 'unified'
 
+export type MdOptions = {
+  remarkPlugins?: Plugin<any[], any>[]
+  rehypePlugins?: Plugin<any[], any>[]
+}
+
+import remarkGfm from 'remark-gfm'
+import rehypeHighlight from 'rehype-highlight'
+import { mermaidPlugin } from './plugins/mermaid'
+
+export const defaultOptions: MdOptions = {
+  remarkPlugins: [mermaidPlugin, remarkGfm],
+  rehypePlugins: [rehypeHighlight]
+}
+
+import { readFileSync, writeFileSync } from 'fs'
+import { basename } from 'path'
 import { build } from './build'
 import { parse } from './parse'
 
-const Md = () : SlashnotesFile => {
+/**
+ * Markdown file plugin for Slashnotes.
+ *
+ * @param options {MdOptions}
+ * @returns SlashnotesFile
+ */
+function Md (options?: MdOptions): SlashnotesFile {
+  if (!options) options = {}
+  options.remarkPlugins = [...(options.remarkPlugins || []), ...defaultOptions.remarkPlugins]
+  options.rehypePlugins = [...(options.rehypePlugins || []), ...defaultOptions.rehypePlugins]
+
   return {
     extname: '.md',
-    read ({ filename }) {
+    read ({ filename }): string {
       return JSON.stringify({ body: readFileSync(filename).toString() })
     },
-    write ({ filename, body }) {
+    write ({ filename, body }): void {
       writeFileSync(filename, body)
     },
-    render ({ filename }) {
+    render ({ filename }): string {
       const file = readFileSync(filename).toString()
-      return JSON.stringify({ body: parse(file) })
+      return JSON.stringify({ body: parse(file, options) })
     },
-    create ({ filename }) {
+    create ({ filename }): void {
       writeFileSync(filename, `# ${basename(filename).replace('.md', '')}\n\n`)
     },
-    build ({ source, destination }) {
-      writeFileSync(destination, build(readFileSync(source).toString()))
+    build ({ source, destination }): void {
+      writeFileSync(destination, build(readFileSync(source).toString(), options))
     }
   }
 }

@@ -24,7 +24,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.json && tsup src/index.ts --format esm,cjs"
+    "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.json && tsup-node src/index.ts --format esm && tsup src/index.ts --format cjs"
   },
   "dependencies": {
     "@slashnotes/desktop": "*"

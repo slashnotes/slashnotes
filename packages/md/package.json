@@ -29,7 +29,6 @@
   "dependencies": {
     "remark": "*",
     "remark-gfm": "*",
-    "remark-directive": "*",
     "@mdx-js/mdx": "*",
     "rehype-highlight": "*",
     "react": "*",

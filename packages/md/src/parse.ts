@@ -1,12 +1,12 @@
 import { compileSync } from '@mdx-js/mdx'
-import { remarkPlugins, rehypePlugins } from './plugins'
+import { MdOptions } from '.'
 
-export function parse (body: string): string {
+export function parse (body: string, options: MdOptions): string {
   return String(compileSync(body, {
     format: 'mdx',
     outputFormat: 'function-body',
     useDynamicImport: true,
-    remarkPlugins,
-    rehypePlugins,
+    remarkPlugins: options.remarkPlugins,
+    rehypePlugins: options.rehypePlugins,
   }))
 }
