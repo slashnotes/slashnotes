@@ -2,6 +2,7 @@
 const { app, BrowserWindow } = require('electron');
 const { join, dirname } = require('path')
 const Server = require(join(dirname(require.resolve('@slashnotes/server')), 'index.cjs')).Server
+const Md = require(join(dirname(require.resolve('@slashnotes/md')), 'index.cjs')).default
 
 const port = Math.floor(Math.random() * 10000)
 
@@ -27,6 +28,7 @@ app.on('ready', () => {
   const server = new Server({
     port,
     folder: __dirname,
+    files: [Md]
   })
   server.start()
   createWindow()

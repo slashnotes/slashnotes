@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@slashnotes/server": "*",
+    "@slashnotes/md": "*",
     "electron-squirrel-startup": "*"
   },
   "devDependencies": {
