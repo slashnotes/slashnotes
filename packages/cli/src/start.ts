@@ -3,6 +3,7 @@ import { Server } from '@slashnotes/server'
 import { platform } from 'os'
 import { exec } from 'child_process'
 import { resolve } from 'path'
+import Md from '@slashnotes/md'
 
 export function action (
   options: {
@@ -12,7 +13,11 @@ export function action (
   }
 ) {
   options.folder = resolve(options.folder)
-  const server = new Server(options)
+  const server = new Server({
+    folder: options.folder,
+    port: options.port,
+    files: [Md]
+  })
   server.start()
 
   if (options.open)

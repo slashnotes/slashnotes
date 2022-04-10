@@ -5,7 +5,7 @@ import {
   join, extname, sep, dirname
 } from 'path'
 import { SlashnotesItem, SlashnotesFile } from '@slashnotes/types'
-import { Md } from '@slashnotes/md'
+import Md from '@slashnotes/md'
 
 type Files = {
   [type: string]: SlashnotesFile

@@ -5,7 +5,7 @@ import { SlashnotesFile } from '@slashnotes/types'
 import { build } from './build'
 import { parse } from './parse'
 
-export const Md: SlashnotesFile = {
+const Md: SlashnotesFile = {
   extname: '.md',
   read ({ filename }) {
     return JSON.stringify({ body: readFileSync(filename).toString() })
@@ -24,3 +24,5 @@ export const Md: SlashnotesFile = {
     writeFileSync(destination, build(readFileSync(source).toString()))
   }
 }
+
+export default Md

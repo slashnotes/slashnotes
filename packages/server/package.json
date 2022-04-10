@@ -30,7 +30,6 @@
     "@slashnotes/desktop": "*"
   },
   "devDependencies": {
-    "@slashnotes/md": "*",
     "@faasjs/logger": "*",
     "@slashnotes/types": "*",
     "tsup": "*",

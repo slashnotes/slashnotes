@@ -7,7 +7,6 @@ import {
 } from 'path'
 import { createRequire } from 'module'
 import { Logger } from '@faasjs/logger'
-import { Md } from '@slashnotes/md'
 import { SlashnotesItem, SlashnotesFile } from '@slashnotes/types'
 
 type Files = {
@@ -61,15 +60,16 @@ export class Server {
   public readonly logger: Logger
   public readonly files: Files
 
-  constructor (options?: {
+  constructor (options: {
     port: number | string
     folder: string
+    files: SlashnotesFile[]
   }) {
     this.port = process.env.PORT || options?.port || 3000
     this.folder = options.folder
     console.log(this.folder)
     this.logger = new Logger()
-    this.files = { '.md': Md }
+    this.files = Object.assign({}, ...options.files.map(file => ({ [file.extname]: file })))
   }
 
   public async start () {

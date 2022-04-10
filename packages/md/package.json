@@ -26,17 +26,15 @@
   "scripts": {
     "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.build.json && tsup src/index.ts --format esm,cjs"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@slashnotes/types": "*",
+    "tsup": "*",
+    "typescript": "*",
     "remark": "*",
     "remark-gfm": "*",
     "remark-directive": "*",
     "@mdx-js/mdx": "*",
     "rehype-highlight": "*"
-  },
-  "devDependencies": {
-    "@slashnotes/types": "*",
-    "tsup": "*",
-    "typescript": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
