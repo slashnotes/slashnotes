@@ -1,13 +1,17 @@
 import type { Command } from 'commander'
 import { Builder } from '@slashnotes/builder'
 import { resolve } from 'path'
+import Md from '@slashnotes/md'
 
 export function action (options: {
   folder: string
   destination: string
 }) {
   options.folder = resolve(options.folder)
-  const builder = new Builder(options)
+  const builder = new Builder({
+    folder: options.folder,
+    files: [Md()]
+  })
   builder.build(options.destination)
 }
 

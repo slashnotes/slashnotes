@@ -31,7 +31,9 @@
     "remark-gfm": "*",
     "remark-directive": "*",
     "@mdx-js/mdx": "*",
-    "rehype-highlight": "*"
+    "rehype-highlight": "*",
+    "react": "*",
+    "react-dom": "*"
   },
   "devDependencies": {
     "@slashnotes/types": "*",

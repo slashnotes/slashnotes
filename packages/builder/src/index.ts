@@ -5,7 +5,6 @@ import {
   join, extname, sep, dirname
 } from 'path'
 import { SlashnotesItem, SlashnotesFile } from '@slashnotes/types'
-import Md from '@slashnotes/md'
 
 type Files = {
   [type: string]: SlashnotesFile
@@ -38,9 +37,12 @@ export class Builder {
   public readonly folder: string
   public readonly files: Files
 
-  constructor (options: { folder: string }) {
+  constructor (options: {
+    folder: string
+    files: SlashnotesFile[]
+  }) {
     this.folder = options.folder
-    this.files = { '.md': Md }
+    this.files = Object.assign({}, ...options.files.map(file => ({ [file.extname]: file })))
   }
 
   public build (destination: string): void {

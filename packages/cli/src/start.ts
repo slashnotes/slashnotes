@@ -16,7 +16,7 @@ export function action (
   const server = new Server({
     folder: options.folder,
     port: options.port,
-    files: [Md]
+    files: [Md()]
   })
   server.start()
 
