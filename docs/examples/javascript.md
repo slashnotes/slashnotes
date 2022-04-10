@@ -54,9 +54,7 @@ Tomorrow is { dayjs().add(1, 'd').format('dddd, YYYY-MM-DD.') }
 export const Clicker = () => {
   const [count, setCount] = useState(0)
 
-  return <div>
-    <button onClick={() => setCount(p => p + 1)}>Clicked {count} times</button>
-  </div>
+  return <button onClick={() => setCount(p => p + 1)}>Clicked {count} times</button>
 }
 ```
 

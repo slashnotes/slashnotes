@@ -1,13 +1,14 @@
 import { DesktopContext } from 'desktop/context'
-import { useContext } from 'react'
+import { useCallback, useContext } from 'react'
 
 export function A (props: {
   href?: string
   children?: any
 }): JSX.Element {
   const { setCurrent, setOpens } = useContext(DesktopContext)
+  const onClick = useCallback((e) => {
+    e.preventDefault()
 
-  return <a onClick={ () => {
     if (!props.href) return
 
     if (!props.href.startsWith('http:') && !props.href.startsWith('https:')) {
@@ -17,5 +18,10 @@ export function A (props: {
     }
 
     window.open(props.href, '_blank')
-  } }>{props.children}</a>
+  }, [props.href])
+
+  return <a
+    onClick={ onClick }
+    href={ props.href }
+  >{props.children}</a>
 }

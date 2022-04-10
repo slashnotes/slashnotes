@@ -201,9 +201,22 @@
           padding: 20px;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1 {
           margin: 0 0 20px 0;
           padding: 0;
+        }
+
+        h2, h3, h4, h5, h6 {
+          margin: 0 0 20px 0;
+          padding: 0;
+          width: max-content;
+
+          .anchor {
+            float: left;
+            width: 10px;
+            padding-right: 4px;
+            margin-left: -14px;
+          }
         }
 
         h1 {
@@ -215,7 +228,7 @@
           font-size: inherit;
         }
 
-        p {
+        div, p {
           margin: 0 0 20px 0;
         }
 
@@ -287,8 +300,27 @@
           background-color: #2F323B;
         }
 
-        .footnotes h2 {
-          margin: 0;
+        .footnotes {
+          p {
+            margin: 0;
+          }
+        }
+
+        .toc {
+          position: fixed;
+          top: 160px;
+          right: 21px;
+          border: 1px solid #333;
+          width: max-content;
+          padding: 10px 20px;
+
+          ul {
+            margin-bottom: 0;
+          }
+
+          > ul {
+            padding-left: 0;
+          }
         }
       }
 

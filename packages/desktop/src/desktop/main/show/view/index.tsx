@@ -8,6 +8,7 @@ import * as runtime from 'react/jsx-runtime'
 import type { Item } from 'desktop/context'
 import { ErrorBoundary } from './error'
 import { components } from './components'
+import { Toc } from './toc'
 
 export function View ({ item }: { item: Item }) {
   const [mdxModule, setMdxModule] = useState<{ default: typeof MDXProvider }>()
@@ -38,6 +39,7 @@ export function View ({ item }: { item: Item }) {
 
   return <div className="view">
     {loading ? <div>Loading..</div> : <ErrorBoundary>
+      <Toc />
       <Content components={ components } />
     </ErrorBoundary>}
   </div>

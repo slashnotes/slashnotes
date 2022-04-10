@@ -77,6 +77,7 @@ const a = 1
 
 ## Footnote
 
-A footnote[^1]
+A[^1] footnote[^2]
 
-[^1]: footnote.
+[^1]: 1st footnote.
+[^2]: 2nd footnote.
