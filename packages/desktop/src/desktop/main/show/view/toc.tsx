@@ -64,11 +64,7 @@ export function Toc (props: {
 
   return headings.length ? <div
     className="toc"
-    style={ props.collapsed ? {
-      position: 'fixed',
-      right: '40px',
-      width: 'fit-content'
-    } : {} }
+    style={ props.collapsed ? { width: 'fit-content', } : {} }
   >
     <div onClick={ () => props.setCollapsed(prev => !prev) }>Contents{props.collapsed ?
       <TriangleUpIcon /> : <TriangleDownIcon />}</div>

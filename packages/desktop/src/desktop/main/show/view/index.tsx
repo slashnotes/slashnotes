@@ -42,7 +42,7 @@ export function View ({ item }: { item: Item }) {
     {loading ? <div>Loading..</div> : <ErrorBoundary>
       <div
         className='content'
-        style={ { width: tocCollapsed ? 'calc(100% - 20px)' : 'calc(80% - 20px)' } }>
+        style={ { width: tocCollapsed ? '100%' : 'calc(80% - 20px)' } }>
         <Content components={ components } />
       </div>
       <Toc
