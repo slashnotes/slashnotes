@@ -44,9 +44,11 @@ function nest (headings: Heading[]) {
   return headings.filter(h => h.level === 2)
 }
 
-export function Toc () {
+export function Toc (props: {
+  collapsed: boolean
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>
+}) {
   const [headings, setHeadings] = useState([])
-  const [collapsed, setCollapsed] = useState(false)
 
   useEffect(() => {
     const newHeadings = document.querySelectorAll<HTMLHeadingElement>('.view h2, .view h3, .view h4, .view h5, .view h6')
@@ -60,9 +62,16 @@ export function Toc () {
       }))))
   }, [])
 
-  return headings.length ? <div className="toc">
-    <div onClick={ () => setCollapsed(prev => !prev) }>Contents{collapsed ?
-      <TriangleDownIcon /> : <TriangleUpIcon />}</div>
-    {!collapsed && <Content items={ headings } />}
+  return headings.length ? <div
+    className="toc"
+    style={ props.collapsed ? {
+      position: 'fixed',
+      right: '40px',
+      width: 'fit-content'
+    } : {} }
+  >
+    <div onClick={ () => props.setCollapsed(prev => !prev) }>Contents{props.collapsed ?
+      <TriangleUpIcon /> : <TriangleDownIcon />}</div>
+    {!props.collapsed && <Content items={ headings } />}
   </div> : null
 }

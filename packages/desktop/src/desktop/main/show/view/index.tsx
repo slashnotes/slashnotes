@@ -14,6 +14,7 @@ export function View ({ item }: { item: Item }) {
   const [mdxModule, setMdxModule] = useState<{ default: typeof MDXProvider }>()
   const Content = mdxModule ? mdxModule.default : Fragment
   const [loading, setLoading] = useState(true)
+  const [tocCollapsed, setTocCollapsed] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -39,8 +40,15 @@ export function View ({ item }: { item: Item }) {
 
   return <div className="view">
     {loading ? <div>Loading..</div> : <ErrorBoundary>
-      <Toc />
-      <Content components={ components } />
+      <div
+        className='content'
+        style={ { width: tocCollapsed ? 'calc(100% - 20px)' : 'calc(80% - 20px)' } }>
+        <Content components={ components } />
+      </div>
+      <Toc
+        collapsed={ tocCollapsed }
+        setCollapsed={ setTocCollapsed }
+      />
     </ErrorBoundary>}
   </div>
 }
