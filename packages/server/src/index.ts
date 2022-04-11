@@ -1,17 +1,12 @@
 import { createServer as createHttpServer } from 'http'
-import {
-  existsSync, readdirSync, statSync, renameSync, mkdirSync, rmSync, createReadStream
-} from 'fs'
-import {
-  join, extname, sep, dirname, basename
-} from 'path'
+import { existsSync, createReadStream } from 'fs'
+import { join, extname } from 'path'
 import { createRequire } from 'module'
 import { Logger } from '@faasjs/logger'
-import { SlashnotesItem, SlashnotesFile } from '@slashnotes/types'
-
-type Files = {
-  [type: string]: SlashnotesFile
-}
+import { SlashnotesFile } from '@slashnotes/types'
+import { Config } from './actions/config'
+import { File } from './actions/file'
+import { Folder } from './actions/folder'
 
 const ContentTypes: {
   [key: string]: string
@@ -24,41 +19,13 @@ const ContentTypes: {
 
 const require = createRequire(import.meta.url)
 
-type AllFiles = {
-  [path: string]: SlashnotesItem & {
-    mode: 'view'
-  }
-}
-
-function findFiles (dir: string, cwd: string, files: Files, prev?: AllFiles): AllFiles {
-  if (!prev) prev = {}
-
-  readdirSync(dir).forEach(f => {
-    const subPath = join(dir, f)
-    if (statSync(subPath).isDirectory() && !subPath.includes('node_modules'))
-      return findFiles(subPath, cwd, files, prev)
-
-    const ext = extname(f)
-    if (files[ext]) {
-      const path = subPath.replace(cwd, '')
-      const paths = path.split(sep)
-      prev[path] = {
-        path,
-        name: paths[paths.length - 1],
-        type: ext,
-        mode: 'view',
-      }
-    }
-  })
-
-  return prev
-}
-
 export class Server {
   public readonly port: number | string
   public readonly folder: string
   public readonly logger: Logger
-  public readonly files: Files
+  public readonly files: {
+    [type: string]: SlashnotesFile
+  }
 
   constructor (options: {
     port: number | string
@@ -106,101 +73,47 @@ export class Server {
         try {
           if (path.startsWith('/__slashnotes/')) {
             const command = path.replace('/__slashnotes/', '')
-            switch (command) {
-              case 'config/get':
-                res
-                  .writeHead(200, headers)
-                  .end(JSON.stringify({ sep }))
-                return
-              case 'list':
-                res
-                  .writeHead(200, headers)
-                  .end(JSON.stringify(findFiles(this.folder, this.folder + sep, this.files)))
-                return
-              case 'read': {
-                const data = JSON.parse(body)
+            if (command.startsWith('config/')) {
+              Config({
+                command: command.replace('config/', ''),
+                headers,
+                res,
+              })
 
-                if (!this.files[data.type]) throw Error('Unknown file type: ' + data.type)
-
-                res
-                  .writeHead(200, headers)
-                  .end(this.files[data.type].read({ filename: join(this.folder, data.path) }))
-                return
-              }
-              case 'write': {
-                const data = JSON.parse(body)
-
-                if (!this.files[data.type]) throw Error('Unknown file type: ' + data.type)
-
-                this.files[data.type].write({
-                  filename: join(this.folder, data.path),
-                  body: data.body
-                })
-                res
-                  .writeHead(201, headers)
-                  .end()
-                return
-              }
-              case 'view': {
-                const data = JSON.parse(body)
-
-                if (!this.files[data.type]) throw Error('Unknown file type: ' + data.type)
-
-                res
-                  .writeHead(200, headers)
-                  .end(this.files[data.type].render({ filename: join(this.folder, data.path) }))
-                return
-              }
-              case 'rename': {
-                const data = JSON.parse(body)
-                const dir = join(this.folder, dirname(data.to))
-                if (!existsSync(dir))
-                  mkdirSync(dir, { recursive: true })
-                renameSync(join(this.folder, data.from), join(this.folder, data.to))
-                res
-                  .writeHead(201, headers)
-                  .end()
-                return
-              }
-              case 'add': {
-                const data = JSON.parse(body)
-
-                if (!this.files[data.type]) throw Error('Unknown file type: ' + data.type)
-
-                const path = join(this.folder, ...data.paths) + data.type
-                const dir = dirname(path)
-                if (!existsSync(dir))
-                  mkdirSync(dir, { recursive: true })
-
-                this.files[data.type].create({ filename: path })
-
-                res
-                  .writeHead(200, headers)
-                  .end(JSON.stringify({
-                    type: data.type,
-                    name: basename(path),
-                    path: path.replace(this.folder + sep, ''),
-                  }))
-                return
-              }
-              case 'delete': {
-                const data = JSON.parse(body)
-                rmSync(join(this.folder, data.path))
-                res
-                  .writeHead(201, headers)
-                  .end()
-                return
-              }
-              default:
-                console.error('Unknown command', command)
-                res
-                  .writeHead(500, {
-                    ...headers,
-                    'Content-Type': 'text/plain'
-                  })
-                  .end('Unknown command: ' + command)
-                return
+              return
             }
+
+            if (command.startsWith('file/')) {
+              File({
+                command: command.replace('file/', ''),
+                headers,
+                res,
+                folder: this.folder,
+                files: this.files,
+                data: body ? JSON.parse(body) : {},
+              })
+              return
+            }
+
+            if (command.startsWith('folder/')) {
+              Folder({
+                command: command.replace('folder/', ''),
+                headers,
+                res,
+                folder: this.folder,
+                data: body ? JSON.parse(body) : {},
+              })
+              return
+            }
+
+            console.error('Unknown command', command)
+            res
+              .writeHead(500, {
+                ...headers,
+                'Content-Type': 'text/plain'
+              })
+              .end('Unknown command: ' + command)
+            return
           }
 
           if (path === '/') path = 'index.html'

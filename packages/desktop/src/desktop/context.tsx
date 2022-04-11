@@ -51,7 +51,7 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     current,
     setCurrent,
     loadAllItems: () => {
-      action('list').then(setAllItems)
+      action('file/list').then(setAllItems)
     },
   }), [
     config,
@@ -73,7 +73,7 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     loadConfig()
 
     function loadList () {
-      action('list')
+      action('file/list')
         .then(setAllItems)
         .catch(loadList)
     }

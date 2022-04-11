@@ -19,7 +19,7 @@ function RenameMode ({
   const { loadAllItems } = useContext(DesktopContext)
   const [path, setPath] = useState(item.path)
   const submit = useCallback(() => {
-    action('rename', {
+    action('file/rename', {
       from: item.path,
       to: path
     })
@@ -121,7 +121,7 @@ export function FileNode ({
       <div
         className='button submit-button'
         onClick={ () => {
-          action('delete', { path: item.path })
+          action('file/delete', { path: item.path })
             .then(() => {
               setOpens(prev => prev.filter(i => i !== item.path))
               loadAllItems()

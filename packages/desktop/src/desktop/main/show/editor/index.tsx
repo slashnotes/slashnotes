@@ -39,7 +39,7 @@ export function Editor ({ item }: {
   useEffect(() => {
     if (!item || !editor) return
 
-    action<{ body: string }>('read', item)
+    action<{ body: string }>('file/read', item)
       .then(data => {
         editor.setValue(data.body)
       })
@@ -48,7 +48,7 @@ export function Editor ({ item }: {
   useEffect(() => {
     if (!item || !value) return
 
-    action('write', {
+    action('file/write', {
       ...item,
       body: value
     })

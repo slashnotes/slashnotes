@@ -3,7 +3,9 @@ import {
   useContext, useEffect, useState
 } from 'react'
 import { FileNode } from './fileNode'
-import { AddMode, FolderNode } from './folderNode'
+import {
+  AddMode, FolderNode, FolderMode
+} from './folderNode'
 import { PlusIcon } from '@primer/octicons-react'
 
 export type TFolderNode = {
@@ -23,7 +25,7 @@ export type TNode = TFolderNode | TFileNode
 export function FileTree () {
   const { allItems, config } = useContext(DesktopContext)
   const [tree, setTree] = useState<TNode[]>([])
-  const [isAdd, setIsAdd] = useState(false)
+  const [mode, setMode] = useState<FolderMode>('view')
 
   useEffect(() => {
     if (!config?.sep) return
@@ -72,16 +74,16 @@ export function FileTree () {
     <div className='header'>Files
       <div
         className='button add-button'
-        onClick={ () => setIsAdd(prev => !prev) }
+        onClick={ () => setMode(prev => (prev === 'view' ? 'add' : 'view')) }
         title='Add'
       >
         <PlusIcon />
       </div>
     </div>
-    {isAdd &&
+    {mode === 'add' &&
       <AddMode
         paths={ [] }
-        setIsAdd={ setIsAdd }
+        setMode={ setMode }
       />}
     {tree.map(node => (node.type === 'folder' ?
       <FolderNode

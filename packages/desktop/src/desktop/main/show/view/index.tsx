@@ -18,7 +18,7 @@ export function View ({ item }: { item: Item }) {
 
   useEffect(() => {
     setLoading(true)
-    action('view', item).then(data => {
+    action('file/view', item).then(data => {
       run(data.body, runtime)
         .then(mdxModule => {
           try {
