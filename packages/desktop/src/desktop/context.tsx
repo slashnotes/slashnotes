@@ -15,15 +15,38 @@ export type AllItems = {
   [path: string]: Item
 }
 
+export type Modal = {
+  visible: boolean
+  content?: React.ReactNode
+}
+
+export type File = {
+  kind: 'file' | 'folder'
+  name: string
+}
+
+export type Sources = {
+  [key: string]: File[]
+}
+
 export const DesktopContext = createContext<{
   config: SlashnotesConfig
+
   opens: string[]
   setOpens: React.Dispatch<React.SetStateAction<string[]>>
+
   allItems: AllItems
   setAllItems: React.Dispatch<React.SetStateAction<AllItems>>
-  current?: string
-  setCurrent:React.Dispatch<React.SetStateAction< string | undefined>>
   loadAllItems(): void
+
+  current?: string
+  setCurrent: React.Dispatch<React.SetStateAction<string | undefined>>
+
+  modal?: Modal
+  setModal: React.Dispatch<React.SetStateAction<Modal>>
+
+  sources: Sources
+  setSources: React.Dispatch<React.SetStateAction<Sources>>
 }>({
       config: { sep: '' },
       opens: [],
@@ -33,6 +56,10 @@ export const DesktopContext = createContext<{
       current: undefined,
       setCurrent: () => {},
       loadAllItems: () => {},
+      modal: undefined,
+      setModal: () => {},
+      sources: {},
+      setSources: () => {}
     })
 
 export function DesktopContextProvider (props: { children: JSX.Element | JSX.Element[] }) {
@@ -41,6 +68,8 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
   const [current, setCurrent] = useState<string>()
   const [allItems, setAllItems] = useState<AllItems>({})
   const [loaded, setLoaded] = useState(false)
+  const [modal, setModal] = useState({ visible: false })
+  const [sources, setSources] = useState({})
 
   const itemsValue = useMemo(() => ({
     config,
@@ -53,6 +82,10 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     loadAllItems: () => {
       action('file/list').then(setAllItems)
     },
+    modal,
+    setModal,
+    sources,
+    setSources,
   }), [
     config,
     opens,
@@ -61,6 +94,10 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     setAllItems,
     current,
     setCurrent,
+    modal,
+    setModal,
+    sources,
+    setSources,
   ])
 
   useEffect(() => {

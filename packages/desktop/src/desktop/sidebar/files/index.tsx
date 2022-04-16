@@ -22,7 +22,7 @@ export type TFileNode = {
 
 export type TNode = TFolderNode | TFileNode
 
-export function FileTree () {
+export function Files () {
   const { allItems, config } = useContext(DesktopContext)
   const [tree, setTree] = useState<TNode[]>([])
   const [mode, setMode] = useState<FolderMode>('view')
@@ -70,7 +70,7 @@ export function FileTree () {
     setTree(tree)
   }, [allItems, config?.sep])
 
-  return <div className='file-tree'>
+  return <div className='file'>
     <div className='header'>Files
       <div
         className='button add-button'

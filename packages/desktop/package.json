@@ -31,6 +31,7 @@
     "@types/react": "*",
     "@types/react-dom": "*",
     "@types/node": "*",
+    "@types/wicg-file-system-access": "*",
     "vite": "*",
     "@vitejs/plugin-react": "*",
     "typescript": "*",

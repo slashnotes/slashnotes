@@ -1,7 +1,9 @@
-import { FileTree } from './fileTree'
+import { Files } from './files'
+import { Sources } from './source'
 
 export function Sidebar () {
   return <div className='sidebar'>
-    <FileTree />
+    <Sources />
+    <Files />
   </div>
 }

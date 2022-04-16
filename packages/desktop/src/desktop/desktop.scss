@@ -358,4 +358,30 @@
       }
     }
   }
+
+  .modal {
+    position: fixed;
+    top: 40px;
+    width: 50%;
+    left: 50%;
+    margin-left: -25%;
+    background-color: var(--slashnotes-background-color);
+    z-index: 1;
+    padding: 20px;
+
+    .close {
+      float: right;
+      cursor: pointer;
+    }
+
+    input {
+      background-color: var(--slashnotes-hover-background-color);
+      border: 0 none;
+      color: var(--slashnotes-color);
+      font-size: inherit;
+      width: calc(100% - 74px);
+      outline: none;
+      font-family: monospace;
+    }
+  }
 }
