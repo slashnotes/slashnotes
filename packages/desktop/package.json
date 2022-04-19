@@ -11,15 +11,21 @@
   "bugs": {
     "url": "https://github.com/slashnotes/slashnotes/issues"
   },
-  "files": [
-    "dist",
-    "index.js"
-  ],
   "main": "index.js",
   "scripts": {
-    "dev": "VITE_SERVER=http://localhost:4000 vite",
-    "build": "tsc && vite build",
+    "dev:electron": "wait-on tcp:3000 && APP_ENV=development electron-forge start",
+    "dev:vite": "VITE_SERVER=http://localhost:4000 vite",
+    "dev": "concurrently \"npm:dev:*\"",
+    "build": "tsc && vite build && electron-forge package",
     "test": "vitest run"
+  },
+  "config": {
+    "forge": "./forge.config.js"
+  },
+  "dependencies": {
+    "@slashnotes/server": "*",
+    "@slashnotes/md": "*",
+    "electron-squirrel-startup": "*"
   },
   "devDependencies": {
     "react": "*",
@@ -37,7 +43,13 @@
     "typescript": "*",
     "sass": "*",
     "@types/mermaid": "*",
-    "mermaid": "*"
+    "mermaid": "*",
+    "concurrently": "*",
+    "@electron-forge/cli": "*",
+    "@electron-forge/maker-squirrel": "*",
+    "@electron-forge/maker-zip": "*",
+    "electron": "*",
+    "wait-on": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

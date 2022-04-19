@@ -6,7 +6,7 @@ export function A (props: {
   children?: any
 }): JSX.Element {
   const { setCurrent, setOpens } = useContext(DesktopContext)
-  const onClick = useCallback((e) => {
+  const onClick = useCallback<React.MouseEventHandler<HTMLAnchorElement>>((e) => {
     e.preventDefault()
 
     if (!props.href) return

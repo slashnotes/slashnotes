@@ -40,17 +40,17 @@ jobs:
       - name: Install
         run: |
           npm install -g npm@latest
-          cd app/desktop
+          cd packages/desktop
           npm install
       - name: Build
         run: |
-          cd app/desktop
+          cd packages/desktop
           npm run publish
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
           name: Slashnotes-darwin-x64
-          path: app/desktop/out/make/zip/darwin/x64/Slashnotes-darwin-x64-1.0.0.zip
+          path: packages/desktop/out/make/zip/darwin/x64/Slashnotes-darwin-x64-1.0.0.zip
           if-no-files-found: error
   publish_win:
     needs: [publish_npm]
@@ -62,15 +62,15 @@ jobs:
       - name: Install
         run: |
           npm install -g npm@latest
-          cd app/desktop
+          cd packages/desktop
           npm install
       - name: Build
         run: |
-          cd app/desktop
+          cd packages/desktop
           npm run publish
       - name: Upload
         uses: actions/upload-artifact@v3
         with:
           name: Slashnotes-win32-x64
-          path: app\desktop\out\make\squirrel.windows\x64\Slashnotes-1.0.0 Setup.exe
+          path: packages\desktop\out\make\squirrel.windows\x64\Slashnotes-1.0.0 Setup.exe
           if-no-files-found: error

@@ -19,6 +19,5 @@ export default defineConfig({
         replacement: __dirname + '/../../node_modules/react/jsx-runtime.js'
       }
     ],
-  },
-  server: { open: true }
+  }
 })
