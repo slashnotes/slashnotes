@@ -1,9 +1,33 @@
+import { DesktopContext } from 'desktop/context'
 import { Files } from './files'
-import { Sources } from './source'
+import { useContext } from 'react'
+import { selectFolder } from 'libs/io'
+
+function NoFiles () {
+  const { setSource } = useContext(DesktopContext)
+
+  return <div className='header'>
+    Files
+    <div
+      title='Open folder'
+      className='open-folder'
+      onClick={ async () => {
+        const folder = await selectFolder()
+        setSource({
+          path: folder,
+          name: folder.split('/').pop()
+        })
+      } }
+    >
+      Open Folder
+    </div>
+  </div>
+}
 
 export function Sidebar () {
+  const { source } = useContext(DesktopContext)
+
   return <div className='sidebar'>
-    <Sources />
-    <Files />
+    {source ? <Files /> : <NoFiles />}
   </div>
 }

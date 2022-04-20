@@ -1,26 +1,10 @@
-import { ServerResponse } from 'http'
 import { sep } from 'path'
 
-export function Config (props: {
-  command: string
-  headers: {
-    [key: string]: string
-  }
-  res: ServerResponse
-}) {
-  switch (props.command) {
+export function Config (name: string, _: any) {
+  switch (name) {
     case 'get':
-      props.res
-        .writeHead(200, props.headers)
-        .end(JSON.stringify({ sep }))
-      return
+      return { sep }
     default:
-      props.res
-        .writeHead(500, {
-          ...props.headers,
-          'Content-Type': 'text/plain'
-        })
-        .end('Unknown command: config/' + props.command)
-      return
+      throw Error('Unknown command: config/' + name)
   }
 }

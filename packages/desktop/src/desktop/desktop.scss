@@ -5,6 +5,8 @@
   --slashnotes-hover-background-color: #2B2D2E;
   --slashnotes-active-background-color: #37363D;
   --slashnotes-main-background-color: #1E1E1E;
+  --slashnotes-bar-background-color: #4471C9;
+  --slashnotes-bar-color: #fff;
 }
 
 .desktop {
@@ -12,7 +14,6 @@
   min-height: 100vh;
   background-color: var(--slashnotes-background-color);
   color: var(--slashnotes-color);
-  font-family: monospace;
   font-size: 14px;
 
   .sidebar {
@@ -45,6 +46,15 @@
       width: calc(100% - 74px);
       outline: none;
       font-family: monospace;
+    }
+
+    .open-folder {
+      margin-top: 10px;
+      background-color: var(--slashnotes-bar-background-color);
+      text-align: center;
+      padding: 4px 0;
+      color: var(--slashnotes-bar-color);
+      cursor: pointer;
     }
 
     .node {
@@ -352,6 +362,7 @@
       }
 
       .editor {
+        font-family: monospace;
         clear: both;
         width: 100%;
         min-height: calc(100vh - 75px);

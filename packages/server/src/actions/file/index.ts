@@ -1,11 +1,11 @@
 import { SlashnotesFile, SlashnotesItem } from '@slashnotes/types'
-import { ServerResponse } from 'http'
 import {
   sep, join, extname, dirname, basename,
 } from 'path'
 import {
   readdirSync, statSync, existsSync, mkdirSync, renameSync, rmSync
 } from 'fs'
+import { Options } from '..'
 
 type Files = {
   [type: string]: SlashnotesFile
@@ -41,94 +41,60 @@ function findFiles (dir: string, cwd: string, files: Files, prev?: AllFiles): Al
   return prev
 }
 
-export function File (props: {
-  command: string
-  headers: {
-    [key: string]: string
-  }
-  res: ServerResponse
-  folder: string
-  files: {
-    [key: string]: SlashnotesFile
-  }
-  data: any
-}) {
-  switch (props.command) {
+export function File (name: string, params: any, options: Options) {
+  switch (name) {
     case 'list':
-      props.res
-        .writeHead(200, props.headers)
-        .end(JSON.stringify(findFiles(props.folder, props.folder + sep, props.files)))
-      return
+      return findFiles(params.folder, params.folder + sep, options.files)
     case 'read':
-      if (!props.files[props.data.type]) throw Error('Unknown file type: ' + props.data.type)
+      if (!options.files[params.type]) throw Error('Unknown file type: ' + params.type)
 
-      props.res
-        .writeHead(200, props.headers)
-        .end(props.files[props.data.type].read({ filename: join(props.folder, props.data.path) }))
-      return
+      return options.files[params.type].read({ filename: join(params.folder, params.path) })
     case 'write': {
-      if (!props.files[props.data.type]) throw Error('Unknown file type: ' + props.data.type)
+      if (!options.files[params.type]) throw Error('Unknown file type: ' + params.type)
 
-      props.files[props.data.type].write({
-        filename: join(props.folder, props.data.path),
-        body: props.data.body
+      options.files[params.type].write({
+        filename: join(params.folder, params.path),
+        body: params.body
       })
-      props.res
-        .writeHead(201, props.headers)
-        .end()
+
       return
     }
     case 'view': {
-      if (!props.files[props.data.type]) throw Error('Unknown file type: ' + props.data.type)
+      if (!options.files[params.type]) throw Error('Unknown file type: ' + params.type)
 
-      props.res
-        .writeHead(200, props.headers)
-        .end(props.files[props.data.type].render({ filename: join(props.folder, props.data.path) }))
-      return
+      return options.files[params.type].render({ filename: join(params.folder, params.path) })
     }
     case 'rename': {
-      const dir = join(props.folder, dirname(props.data.to))
+      const dir = join(params.folder, dirname(params.to))
+
       if (!existsSync(dir))
         mkdirSync(dir, { recursive: true })
-      renameSync(join(props.folder, props.data.from), join(props.folder, props.data.to))
-      props.res
-        .writeHead(201, props.headers)
-        .end()
+
+      renameSync(join(params.folder, params.from), join(params.folder, params.to))
       return
     }
     case 'add': {
-      if (!props.files[props.data.type]) throw Error('Unknown file type: ' + props.data.type)
+      if (!options.files[params.type]) throw Error('Unknown file type: ' + params.type)
 
-      const path = join(props.folder, ...props.data.paths) + props.data.type
+      const path = join(params.folder, ...params.paths) + params.type
       const dir = dirname(path)
       if (!existsSync(dir))
         mkdirSync(dir, { recursive: true })
 
-      props.files[props.data.type].create({ filename: path })
+      options.files[params.type].create({ filename: path })
 
-      props.res
-        .writeHead(200, props.headers)
-        .end(JSON.stringify({
-          type: props.data.type,
-          name: basename(path),
-          path: path.replace(props.folder + sep, ''),
-        }))
-      return
+      return {
+        type: params.type,
+        name: basename(path),
+        path: path.replace(params.folder + sep, ''),
+      }
     }
     case 'delete': {
-      rmSync(join(props.folder, props.data.path))
-      props.res
-        .writeHead(201, props.headers)
-        .end()
+      rmSync(join(params.folder, params.path))
+
       return
     }
     default:
-      props.res
-        .writeHead(500, {
-          ...props.headers,
-          'Content-Type': 'text/plain'
-        })
-        .end('Unknown command: file/' + props.command)
-      return
+      throw Error('Unknown command: file/' + name)
   }
 }

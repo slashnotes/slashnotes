@@ -33,15 +33,15 @@ function Md (options?: MdOptions): SlashnotesFile {
 
   return {
     extname: '.md',
-    read ({ filename }): string {
-      return JSON.stringify({ body: readFileSync(filename).toString() })
+    read ({ filename }) {
+      return { body: readFileSync(filename).toString() }
     },
     write ({ filename, body }): void {
       writeFileSync(filename, body)
     },
-    render ({ filename }): string {
+    render ({ filename }) {
       const file = readFileSync(filename).toString()
-      return JSON.stringify({ body: parse(file, options) })
+      return { body: parse(file, options) }
     },
     create ({ filename }): void {
       writeFileSync(filename, `# ${basename(filename).replace('.md', '')}\n\n`)

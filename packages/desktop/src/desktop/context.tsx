@@ -20,13 +20,9 @@ export type Modal = {
   content?: React.ReactNode
 }
 
-export type File = {
-  kind: 'file' | 'folder'
+export type Source = {
   name: string
-}
-
-export type Sources = {
-  [key: string]: File[]
+  path: string
 }
 
 export const DesktopContext = createContext<{
@@ -45,8 +41,8 @@ export const DesktopContext = createContext<{
   modal?: Modal
   setModal: React.Dispatch<React.SetStateAction<Modal>>
 
-  sources: Sources
-  setSources: React.Dispatch<React.SetStateAction<Sources>>
+  source: Source
+  setSource: React.Dispatch<React.SetStateAction<Source>>
 }>({
       config: { sep: '' },
       opens: [],
@@ -58,8 +54,8 @@ export const DesktopContext = createContext<{
       loadAllItems: () => {},
       modal: undefined,
       setModal: () => {},
-      sources: {},
-      setSources: () => {}
+      source: undefined,
+      setSource: () => {},
     })
 
 export function DesktopContextProvider (props: { children: JSX.Element | JSX.Element[] }) {
@@ -69,7 +65,7 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
   const [allItems, setAllItems] = useState<AllItems>({})
   const [loaded, setLoaded] = useState(false)
   const [modal, setModal] = useState({ visible: false })
-  const [sources, setSources] = useState({})
+  const [source, setSource] = useState<Source>()
 
   const itemsValue = useMemo(() => ({
     config,
@@ -80,12 +76,12 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     current,
     setCurrent,
     loadAllItems: () => {
-      action('file/list').then(setAllItems)
+      action('file/list', { folder: source.path }).then(setAllItems)
     },
     modal,
     setModal,
-    sources,
-    setSources,
+    source,
+    setSource,
   }), [
     config,
     opens,
@@ -96,8 +92,8 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     setCurrent,
     modal,
     setModal,
-    sources,
-    setSources,
+    source,
+    setSource,
   ])
 
   useEffect(() => {
@@ -109,18 +105,28 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
 
     loadConfig()
 
-    function loadList () {
-      action('file/list')
-        .then(setAllItems)
-        .catch(loadList)
-    }
-
-    loadList()
+    const source = localStorage.getItem('source')
+    if (source)
+      setSource(JSON.parse(source))
   }, [])
 
   useEffect(()=> {
     if (!loaded && config?.sep) setLoaded(true)
   }, [config?.sep])
+
+  useEffect(() => {
+    if (!source) return
+
+    localStorage.setItem('source', JSON.stringify(source))
+
+    function loadList () {
+      action('file/list', { folder: source.path })
+        .then(setAllItems)
+        .catch(loadList)
+    }
+
+    loadList()
+  }, [source])
 
   if (!loaded) return null
 

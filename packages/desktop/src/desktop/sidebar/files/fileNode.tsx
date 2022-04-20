@@ -16,12 +16,13 @@ function RenameMode ({
   item: Item
   setMode: React.Dispatch<React.SetStateAction<Mode>>
 }) {
-  const { loadAllItems } = useContext(DesktopContext)
+  const { loadAllItems, source } = useContext(DesktopContext)
   const [path, setPath] = useState(item.path)
   const submit = useCallback(() => {
     action('file/rename', {
+      folder: source.path,
       from: item.path,
-      to: path
+      to: path,
     })
       .then(() => {
         loadAllItems()
@@ -73,7 +74,7 @@ export function FileNode ({
 }) {
   const [mode, setMode] = useState<Mode>('view')
   const {
-    setOpens, current, setCurrent, loadAllItems
+    setOpens, current, setCurrent, loadAllItems, source
   } = useContext(DesktopContext)
   const [hover, setHover] = useState(false)
 
@@ -121,7 +122,10 @@ export function FileNode ({
       <div
         className='button submit-button'
         onClick={ () => {
-          action('file/delete', { path: item.path })
+          action('file/delete', {
+            path: item.path,
+            folder: source.path 
+          })
             .then(() => {
               setOpens(prev => prev.filter(i => i !== item.path))
               loadAllItems()

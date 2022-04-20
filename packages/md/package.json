@@ -37,10 +37,19 @@
   "devDependencies": {
     "@slashnotes/types": "*",
     "tsup": "*",
-    "typescript": "*"
+    "typescript": "*",
+    "@faasjs/eslint-config-recommended": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=16.0.0"
+  },
+  "eslintConfig": {
+    "ignorePatterns": [
+      "**/dist"
+    ],
+    "extends": [
+      "@faasjs/recommended"
+    ]
   }
 }

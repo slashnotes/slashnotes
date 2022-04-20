@@ -1,14 +1,32 @@
-window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector, text) => {
-    const element = document.getElementById(selector)
-    if (element) element.innerText = text
-  }
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { contextBridge, ipcRenderer } = require('electron')
+const { randomUUID } = require('crypto')
 
-  for (const dependency of [
-    'chrome',
-    'node',
-    'electron'
-  ]) {
-    replaceText(`${dependency}-version`, process.versions[dependency])
+contextBridge.exposeInMainWorld('Server', {
+  action: (name, params) => {
+    const id = randomUUID()
+
+    ipcRenderer.send('request', id, name, params)
+
+    return new Promise((resolve, reject) => {
+      ipcRenderer.once(`response-${id}`, (_, data) => {
+        console.debug(`response-${id}`, data)
+        if (data.error)
+          reject(data.error)
+        else
+          resolve(data.data)
+      })
+    })
+  },
+  selectFolder: () => {
+    ipcRenderer.send('select-folder')
+
+    return new Promise((resolve, reject) => {
+      ipcRenderer.once('selected-folder', (_, data) => {
+        console.debug('selected-folder', data)
+        if (!data) reject(Error('Canceled'))
+        resolve(data)
+      })
+    })
   }
 })

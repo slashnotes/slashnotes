@@ -1,11 +1,11 @@
 import { action } from 'libs/action'
 import {
-  Fragment, useEffect, useState
+  Fragment, useContext, useEffect, useState
 } from 'react'
 import { run } from '@mdx-js/mdx'
 import type { MDXProvider } from '@mdx-js/react'
 import * as runtime from 'react/jsx-runtime'
-import type { Item } from 'desktop/context'
+import { DesktopContext, Item } from 'desktop/context'
 import { ErrorBoundary } from './error'
 import { components } from './components'
 import { Toc } from './toc'
@@ -15,10 +15,14 @@ export function View ({ item }: { item: Item }) {
   const Content = mdxModule ? mdxModule.default : Fragment
   const [loading, setLoading] = useState(true)
   const [tocCollapsed, setTocCollapsed] = useState(false)
+  const { source } = useContext(DesktopContext)
 
   useEffect(() => {
     setLoading(true)
-    action('file/view', item).then(data => {
+    action('file/view', {
+      ...item,
+      folder: source.path,
+    }).then(data => {
       run(data.body, runtime)
         .then(mdxModule => {
           try {

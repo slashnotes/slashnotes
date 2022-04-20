@@ -3,7 +3,7 @@ const process = require('process')
 
 const packagerConfig = {
   name: 'Slashnotes',
-  asar: true,
+  // asar: true,
 }
 
 const makers = [

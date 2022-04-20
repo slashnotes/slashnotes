@@ -15,6 +15,7 @@
     "rehype",
     "slashnotes",
     "tsup",
+    "vite",
     "vitest"
   ]
 }

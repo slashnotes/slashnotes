@@ -4,6 +4,7 @@
   "type": "module",
   "license": "AGPL-3.0",
   "scripts": {
+    "lint": "npm run lint -ws --if-present",
     "test": "vitest run",
     "ci": "vitest run --coverage",
     "build": "npm run build --workspaces --if-present",
@@ -17,26 +18,12 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@faasjs/eslint-config-recommended": "*",
-    "@faasjs/eslint-config-react": "*",
     "concurrently": "*",
     "vitest": "*",
     "@vitejs/plugin-react": "*",
     "@testing-library/react": "*",
     "jsdom": "*",
     "c8": "*"
-  },
-  "eslintConfig": {
-    "ignorePatterns": [
-      "**/examples",
-      "**/lib",
-      "**/dist",
-      "**/tmp"
-    ],
-    "extends": [
-      "@faasjs/recommended",
-      "@faasjs/react"
-    ]
   },
   "engines": {
     "npm": ">=8.0.0",

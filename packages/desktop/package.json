@@ -13,11 +13,13 @@
   },
   "main": "index.js",
   "scripts": {
-    "dev:electron": "wait-on tcp:3000 && APP_ENV=development electron-forge start",
+    "dev:electron": "wait-on tcp:4000 && wait-on tcp:3000 && APP_ENV=development electron-forge start",
     "dev:vite": "VITE_SERVER=http://localhost:4000 vite",
     "dev": "concurrently \"npm:dev:*\"",
+    "lint": "eslint .",
     "build": "tsc && vite build && electron-forge package",
-    "test": "vitest run"
+    "test": "vitest run",
+    "publish": "electron-forge publish"
   },
   "config": {
     "forge": "./forge.config.js"
@@ -49,10 +51,24 @@
     "@electron-forge/maker-squirrel": "*",
     "@electron-forge/maker-zip": "*",
     "electron": "*",
-    "wait-on": "*"
+    "wait-on": "*",
+    "@faasjs/eslint-config-recommended": "*",
+    "@faasjs/eslint-config-react": "*",
+    "@types/ws": "*",
+    "ws": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=16.0.0"
+  },
+  "eslintConfig": {
+    "ignorePatterns": [
+      "**/dist",
+      "**/out"
+    ],
+    "extends": [
+      "@faasjs/recommended",
+      "@faasjs/react"
+    ]
   }
 }

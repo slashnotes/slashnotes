@@ -20,7 +20,7 @@ export function AddMode ({
   setMode: React.Dispatch<React.SetStateAction<FolderMode>>
 }) {
   const {
-    setCurrent, setOpens, setAllItems
+    setCurrent, setOpens, setAllItems, source,
   } = useContext(DesktopContext)
   const [name, setName] = useState<string>('')
   const [placeholder, setPlaceholder] = useState<string>('')
@@ -33,6 +33,7 @@ export function AddMode ({
 
   const add = useCallback(() => {
     action<SlashnotesItem>('file/add', {
+      folder: source.path,
       paths: [...paths, name || placeholder],
       type: '.md',
     })
@@ -91,10 +92,13 @@ function RenameMode ({
   paths: string[]
   setMode: React.Dispatch<React.SetStateAction<FolderMode>>
 }) {
-  const { loadAllItems, config } = useContext(DesktopContext)
+  const {
+    loadAllItems, config, source
+  } = useContext(DesktopContext)
   const [path, setPath] = useState('')
   const submit = useCallback(() => {
     action('folder/rename', {
+      folder: source.path,
       from: paths.join(config.sep),
       to: path
     })

@@ -8,7 +8,9 @@ export type SlashnotesFile = {
    */
   read(props: {
     filename: string
-  }): string
+  }): {
+    body: string
+  }
   /**
    * write to local file
    */
@@ -21,7 +23,9 @@ export type SlashnotesFile = {
    */
   render(props: {
     filename: string
-  }): string
+  }): {
+    body: string
+  }
   /**
    * create a new file
    */
