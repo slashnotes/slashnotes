@@ -13,6 +13,7 @@ jobs:
   publish_npm:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -37,6 +38,7 @@ jobs:
     needs: [publish_npm]
     if: github.ref == 'refs/heads/main'
     runs-on: macos-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -61,6 +63,7 @@ jobs:
     needs: [publish_npm]
     if: github.ref == 'refs/heads/main'
     runs-on: windows-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
