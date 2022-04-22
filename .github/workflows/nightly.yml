@@ -45,11 +45,11 @@ jobs:
           npm install -g npm@latest
           npm install
           npm run build
-          cd app/desktop
-          npm install
       - name: Build
         run: |
           cd app/desktop
+          npm install
+          npm run build
           npm run publish
       - name: Upload
         uses: actions/upload-artifact@v3
@@ -69,11 +69,11 @@ jobs:
           npm install -g npm@latest
           npm install
           npm run build
-          cd app/desktop
-          npm install
       - name: Build
         run: |
           cd app/desktop
+          npm install
+          npm run build
           npm run publish
       - name: Upload
         uses: actions/upload-artifact@v3
