@@ -43,6 +43,7 @@ jobs:
       - name: Install
         run: |
           npm install -g npm@latest
+          npm run build
           cd app/desktop
           npm install
       - name: Build
@@ -65,6 +66,7 @@ jobs:
       - name: Install
         run: |
           npm install -g npm@latest
+          npm run build
           cd app/desktop
           npm install
       - name: Build
