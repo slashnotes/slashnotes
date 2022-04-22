@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: process.env.ELECTRON === 'true' ? './' : '.',
   plugins: [react()],
   resolve: {
     alias: [
@@ -19,5 +20,5 @@ export default defineConfig({
         replacement: __dirname + '/../../node_modules/react/jsx-runtime.js'
       }
     ],
-  }
+  },
 })

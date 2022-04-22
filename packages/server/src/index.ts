@@ -3,6 +3,8 @@ import { SlashnotesFile } from '@slashnotes/types'
 import { WebSocketServer } from 'ws'
 import { Actions, Options } from './actions'
 
+export { Actions }
+
 export class Server {
   public readonly port: number | string
   public readonly folder: string

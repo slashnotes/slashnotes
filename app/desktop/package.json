@@ -17,16 +17,14 @@
     "dev:vite": "VITE_SERVER=http://localhost:4000 vite",
     "dev": "concurrently \"npm:dev:*\"",
     "lint": "eslint .",
-    "build": "tsc && vite build && electron-forge package",
+    "build": "tsc && ELECTRON=true vite build",
     "test": "vitest run",
-    "publish": "electron-forge publish"
+    "publish": "node publish.js && electron-forge package"
   },
   "config": {
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "@slashnotes/server": "*",
-    "@slashnotes/md": "*",
     "electron-squirrel-startup": "*"
   },
   "devDependencies": {
@@ -55,7 +53,8 @@
     "@faasjs/eslint-config-recommended": "*",
     "@faasjs/eslint-config-react": "*",
     "@types/ws": "*",
-    "ws": "*"
+    "ws": "*",
+    "electron-builder": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

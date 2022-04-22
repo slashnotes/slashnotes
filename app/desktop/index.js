@@ -67,7 +67,7 @@ const createWindow = () => {
   if (isDev)
     mainWindow.loadURL('http://localhost:3000/')
   else
-    mainWindow.loadFile(`file://${join(__dirname, 'dist', 'index.html')}`)
+    mainWindow.loadFile(join('dist', 'index.html'))
 
   mainWindow.webContents.openDevTools()
 };
@@ -85,8 +85,15 @@ app.on('ready', () => {
         params
       }))
     })
-  } else
-    ipcMain.on('action', (_, name, params) => console.log(name, params))
+  } else {
+    const Md = require(join(__dirname, 'dist', 'md.cjs')).default()
+    const { Actions } = require(join(__dirname, 'dist', 'server.cjs'))
+    ipcMain.on('request', (event, id, name, params) => {
+      console.log(id, name, params)
+
+      event.reply('response-' + id, Actions(name, params, { files: { '.md': Md } }))
+    })
+  }
 
   ipcMain.on('select-folder', event => {
     dialog.showOpenDialog(mainWindow, { properties: ['openDirectory'] })
