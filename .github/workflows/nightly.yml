@@ -30,6 +30,9 @@ jobs:
           npm run publish:nightly
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Build desktop
+        run: |
+          cd app/desktop && npm run build
   publish_mac:
     needs: [publish_npm]
     if: github.ref == 'refs/heads/main'
