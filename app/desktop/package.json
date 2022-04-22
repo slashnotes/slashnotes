@@ -19,7 +19,8 @@
     "lint": "eslint .",
     "build": "tsc && ELECTRON=true vite build",
     "test": "vitest run",
-    "publish": "node publish.js && electron-forge package"
+    "package": "node publish.js && electron-forge package",
+    "publish": "node publish.js && electron-forge publish"
   },
   "config": {
     "forge": "./forge.config.js"

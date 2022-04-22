@@ -4,12 +4,14 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
+      - app/**
       - packages/**
       - package.json
       - package-lock.json
       - .github/workflows/testing.yml
   push:
     paths:
+      - app/**
       - packages/**
       - package.json
       - package-lock.json
