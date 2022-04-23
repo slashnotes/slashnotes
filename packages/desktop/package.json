@@ -12,7 +12,8 @@
     "url": "https://github.com/slashnotes/slashnotes/issues"
   },
   "files": [
-    "dist"
+    "dist",
+    "index.js"
   ],
   "scripts": {
     "dev": "vite",
