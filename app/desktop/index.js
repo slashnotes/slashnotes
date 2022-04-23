@@ -2,7 +2,7 @@
 const {
   app, BrowserWindow, ipcMain, dialog,
 } = require('electron');
-const { join } = require('path')
+const { join, dirname } = require('path')
 
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -67,7 +67,7 @@ const createWindow = () => {
   if (isDev)
     mainWindow.loadURL('http://localhost:3000/')
   else
-    mainWindow.loadFile(join('dist', 'index.html'))
+    mainWindow.loadFile(require.resolve('@slashnotes/desktop'))
 
   mainWindow.webContents.openDevTools()
 };
@@ -86,8 +86,8 @@ app.on('ready', () => {
       }))
     })
   } else {
-    const Md = require(join(__dirname, 'dist', 'md.cjs')).default()
-    const { Actions } = require(join(__dirname, 'dist', 'server.cjs'))
+    const Md = require(require.resolve('@slashnotes/md').replace('index.js', 'index.cjs')).default()
+    const { Actions } = require(require.resolve('@slashnotes/server').replace('index.js', 'index.cjs'))
     ipcMain.on('request', (event, id, name, params) => {
       console.log(id, name, params)
 

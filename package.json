@@ -11,7 +11,8 @@
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo coverage",
     "dev": "concurrently \"npm:dev:*\"",
     "dev:cli": "npm run dev --workspace=packages/cli",
-    "dev:desktop": "cd app/desktop && npm run dev",
+    "dev:desktop": "npm run dev --workspace=packages/desktop",
+    "dev:desktop-app": "cd app/desktop && npm run dev",
     "publish:nightly": "node nightly.cjs"
   },
   "workspaces": [

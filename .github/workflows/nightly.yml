@@ -42,16 +42,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: Install
-        run: |
-          npm install -g npm@latest
-          npm install
-          npm run build
       - name: Build
         run: |
           cd app/desktop
           npm install
-          npm run build
           npm run publish
       - name: Upload
         uses: actions/upload-artifact@v3
@@ -67,16 +61,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: Install
-        run: |
-          npm install -g npm@latest
-          npm install
-          npm run build
       - name: Build
         run: |
           cd app/desktop
           npm install
-          npm run build
           npm run publish
       - name: Upload
         uses: actions/upload-artifact@v3

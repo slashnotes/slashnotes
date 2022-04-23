@@ -1,5 +1,5 @@
 {
-  "name": "@slashnotes/desktop-app",
+  "name": "@slashnotes/desktop",
   "version": "1.0.0",
   "license": "AGPL-3.0",
   "homepage": "https://github.com/slashnotes/slashnotes",
@@ -11,34 +11,35 @@
   "bugs": {
     "url": "https://github.com/slashnotes/slashnotes/issues"
   },
-  "main": "index.js",
+  "main": "dist/index.html",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "npm install && wait-on tcp:4000 && wait-on tcp:3000 && APP_ENV=development electron-forge start",
+    "dev": "vite",
     "lint": "eslint .",
     "build": "tsc && ELECTRON=true vite build",
-    "test": "vitest run",
-    "package": "electron-forge package",
-    "publish": "electron-forge publish"
-  },
-  "config": {
-    "forge": "./forge.config.js"
-  },
-  "dependencies": {
-    "electron-squirrel-startup": "*",
-    "@slashnotes/desktop": "*",
-    "@slashnotes/md": "*",
-    "@slashnotes/server": "*"
+    "test": "vitest run"
   },
   "devDependencies": {
-    "@electron-forge/cli": "*",
-    "@electron-forge/maker-squirrel": "*",
-    "@electron-forge/maker-zip": "*",
-    "electron": "*",
-    "wait-on": "*",
+    "react": "*",
+    "react-dom": "*",
+    "@slashnotes/monaco-editor-esm": "*",
+    "@mdx-js/mdx": "*",
+    "@mdx-js/react": "*",
+    "@primer/octicons-react": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "@types/node": "*",
+    "@types/wicg-file-system-access": "*",
+    "vite": "*",
+    "@vitejs/plugin-react": "*",
+    "typescript": "*",
+    "sass": "*",
+    "@types/mermaid": "*",
+    "mermaid": "*",
     "@faasjs/eslint-config-recommended": "*",
-    "@faasjs/eslint-config-react": "*",
-    "@types/ws": "*",
-    "ws": "*"
+    "@faasjs/eslint-config-react": "*"
   },
   "engines": {
     "npm": ">=8.0.0",

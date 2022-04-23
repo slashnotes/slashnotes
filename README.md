@@ -22,16 +22,7 @@ A note taking app for your whole life.
 
 ## Road map
 
-### 1.0.0
-
-- [x] Build localhost server with desktop interface.
-- [ ] Export to static website.
-
-### In feature
-
-- [ ] Split window.
-- [ ] Mobile version.
-- [ ] Api version.
+See [Milestones](https://github.com/slashnotes/slashnotes/milestones)
 
 ## Contributing
 
