@@ -11,7 +11,6 @@
   "bugs": {
     "url": "https://github.com/slashnotes/slashnotes/issues"
   },
-  "main": "dist/index.html",
   "files": [
     "dist"
   ],

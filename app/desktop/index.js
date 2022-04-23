@@ -2,7 +2,7 @@
 const {
   app, BrowserWindow, ipcMain, dialog,
 } = require('electron');
-const { join, dirname } = require('path')
+const { join } = require('path')
 
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -67,7 +67,7 @@ const createWindow = () => {
   if (isDev)
     mainWindow.loadURL('http://localhost:3000/')
   else
-    mainWindow.loadFile(require.resolve('@slashnotes/desktop'))
+    mainWindow.loadFile(require.resolve('@slashnotes/desktop').replace('index.js', join('dist', 'index.html')))
 
   mainWindow.webContents.openDevTools()
 };
