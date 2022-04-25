@@ -31,7 +31,7 @@ jobs:
           npm run publish:nightly
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-  publish_mac:
+  publish_desktop:
     needs: [publish_npm]
     if: github.ref == 'refs/heads/main'
     runs-on: macos-latest
@@ -43,29 +43,15 @@ jobs:
         run: |
           cd app/desktop
           npm install
-          npm run publish
-      - name: Upload
-        uses: actions/upload-artifact@v3
+          npm run publish --mac
+          npm run publish --win
+      - uses: actions/upload-artifact@v3
         with:
-          name: Slashnotes-darwin-x64
-          path: app/desktop/out/make/zip/darwin/x64/Slashnotes-darwin-x64-1.0.0.zip
+          name: Slashnotes-mac-x64
+          path: app/desktop/dist/Slashnotes-1.0.0.dmg
           if-no-files-found: error
-  publish_win:
-    needs: [publish_npm]
-    if: github.ref == 'refs/heads/main'
-    runs-on: windows-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - name: Build
-        run: |
-          cd app/desktop
-          npm install
-          npm run publish
-      - name: Upload
-        uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v3
         with:
-          name: Slashnotes-win32-x64
-          path: app\desktop\out\make\squirrel.windows\x64\Slashnotes-1.0.0 Setup.exe
+          name: Slashnotes-win-x64
+          path: app/desktop/dist/Slashnotes-1.0.0.exe
           if-no-files-found: error

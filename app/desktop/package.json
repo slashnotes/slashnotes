@@ -1,5 +1,7 @@
 {
   "name": "@slashnotes/desktop-app",
+  "description": "Slashnotes for desktop app",
+  "author": "Slashnotes",
   "version": "1.0.0",
   "license": "AGPL-3.0",
   "homepage": "https://github.com/slashnotes/slashnotes",
@@ -13,15 +15,23 @@
   },
   "main": "index.js",
   "scripts": {
-    "dev": "npm install && wait-on tcp:4000 && wait-on tcp:3000 && APP_ENV=development electron-forge start",
+    "dev": "npm install && wait-on tcp:4000 && wait-on tcp:3000 && APP_ENV=development electron .",
     "lint": "eslint .",
-    "build": "tsc && ELECTRON=true vite build",
     "test": "vitest run",
-    "package": "electron-forge package",
-    "publish": "electron-forge publish"
+    "build": "electron-builder --dir",
+    "publish": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
-  "config": {
-    "forge": "./forge.config.js"
+  "build": {
+    "appId": "com.slashnotes.desktop",
+    "productName": "Slashnotes",
+    "mac": {
+      "icon": "logo.icns"
+    },
+    "win": {
+      "target": "portable",
+      "icon": "logo.ico"
+    }
   },
   "dependencies": {
     "electron-squirrel-startup": "*",
@@ -30,15 +40,13 @@
     "@slashnotes/server": "*"
   },
   "devDependencies": {
-    "@electron-forge/cli": "*",
-    "@electron-forge/maker-squirrel": "*",
-    "@electron-forge/maker-zip": "*",
     "electron": "*",
     "wait-on": "*",
     "@faasjs/eslint-config-recommended": "*",
     "@faasjs/eslint-config-react": "*",
     "@types/ws": "*",
-    "ws": "*"
+    "ws": "*",
+    "electron-builder": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
