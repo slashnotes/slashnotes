@@ -47,7 +47,8 @@
     "@faasjs/eslint-config-react": "*",
     "@types/ws": "*",
     "ws": "*",
-    "electron-builder": "*"
+    "electron-builder": "*",
+    "dmg-license": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
