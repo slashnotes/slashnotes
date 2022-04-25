@@ -43,8 +43,8 @@ jobs:
         run: |
           cd app/desktop
           npm install
-          npm run publish --mac
-          npm run publish --win
+          npm run publish:mac
+          npm run publish:win
       - uses: actions/upload-artifact@v3
         with:
           name: Slashnotes-mac-x64

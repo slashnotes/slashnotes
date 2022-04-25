@@ -19,7 +19,8 @@
     "lint": "eslint .",
     "test": "vitest run",
     "build": "electron-builder --dir",
-    "publish": "electron-builder",
+    "publish:mac": "electron-builder --mac",
+    "publish:win": "electron-builder --win",
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
