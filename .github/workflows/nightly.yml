@@ -65,5 +65,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: Slashnotes-win-x64
-          path: app/desktop/dist/Slashnotes-1.0.0.exe
+          path: app/desktop/dist/Slashnotes 1.0.0.exe
           if-no-files-found: error
