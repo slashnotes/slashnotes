@@ -4,7 +4,7 @@ import {
   useCallback, useContext, useEffect, useState
 } from 'react'
 import {
-  PencilIcon, TrashIcon, CheckIcon, XIcon
+  PencilIcon, TrashIcon, CheckIcon, XIcon, FileIcon
 } from '@primer/octicons-react'
 
 type Mode = 'view' | 'rename' | 'delete'
@@ -83,7 +83,7 @@ export function FileNode ({
   return <div className={ `node file ${item.path === current ? 'current' : ''}` }>
     {mode === 'view' && <div
       className='view'
-      style={ { paddingLeft: (depth * 20) + 'px' } }
+      style={ { paddingLeft: 10 + ((depth - 1) * 20) + 'px' } }
       onMouseEnter={ () => setHover(true) }
       onMouseLeave={ () => setHover(false) }
     >
@@ -93,8 +93,8 @@ export function FileNode ({
           setOpens(prev => (prev.includes(item.path) ? prev : [...prev, item.path]))
           setCurrent(item.path)
         } }
-        style={ { width: `${300 - (depth * 20) - 46}px` } }
-      >{name}</div>
+        style={ { width: `${300 - (depth * 20) - 40}px` } }
+      ><FileIcon />{name}</div>
       {hover && <>
         <div
           className="delete-button button"
@@ -124,7 +124,7 @@ export function FileNode ({
         onClick={ () => {
           action('file/delete', {
             path: item.path,
-            folder: source.path 
+            folder: source.path
           })
             .then(() => {
               setOpens(prev => prev.filter(i => i !== item.path))

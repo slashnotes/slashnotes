@@ -119,6 +119,9 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
 
     localStorage.setItem('source', JSON.stringify(source))
 
+    setOpens([])
+    setCurrent(null)
+
     function loadList () {
       action('file/list', { folder: source.path })
         .then(setAllItems)

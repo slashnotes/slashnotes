@@ -6,7 +6,8 @@ import { FileNode } from './fileNode'
 import {
   AddMode, FolderNode, FolderMode
 } from './folderNode'
-import { PlusIcon } from '@primer/octicons-react'
+import { PlusIcon, FileDirectoryIcon } from '@primer/octicons-react'
+import { selectFolder } from 'libs/io'
 
 export type TFolderNode = {
   type: 'folder'
@@ -23,7 +24,9 @@ export type TFileNode = {
 export type TNode = TFolderNode | TFileNode
 
 export function Files () {
-  const { allItems, config } = useContext(DesktopContext)
+  const {
+    allItems, config, setSource
+  } = useContext(DesktopContext)
   const [tree, setTree] = useState<TNode[]>([])
   const [mode, setMode] = useState<FolderMode>('view')
 
@@ -78,6 +81,19 @@ export function Files () {
         title='Add'
       >
         <PlusIcon />
+      </div>
+      <div
+        className='button open-button'
+        title='Open another folder'
+        onClick={ async () => {
+          const folder = await selectFolder()
+          setSource({
+            path: folder,
+            name: folder.split('/').pop()
+          })
+        } }
+      >
+        <FileDirectoryIcon />
       </div>
     </div>
     {mode === 'add' &&

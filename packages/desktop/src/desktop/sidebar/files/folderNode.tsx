@@ -7,7 +7,7 @@ import { FileNode } from './fileNode'
 import { DesktopContext } from 'desktop/context'
 import { SlashnotesItem } from '@slashnotes/types'
 import {
-  PlusIcon, CheckIcon, XIcon, PencilIcon
+  PlusIcon, CheckIcon, XIcon, PencilIcon, ChevronDownIcon, ChevronRightIcon
 } from '@primer/octicons-react'
 
 export type FolderMode = 'view' | 'rename' | 'add'
@@ -152,22 +152,23 @@ export function FolderNode ({
   paths: string[]
   depth: number
 }) {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true)
   const [hover, setHover] = useState(false)
   const [mode, setMode] = useState<FolderMode>('view')
 
   return <div className='node folder'>
-    {mode === 'view' && <div
+    {mode !== 'rename' && <div
       className='view'
-      style={ { paddingLeft: (depth * 20) + 'px' } }
+      style={ { paddingLeft: 10 + ((depth - 1) * 20) + 'px' } }
       onMouseEnter={ () => setHover(true) }
       onMouseLeave={ () => setHover(false) }
     >
       <div
         className='name'
         onClick={ () => setCollapsed(prev => !prev) }
-        style={ { width: `${300 - (depth * 20) - 48}px` } }
+        style={ { width: `${300 - (depth * 20) - 40}px` } }
       >
+        {collapsed ? <ChevronRightIcon /> : <ChevronDownIcon />}
         {name}/
       </div>
       {hover && <>

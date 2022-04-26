@@ -23,6 +23,11 @@
 
     .header {
       padding: 10px;
+
+      .open-button {
+        float: right;
+        margin-right: 4px;
+      }
     }
 
     .button {
@@ -36,16 +41,20 @@
       }
     }
 
+    .name svg {
+      margin-right: 4px;
+    }
+
     input {
       float: left;
-      margin-left: 20px;
+      margin-left: 24px;
       background-color: var(--slashnotes-hover-background-color);
       border: 0 none;
       color: var(--slashnotes-color);
       font-size: inherit;
-      width: calc(100% - 74px);
+      width: calc(100% - 90px);
       outline: none;
-      font-family: monospace;
+      padding: 2px 6px;
     }
 
     .open-folder {
