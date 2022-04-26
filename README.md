@@ -15,11 +15,6 @@ A note taking app for your whole life.
 - Git based
 - Support markdown, html, and Javascript
 
-## For early access
-
-1. Create a new repository
-2. In the repo directory, run `npx slashnotes init`
-
 ## Road map
 
 See [Milestones](https://github.com/slashnotes/slashnotes/milestones)

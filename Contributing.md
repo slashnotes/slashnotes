@@ -17,5 +17,4 @@ You could develop slashnotes by yourself:
 1. Fork slashnotes on Github.
 2. Clone the repository to your local machine.
 3. Install dependencies with `npm install`.
-4. Run `npm dev` to start the server.
-5. Open `http://localhost:3000` to see the slashnotes.
+4. Run `npm dev` to start.
