@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const {
   app, BrowserWindow, ipcMain, dialog,
-} = require('electron');
+} = require('electron')
 const { join } = require('path')
 
 if (require('electron-squirrel-startup')) {
-  app.quit();
+  app.quit()
 }
 
 const isDev = process.env.APP_ENV === 'development'
@@ -64,13 +64,12 @@ const createWindow = () => {
   })
   mainWindow.maximize()
 
-  if (isDev)
+  if (isDev) {
     mainWindow.loadURL('http://localhost:3000/')
-  else
+    mainWindow.webContents.openDevTools()
+  } else
     mainWindow.loadFile(require.resolve('@slashnotes/desktop').replace('index.js', join('dist', 'index.html')))
-
-  mainWindow.webContents.openDevTools()
-};
+}
 
 app.on('ready', () => {
   if (isDev) {
@@ -103,16 +102,16 @@ app.on('ready', () => {
   })
 
   createWindow()
-});
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit();
+    app.quit()
   }
-});
+})
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
+    createWindow()
   }
-});
+})
