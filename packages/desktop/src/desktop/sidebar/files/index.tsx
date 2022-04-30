@@ -6,7 +6,9 @@ import { FileNode } from './fileNode'
 import {
   AddMode, FolderNode, FolderMode
 } from './folderNode'
-import { PlusIcon, FileDirectoryIcon } from '@primer/octicons-react'
+import {
+  PlusIcon, FileDirectoryIcon, ChevronDownIcon, ChevronRightIcon
+} from '@primer/octicons-react'
 import { selectFolder } from 'libs/io'
 
 export type TFolderNode = {
@@ -29,6 +31,7 @@ export function Files () {
   } = useContext(DesktopContext)
   const [tree, setTree] = useState<TNode[]>([])
   const [mode, setMode] = useState<FolderMode>('view')
+  const [collapsed, setCollapsed] = useState(false)
 
   useEffect(() => {
     if (!config?.sep) return
@@ -74,7 +77,18 @@ export function Files () {
   }, [allItems, config?.sep])
 
   return <div className='file'>
-    <div className='header'>Files
+    <div className='header'>
+      <div
+        className='name'
+        onClick={ () => setCollapsed(prev => !prev) }
+        style={ {
+          float: 'left',
+          width: '240px',
+        } }
+      >
+        {collapsed ? <ChevronRightIcon /> : <ChevronDownIcon />}
+        Files
+      </div>
       <div
         className='button add-button'
         onClick={ () => setMode(prev => (prev === 'view' ? 'add' : 'view')) }
@@ -101,7 +115,7 @@ export function Files () {
         paths={ [] }
         setMode={ setMode }
       />}
-    {tree.map(node => (node.type === 'folder' ?
+    {!collapsed && tree.map(node => (node.type === 'folder' ?
       <FolderNode
         key={ node.type + node.name }
         name={ node.name }

@@ -22,7 +22,13 @@
     width: 300px;
 
     .header {
-      padding: 10px;
+      padding: 10px 4px;
+      clear: both;
+      overflow: hidden;
+
+      .name {
+        cursor: pointer;
+      }
 
       .open-button {
         float: right;
@@ -89,11 +95,11 @@
         }
 
         .add-button {
-          margin-right: 10px;
+          margin-right: 4px;
         }
 
         .delete-button {
-          margin-right: 10px;
+          margin-right: 4px;
         }
       }
 
@@ -108,7 +114,7 @@
 
       .delete {
         clear: both;
-        padding: 5px 10px 5px 20px;
+        padding: 5px 4px 5px 20px;
         font-style: italic;
         cursor: default;
         overflow: hidden;
@@ -129,7 +135,7 @@
       padding: 5px 0;
 
       .cancel-button {
-        margin: 0 10px 0 4px;
+        margin: 0 4px;
       }
     }
   }

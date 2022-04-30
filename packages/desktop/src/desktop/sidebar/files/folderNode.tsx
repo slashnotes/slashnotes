@@ -159,17 +159,17 @@ export function FolderNode ({
   return <div className='node folder'>
     {mode !== 'rename' && <div
       className='view'
-      style={ { paddingLeft: 10 + ((depth - 1) * 20) + 'px' } }
+      style={ { paddingLeft: (depth * 20) + 'px' } }
       onMouseEnter={ () => setHover(true) }
       onMouseLeave={ () => setHover(false) }
     >
       <div
         className='name'
         onClick={ () => setCollapsed(prev => !prev) }
-        style={ { width: `${300 - (depth * 20) - 40}px` } }
+        style={ { width: `${300 - (depth * 20) - 60}px` } }
       >
         {collapsed ? <ChevronRightIcon /> : <ChevronDownIcon />}
-        {name}/
+        {name}
       </div>
       {hover && <>
         <div
