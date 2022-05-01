@@ -62,11 +62,6 @@ jobs:
           npm run publish:mac -- -p always
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Slashnotes-mac-x64
-          path: app/desktop/dist/Slashnotes-1.0.0.dmg
-          if-no-files-found: error
   publish_win:
     needs: [publish_npm]
     if: github.ref == 'refs/heads/main'
@@ -82,8 +77,3 @@ jobs:
           npm run publish:win -- -p always
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Slashnotes-win-x64
-          path: app/desktop/dist/Slashnotes 1.0.0.exe
-          if-no-files-found: error

@@ -2,6 +2,7 @@
 const {
   app, BrowserWindow, ipcMain, dialog,
 } = require('electron')
+const { autoUpdater } = require('electron-updater')
 const { join } = require('path')
 
 if (require('electron-squirrel-startup')) {
@@ -102,6 +103,8 @@ app.on('ready', () => {
   })
 
   createWindow()
+
+  autoUpdater.checkForUpdatesAndNotify()
 })
 
 app.on('window-all-closed', () => {

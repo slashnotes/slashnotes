@@ -34,13 +34,17 @@
       "target": "portable",
       "icon": "logo.ico",
       "publish": ["github"]
+    },
+    "publish": {
+      "provider": "github"
     }
   },
   "dependencies": {
     "electron-squirrel-startup": "*",
     "@slashnotes/desktop": "*",
     "@slashnotes/md": "*",
-    "@slashnotes/server": "*"
+    "@slashnotes/server": "*",
+    "electron-updater": "*"
   },
   "devDependencies": {
     "electron": "*",

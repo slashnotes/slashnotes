@@ -45,8 +45,8 @@ export function Search () {
           />
           <div className='button'><SearchIcon /></div>
         </div>
-        <div className='results'>
-          {results.map(result => <div
+        {q && <div className='results'>
+          {results.length ? results.map(result => <div
             className='result'
             key={ result.item.path }
             onClick={ () => {
@@ -55,8 +55,8 @@ export function Search () {
             } }
           >
             {result.item.name}
-          </div>)}
-        </div>
+          </div>) : <div>Nothing found.</div>}
+        </div>}
       </>}
     </div>
   </div>
