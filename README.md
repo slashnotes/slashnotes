@@ -6,24 +6,25 @@
 [![Testing Status](https://github.com/slashnotes/slashnotes/actions/workflows/testing.yml/badge.svg)](https://github.com/slashnotes/slashnotes/actions/workflows/testing.yml)
 [![Coverage Status](https://img.shields.io/codecov/c/github/slashnotes/slashnotes.svg)](https://app.codecov.io/gh/slashnotes/slashnotes)
 
-A note taking app for your whole life.
+Slashnotes is a note-taking app that aims to be available for your lifetime.
 
-## Features
+Whole lifetime availability means that two conditions are met.
 
-- Open source
-- Text-plain based notes
-- Git based
-- Support Markdown and Javascript
+The first is that the user has full ownership of the content of their notes, including the ability to modify the content of their notes without the restrictions of the software.
 
-## Documents
+Secondly, the source code of the note-taking software itself is open and can be modified.
 
-See [Documents](docs/README.md)
+So Slashnotes is based on plain-text files and open source with an AGPL-2.0 license.
 
 ## Early access
 
 Current support Windows and OS X, download link could be found in https://github.com/slashnotes/slashnotes/releases.
 
 If you have any question or suggestion, feel free to talk it in [Discussion](https://github.com/slashnotes/slashnotes/discussions).
+
+## Documents
+
+See [Documents](docs/README.md)
 
 ## Road map
 
