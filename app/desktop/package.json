@@ -19,19 +19,21 @@
     "lint": "eslint .",
     "test": "vitest run",
     "build": "electron-builder --dir",
-    "publish:mac": "electron-builder --mac -p never",
-    "publish:win": "electron-builder --win -p never",
+    "publish:mac": "electron-builder --mac",
+    "publish:win": "electron-builder --win",
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
     "appId": "com.slashnotes.desktop",
     "productName": "Slashnotes",
     "mac": {
-      "icon": "logo.icns"
+      "icon": "logo.icns",
+      "publish": ["github"]
     },
     "win": {
       "target": "portable",
-      "icon": "logo.ico"
+      "icon": "logo.ico",
+      "publish": ["github"]
     }
   },
   "dependencies": {
