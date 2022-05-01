@@ -2,6 +2,7 @@ import { DesktopContext } from 'desktop/context'
 import { Files } from './files'
 import { useContext } from 'react'
 import { selectFolder } from 'libs/io'
+import { Search } from './search'
 
 function NoFiles () {
   const { setSource } = useContext(DesktopContext)
@@ -28,6 +29,9 @@ export function Sidebar () {
   const { source } = useContext(DesktopContext)
 
   return <div className='sidebar'>
-    {source ? <Files /> : <NoFiles />}
+    {source ? <>
+      <Search />
+      <Files />
+    </> : <NoFiles />}
   </div>
 }

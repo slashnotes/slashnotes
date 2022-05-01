@@ -72,72 +72,106 @@
       cursor: pointer;
     }
 
-    .node {
-      &.current {
-        background-color: var(--slashnotes-active-background-color);
-      }
-
-      .view {
+    .search {
+      .box {
+        clear: both;
         overflow: hidden;
-        padding: 5px 0;
-        cursor: pointer;
+        height: 20px;
+        margin-top: 10px;
 
-        &:hover{
-          background-color: var(--slashnotes-hover-background-color);
+        input {
+          width: 220px;
+          margin-left: 20px;
         }
 
-        .name {
+        .button {
           float: left;
-        }
-
-        .rename-button {
-          margin-right: 4px;
-        }
-
-        .add-button {
-          margin-right: 4px;
-        }
-
-        .delete-button {
-          margin-right: 4px;
+          margin-left: 4px;
+          height: 20px;
+          line-height: 20px;
         }
       }
 
-      .rename {
+      .results {
+        padding: 10px 20px;
+
+        .result {
+          padding: 4px 0;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .files {
+      border-top: 1px solid rgba(204, 204, 204, 0.2);
+
+      .node {
+        &.current {
+          background-color: var(--slashnotes-active-background-color);
+        }
+
+        .view {
+          overflow: hidden;
+          padding: 5px 0;
+          cursor: pointer;
+
+          &:hover{
+            background-color: var(--slashnotes-hover-background-color);
+          }
+
+          .name {
+            float: left;
+          }
+
+          .rename-button {
+            margin-right: 4px;
+          }
+
+          .add-button {
+            margin-right: 4px;
+          }
+
+          .delete-button {
+            margin-right: 4px;
+          }
+        }
+
+        .rename {
+          overflow: hidden;
+          padding: 5px 0;
+
+          .cancel-button {
+            margin: 0 10px 0 4px;
+          }
+        }
+
+        .delete {
+          clear: both;
+          padding: 5px 4px 5px 20px;
+          font-style: italic;
+          cursor: default;
+          overflow: hidden;
+
+          span {
+            font-style: normal;
+            font-weight: bold;
+          }
+
+          .submit-button {
+            margin-right: 4px;
+          }
+        }
+      }
+
+      .add {
         overflow: hidden;
         padding: 5px 0;
 
         .cancel-button {
-          margin: 0 10px 0 4px;
+          margin: 0 4px;
         }
       }
-
-      .delete {
-        clear: both;
-        padding: 5px 4px 5px 20px;
-        font-style: italic;
-        cursor: default;
-        overflow: hidden;
-
-        span {
-          font-style: normal;
-          font-weight: bold;
-        }
-
-        .submit-button {
-          margin-right: 4px;
-        }
-      }
-    }
-
-    .add {
-      overflow: hidden;
-      padding: 5px 0;
-
-      .cancel-button {
-        margin: 0 4px;
-      }
-    }
+  }
   }
 
   .main {

@@ -36,18 +36,30 @@ function Md (options?: MdOptions): SlashnotesFile {
     read ({ filename }) {
       return { body: readFileSync(filename).toString() }
     },
-    write ({ filename, body }): void {
+    write ({ filename, body }) {
       writeFileSync(filename, body)
     },
     render ({ filename }) {
       const file = readFileSync(filename).toString()
       return { body: parse(file, options) }
     },
-    create ({ filename }): void {
+    create ({ filename }) {
       writeFileSync(filename, `# ${basename(filename).replace('.md', '')}\n\n`)
     },
-    build ({ source, destination }): void {
+    build ({ source, destination }) {
       writeFileSync(destination, build(readFileSync(source).toString(), options))
+    },
+    searchableContent ({ filename }) {
+      return readFileSync(filename).toString()
+    },
+    search ({ q, contents }) {
+      const result = []
+
+      for (const file of contents) {
+        if (file.item.name.includes(q) || file.content?.includes(q)) result.push({ item: file.item })
+      }
+
+      return result
     }
   }
 }

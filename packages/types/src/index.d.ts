@@ -31,14 +31,24 @@ export type SlashnotesFile = {
    */
   create(props: {
     filename: string
-  })
+  }): void
   /**
    * build file to html
    */
   build(props: {
     source: string
     destination: string
-  })
+  }): void
+  searchableContent(props: { filename: string }): any
+  search(props: {
+    q: string
+    contents: {
+      item: SlashnotesItem
+      content: any
+    }[]
+  }): {
+    item: SlashnotesItem
+  }[]
 }
 
 export type SlashnotesItem = {

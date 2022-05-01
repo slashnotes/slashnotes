@@ -5,7 +5,7 @@ import {
 import {
   readdirSync, statSync, existsSync, mkdirSync, renameSync, rmSync
 } from 'fs'
-import { Options } from '..'
+import type { Options } from '..'
 
 type Files = {
   [type: string]: SlashnotesFile
@@ -17,7 +17,7 @@ type AllFiles = {
   }
 }
 
-function findFiles (dir: string, cwd: string, files: Files, prev?: AllFiles): AllFiles {
+export function findFiles (dir: string, cwd: string, files: Files, prev?: AllFiles): AllFiles {
   if (!prev) prev = {}
 
   readdirSync(dir).forEach(f => {

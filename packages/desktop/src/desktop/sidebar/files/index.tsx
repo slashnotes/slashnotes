@@ -76,7 +76,7 @@ export function Files () {
     setTree(tree)
   }, [allItems, config?.sep])
 
-  return <div className='file'>
+  return <div className='files'>
     <div className='header'>
       <div
         className='name'
