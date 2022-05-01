@@ -13,7 +13,11 @@ A note taking app for your whole life.
 - Open source
 - Text-plain based notes
 - Git based
-- Support markdown, html, and Javascript
+- Support Markdown and Javascript
+
+## Documents
+
+See [Documents](docs/README.md)
 
 ## Early access
 
