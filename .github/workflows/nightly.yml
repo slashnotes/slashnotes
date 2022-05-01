@@ -31,6 +31,25 @@ jobs:
           npm run publish:nightly
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Add tag
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const github = require('@actions/github');
+            const core = require('@actions/core');
+            const fs = require('fs');
+            const path = require('path');
+            const exec = require('child_process').exec;
+
+            const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'packages', 'md', 'package.json'), 'utf8'));
+            const version = packageJson.version;
+
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/v' + version,
+              sha: context.sha
+            })
   publish_macos:
     needs: [publish_npm]
     if: github.ref == 'refs/heads/main'
