@@ -35,10 +35,10 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const fs = require('fs');
-            const path = require('path');
+            const readFileSync = require('fs').readFileSync;
+            const join = require('path').join;
 
-            const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'packages', 'md', 'package.json'), 'utf8'));
+            const packageJson = JSON.parse(readFileSync(join('packages', 'md', 'package.json'), 'utf8'));
             const version = packageJson.version;
 
             github.rest.git.createRef({
