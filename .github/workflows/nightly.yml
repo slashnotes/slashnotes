@@ -44,6 +44,8 @@ jobs:
           cd app/desktop
           npm install
           npm run publish:mac
+        with:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: actions/upload-artifact@v3
         with:
           name: Slashnotes-mac-x64
@@ -62,6 +64,8 @@ jobs:
           cd app/desktop
           npm install
           npm run publish:win
+        with:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: actions/upload-artifact@v3
         with:
           name: Slashnotes-win-x64
