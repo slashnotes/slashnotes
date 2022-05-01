@@ -15,6 +15,12 @@ A note taking app for your whole life.
 - Git based
 - Support markdown, html, and Javascript
 
+## Early access
+
+Current support Windows and OS X, download link could be found in https://github.com/slashnotes/slashnotes/releases.
+
+If you have any question or suggestion, feel free to talk it in [Discussion](https://github.com/slashnotes/slashnotes/discussions).
+
 ## Road map
 
 See [Milestones](https://github.com/slashnotes/slashnotes/milestones)
