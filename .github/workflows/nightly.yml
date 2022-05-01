@@ -44,7 +44,7 @@ jobs:
           cd app/desktop
           npm install
           npm run publish:mac
-        with:
+        env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: actions/upload-artifact@v3
         with:
@@ -64,7 +64,7 @@ jobs:
           cd app/desktop
           npm install
           npm run publish:win
-        with:
+        env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: actions/upload-artifact@v3
         with:
