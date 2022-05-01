@@ -44,7 +44,7 @@
     "@slashnotes/desktop": "*",
     "@slashnotes/md": "*",
     "@slashnotes/server": "*",
-    "electron-updater": "*"
+    "electron-updater": "^5.0.0"
   },
   "devDependencies": {
     "electron": "*",
