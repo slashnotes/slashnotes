@@ -7,9 +7,6 @@
     "paths": {
       "@slashnotes/types": [
         "../../types/src/index"
-      ],
-      "@slashnotes/core": [
-        "../../core/src/index"
       ]
     }
   },
@@ -22,9 +19,6 @@
   "references": [
     {
       "path": "../types"
-    },
-    {
-      "path": "../core"
     }
   ]
 }

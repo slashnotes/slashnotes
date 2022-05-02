@@ -1,9 +1,7 @@
 import { Logger } from '@faasjs/logger'
 import { SlashnotesFile } from '@slashnotes/types'
 import { WebSocketServer } from 'ws'
-import { Actions, Options } from './actions'
-
-export { Actions }
+import { Actions, Options } from '@slashnotes/core'
 
 export class Server {
   public readonly port: number | string

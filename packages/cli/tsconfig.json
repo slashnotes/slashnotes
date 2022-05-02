@@ -5,6 +5,9 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
+      "@slashnotes/core": [
+        "../../core/src/index"
+      ],
       "@slashnotes/builder": [
         "../../builder/src/index"
       ],
@@ -19,6 +22,9 @@
   "references": [
     {
       "path": "../types"
+    },
+    {
+      "path": "../core"
     },
     {
       "path": "../builder"

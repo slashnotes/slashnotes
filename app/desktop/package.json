@@ -1,6 +1,6 @@
 {
   "name": "@slashnotes/desktop-app",
-  "description": "Slashnotes for desktop app",
+  "description": "A note-taking app that aims to be available for your lifetime.",
   "author": "Slashnotes",
   "version": "1.0.0",
   "license": "AGPL-3.0",
@@ -43,7 +43,7 @@
     "electron-squirrel-startup": "*",
     "@slashnotes/desktop": "*",
     "@slashnotes/md": "*",
-    "@slashnotes/server": "*",
+    "@slashnotes/core": "*",
     "electron-updater": "^5.0.0"
   },
   "devDependencies": {

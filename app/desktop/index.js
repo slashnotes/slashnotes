@@ -87,7 +87,7 @@ app.on('ready', () => {
     })
   } else {
     const Md = require(require.resolve('@slashnotes/md').replace('index.js', 'index.cjs')).default()
-    const { Actions } = require(require.resolve('@slashnotes/server').replace('index.js', 'index.cjs'))
+    const { Actions } = require(require.resolve('@slashnotes/core').replace('index.js', 'index.cjs'))
     ipcMain.on('request', (event, id, name, params) => {
       console.log(id, name, params)
 
@@ -97,9 +97,7 @@ app.on('ready', () => {
 
   ipcMain.on('select-folder', event => {
     dialog.showOpenDialog(mainWindow, { properties: ['openDirectory'] })
-      .then(res => {
-        event.reply('selected-folder', res.filePaths[0])
-      })
+      .then(res => event.reply('selected-folder', res.filePaths[0]))
   })
 
   createWindow()
@@ -108,13 +106,11 @@ app.on('ready', () => {
 })
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  if (process.platform !== 'darwin')
     app.quit()
-  }
 })
 
 app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
+  if (BrowserWindow.getAllWindows().length === 0)
     createWindow()
-  }
 })

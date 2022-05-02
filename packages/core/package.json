@@ -1,12 +1,12 @@
 {
-  "name": "@slashnotes/server",
+  "name": "@slashnotes/core",
   "version": "1.0.0",
   "license": "AGPL-3.0",
   "homepage": "https://github.com/slashnotes/slashnotes",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/slashnotes/slashnotes.git",
-    "directory": "packages/server"
+    "directory": "packages/core"
   },
   "bugs": {
     "url": "https://github.com/slashnotes/slashnotes/issues"
@@ -27,14 +27,10 @@
     "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.json && tsup-node src/index.ts --format esm && tsup src/index.ts --format cjs"
   },
   "devDependencies": {
-    "@faasjs/logger": "*",
     "@slashnotes/types": "*",
-    "@slashnotes/core": "*",
     "tsup": "*",
     "typescript": "*",
-    "@faasjs/eslint-config-recommended": "*",
-    "@types/ws": "*",
-    "ws": "*"
+    "@faasjs/eslint-config-recommended": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
