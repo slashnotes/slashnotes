@@ -8,7 +8,7 @@ function NoFiles () {
   const { setSource } = useContext(DesktopContext)
 
   return <div className='header'>
-    Files
+    <div className='name'>Files</div>
     <div
       title='Open folder'
       className='open-folder'

@@ -76,7 +76,7 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     current,
     setCurrent,
     loadAllItems: () => {
-      action('file/list', { folder: source.path }).then(setAllItems)
+      action('folder/list', { folder: source.path }).then(setAllItems)
     },
     modal,
     setModal,
@@ -123,7 +123,7 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     setCurrent(null)
 
     function loadList () {
-      action('file/list', { folder: source.path })
+      action('folder/list', { folder: source.path })
         .then(setAllItems)
         .catch(loadList)
     }

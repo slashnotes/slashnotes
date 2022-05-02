@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const {
-  app, BrowserWindow, ipcMain, dialog,
+  app, BrowserWindow, ipcMain, dialog, shell
 } = require('electron')
 const { autoUpdater } = require('electron-updater')
 const { join } = require('path')
@@ -64,6 +64,12 @@ const createWindow = () => {
     webPreferences: { preload: join(app.getAppPath(), 'preload.js') }
   })
   mainWindow.maximize()
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('http')) {
+      shell.openExternal(url)
+      return { action: 'deny' }
+    }
+  })
 
   if (isDev) {
     mainWindow.loadURL('http://localhost:3000/')

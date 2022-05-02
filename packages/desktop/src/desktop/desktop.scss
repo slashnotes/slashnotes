@@ -28,6 +28,8 @@
 
       .name {
         cursor: pointer;
+        float: 'left';
+        width: '240px';
       }
 
       .open-button {
@@ -64,7 +66,7 @@
     }
 
     .open-folder {
-      margin-top: 10px;
+      margin: 10px 20px;
       background-color: var(--slashnotes-bar-background-color);
       text-align: center;
       padding: 4px 0;
@@ -171,7 +173,7 @@
           margin: 0 4px;
         }
       }
-  }
+    }
   }
 
   .main {
@@ -320,9 +322,14 @@
           }
 
           a {
+            display: inline-block;
             cursor: pointer;
             color: #007ACC;
             text-decoration: none;
+
+            img {
+              margin: 0;
+            }
           }
 
           ul, ol {

@@ -81,10 +81,6 @@ export function Files () {
       <div
         className='name'
         onClick={ () => setCollapsed(prev => !prev) }
-        style={ {
-          float: 'left',
-          width: '240px',
-        } }
       >
         {collapsed ? <ChevronRightIcon /> : <ChevronDownIcon />}
         Files
