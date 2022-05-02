@@ -1,4 +1,4 @@
-# [WIP] Slashnotes
+# Slashnotes
 
 [![License](https://img.shields.io/github/license/slashnotes/slashnotes?color=blue)](https://github.com/slashnotes/slashnotes/blob/main/LICENSE.md)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fslashnotes%2Fslashnotes.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fslashnotes%2Fslashnotes?ref=badge_shield)
@@ -14,11 +14,23 @@ The first is that the user has full ownership of the content of their notes, inc
 
 Secondly, the source code of the note-taking software itself is open and can be modified.
 
-So Slashnotes is based on plain-text files and open source with an AGPL-2.0 license.
+So Slashnotes is based on plain-text files and open source with [AGPL-2.0 License](./LICENSE).
+
+## System Requirements
+
+Currently, Slashnotes is only available for OS X and Windows. (Mobile version will be available later.)
+
+## Features
+
+- Based on plain-text files.
+- Open source.
+- Support Markdown.
+- Support Javascript.
+- Support Mermaid.
 
 ## Early access
 
-Current support Windows and OS X, download link could be found in https://github.com/slashnotes/slashnotes/releases.
+Current support Windows and OS X, download link could be found in [Releases](https://github.com/slashnotes/slashnotes/releases).
 
 If you have any question or suggestion, feel free to talk it in [Discussion](https://github.com/slashnotes/slashnotes/discussions).
 
