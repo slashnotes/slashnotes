@@ -19,4 +19,6 @@ graph TD;
 
   expect(build('```mermaid\n<br />\n```', defaultOptions))
     .toEqual('<pre class="mermaid">&lt;br /&gt;</pre>')
+
+  expect(build('{a b}', defaultOptions)).toEqual('<p>{a b}</p>')
 })
