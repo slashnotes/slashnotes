@@ -13,9 +13,6 @@
       ],
       "@slashnotes/md": [
         "../../md/src/index"
-      ],
-      "@slashnotes/server": [
-        "../../server/src/index"
       ]
     }
   },
@@ -31,9 +28,6 @@
     },
     {
       "path": "../md"
-    },
-    {
-      "path": "../server"
     }
   ]
 }

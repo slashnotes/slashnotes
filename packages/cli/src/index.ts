@@ -3,7 +3,7 @@
 import { Command } from 'commander'
 import { Init } from './init'
 import { Build } from './build'
-import { Start } from './start'
+import { Server } from './server'
 
 const program = new Command()
 
@@ -13,6 +13,6 @@ program
 
 Init(program)
 Build(program)
-Start(program)
+Server(program)
 
 program.parse()

@@ -21,12 +21,11 @@
   ],
   "scripts": {
     "build": "tsc -b",
-    "dev": "nodemon --exec 'node --experimental-specifier-resolution=node --loader ./loader.js src/index.ts start --no-open -p 4000 -f ../../docs' --watch src --watch ../builder/src --watch ../md/src --watch ../server/src -e ts"
+    "dev": "nodemon --exec 'node --experimental-specifier-resolution=node --loader ./loader.js src/index.ts server --no-open -p 4000 -f ../../docs' --watch src --watch ../builder/src --watch ../md/src --watch ../core/src -e ts"
   },
   "dependencies": {
     "commander": "^9.2.0",
     "@slashnotes/builder": "*",
-    "@slashnotes/server": "*",
     "@slashnotes/md": "*",
     "@slashnotes/desktop": "*"
   },

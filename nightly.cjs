@@ -6,12 +6,10 @@ const { readFileSync, writeFileSync } = require('fs')
 const newVersion = version + '-nightly-' + Date.now()
 
 for (const name of [
-  'builder',
   'cli',
   'core',
   'desktop',
   'md',
-  'server',
   'slashnotes',
   'types',
 ]) {
