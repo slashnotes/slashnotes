@@ -27,12 +27,14 @@
     "commander": "^9.2.0",
     "@slashnotes/builder": "*",
     "@slashnotes/md": "*",
-    "@slashnotes/desktop": "*"
+    "@slashnotes/desktop": "*",
+    "ws": "*"
   },
   "devDependencies": {
     "nodemon": "*",
     "ts-node": "*",
-    "tsconfig-paths": "*"
+    "tsconfig-paths": "*",
+    "@types/ws": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
