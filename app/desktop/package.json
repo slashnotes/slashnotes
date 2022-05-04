@@ -1,5 +1,5 @@
 {
-  "name": "@slashnotes/desktop-app",
+  "name": "slashnotes",
   "description": "A note-taking app that aims to be available for your lifetime.",
   "author": "Slashnotes",
   "version": "1.0.0",
@@ -24,7 +24,7 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
-    "appId": "com.slashnotes.desktop",
+    "appId": "net.slashnotes.desktop",
     "productName": "Slashnotes",
     "mac": {
       "icon": "logo.icns",
@@ -36,7 +36,9 @@
       "publish": ["github"]
     },
     "publish": {
-      "provider": "github"
+      "provider": "github",
+      "owner": "slashnotes",
+      "repo": "slashnotes"
     }
   },
   "dependencies": {

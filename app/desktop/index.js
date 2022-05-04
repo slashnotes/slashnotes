@@ -75,8 +75,17 @@ const createWindow = () => {
   if (isDev) {
     mainWindow.loadURL('http://localhost:3000/')
     mainWindow.webContents.openDevTools()
-  } else
-    mainWindow.loadFile(require.resolve('@slashnotes/desktop').replace('index.js', join('dist', 'index.html')))
+
+    return
+  }
+
+  mainWindow.once('ready-to-show', () => {
+    autoUpdater.on('update-downloaded', () => mainWindow.webContents.send('update-downloaded'))
+
+    autoUpdater.checkForUpdatesAndNotify()
+  })
+
+  mainWindow.loadFile(require.resolve('@slashnotes/desktop').replace('index.js', join('dist', 'index.html')))
 }
 
 app.on('ready', () => {
@@ -107,9 +116,9 @@ app.on('ready', () => {
       .then(res => event.reply('selected-folder', res.filePaths[0]))
   })
 
-  createWindow()
+  ipcMain.on('restart-app', () => autoUpdater.quitAndInstall())
 
-  autoUpdater.checkForUpdatesAndNotify()
+  createWindow()
 })
 
 app.on('window-all-closed', () => {

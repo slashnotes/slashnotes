@@ -35,3 +35,8 @@ contextBridge.exposeInMainWorld('Server', {
     shell.openPath(path)
   }
 })
+
+ipcRenderer.on('update-downloaded', () => {
+  if (window.confirm('New version has been downloaded, do you want to install it now?'))
+    ipcRenderer.send('restart-app')
+})
