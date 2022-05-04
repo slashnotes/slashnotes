@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { contextBridge, ipcRenderer } = require('electron')
+const {
+  contextBridge, ipcRenderer, shell,
+} = require('electron')
 const { randomUUID } = require('crypto')
 
 contextBridge.exposeInMainWorld('Server', {
@@ -28,5 +30,8 @@ contextBridge.exposeInMainWorld('Server', {
         resolve(data)
       })
     })
+  },
+  openFolder: (path) => {
+    shell.openPath(path)
   }
 })

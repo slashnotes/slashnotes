@@ -37,10 +37,17 @@ export class WebServer {
           id, name, params
         } = JSON.parse(data.toString())
 
-        ws.send(JSON.stringify({
-          id,
-          ...Actions(name, params, this.options),
-        }))
+        try {
+          ws.send(JSON.stringify({
+            id,
+            ...Actions(name, params, this.options),
+          }))
+        } catch (error: any) {
+          ws.send(JSON.stringify({
+            id,
+            error: error.message,
+          }))
+        }
       })
     })
 

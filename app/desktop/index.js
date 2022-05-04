@@ -16,13 +16,14 @@ const requests = {}
 
 if (isDev) {
   const webSocket = require('ws')
-
+  let timer
   const reconnect = () => {
-    setTimeout(() => {
-      console.log('Try reconnecting...')
-
-      connect()
+    timer = setTimeout(() => {
       if (!ws) reconnect()
+
+      console.log('Try reconnecting...')
+      clearTimeout(timer)
+      connect()
     }, 500)
   }
 

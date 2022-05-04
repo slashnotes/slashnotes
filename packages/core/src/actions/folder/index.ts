@@ -1,7 +1,7 @@
 import type { SlashnotesFile, SlashnotesItem } from '@slashnotes/types'
 import type { Options } from '..'
 import {
-  join, extname, sep 
+  join, extname, sep, dirname
 } from 'path'
 import {
   existsSync, mkdirSync, renameSync, readdirSync, statSync
@@ -50,6 +50,20 @@ export function Folder (name: string, params: any, options: Options) {
       if (!existsSync(dir))
         mkdirSync(dir, { recursive: true })
       renameSync(join(params.folder, params.from), join(params.folder, params.to))
+      return
+    }
+    case 'generate': {
+      const files = Object.values(findFiles(params.source, params.source + sep, options.files))
+      for (const file of files) {
+        const destination = join(params.target, 'slashnotes', file.path)
+        const dir = dirname(destination)
+        if (!existsSync(dir))
+          mkdirSync(dir, { recursive: true })
+        options.files[file.type].build({
+          source: join(params.source, file.path),
+          destination,
+        })
+      }
       return
     }
     default:

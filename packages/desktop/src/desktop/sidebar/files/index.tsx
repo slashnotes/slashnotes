@@ -7,9 +7,10 @@ import {
   AddMode, FolderNode, FolderMode
 } from './folderNode'
 import {
-  PlusIcon, FileDirectoryIcon, ChevronDownIcon, ChevronRightIcon
+  PlusIcon, FileDirectoryIcon, ChevronDownIcon, ChevronRightIcon, FileSymlinkFileIcon,
 } from '@primer/octicons-react'
 import { selectFolder } from 'libs/io'
+import { Generate } from './generate'
 
 export type TFolderNode = {
   type: 'folder'
@@ -27,7 +28,7 @@ export type TNode = TFolderNode | TFileNode
 
 export function Files () {
   const {
-    allItems, config, setSource
+    allItems, config, setSource, setModal
   } = useContext(DesktopContext)
   const [tree, setTree] = useState<TNode[]>([])
   const [mode, setMode] = useState<FolderMode>('view')
@@ -104,6 +105,16 @@ export function Files () {
         } }
       >
         <FileDirectoryIcon />
+      </div>
+      <div
+        className='button'
+        title='Generate a website'
+        onClick={ () => setModal({
+          visible: true,
+          content: <Generate />
+        }) }
+      >
+        <FileSymlinkFileIcon />
       </div>
     </div>
     {mode === 'add' &&
