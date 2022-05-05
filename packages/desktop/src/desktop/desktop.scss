@@ -249,17 +249,19 @@
 
       .view {
         position: fixed;
-        top: 80px;
+        top: 110px;
         bottom: 0;
         padding: 0 20px;
         min-height: calc(100% - 60px);
         width: calc(100% - 340px);
         overflow: auto;
-        line-height: 1.6;
+        line-height: 2;
 
         .content {
           float: left;
           width: calc(80% - 20px);
+          font-size: 14px;
+          line-height: 1.6;
 
           &::after{
             content: " ";
@@ -297,6 +299,7 @@
 
           div, p {
             margin: 0 0 20px 0;
+            line-height: 2;
           }
 
           blockquote {
@@ -337,6 +340,7 @@
             margin: 0 0 20px 0;
             list-style-position: inside;
             padding-left: 20px;
+            line-height: 2;
           }
 
           > ul, > ol {
@@ -432,6 +436,7 @@
         overflow-y: auto;
         box-sizing: border-box;
         font-size: 12px;
+        line-height: 1.6;
 
         &::-webkit-scrollbar {
           width: 10px;
