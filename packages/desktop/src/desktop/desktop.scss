@@ -66,7 +66,8 @@
     }
 
     .open-folder {
-      margin: 10px 20px;
+      clear: both;
+      margin: 30px 20px;
       background-color: var(--slashnotes-bar-background-color);
       text-align: center;
       padding: 4px 0;
@@ -421,7 +422,27 @@
         font-family: monospace;
         clear: both;
         width: 100%;
-        min-height: calc(100vh - 75px);
+        height: calc(100vh - 85px);
+        background-color: transparent;
+        color: var(--slashnotes-color);
+        padding: 0 20px;
+        outline: none;
+        border: 0 none;
+        resize: none;
+        width: 100%;
+        overflow-y: auto;
+        box-sizing: border-box;
+      }
+
+      textarea::-webkit-scrollbar {
+        width: 10px;
+        border-radius: 10px;
+        background-color: var(--slashnotes-active-background-color);
+       }
+
+      textarea::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: var(--slashnotes-secondary-color);
       }
     }
   }

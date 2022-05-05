@@ -24,7 +24,6 @@
   "devDependencies": {
     "react": "*",
     "react-dom": "*",
-    "@slashnotes/monaco-editor-esm": "*",
     "@mdx-js/mdx": "*",
     "@mdx-js/react": "*",
     "@primer/octicons-react": "*",
