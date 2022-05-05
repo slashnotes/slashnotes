@@ -14,7 +14,7 @@
   min-height: 100vh;
   background-color: var(--slashnotes-background-color);
   color: var(--slashnotes-color);
-  font-size: 14px;
+  font-size: 12px;
 
   .sidebar {
     float: left;
@@ -187,7 +187,7 @@
     .tabs {
       background-color: var(--slashnotes-background-color);
       overflow: auto;
-      line-height: 35px;
+      line-height: 30px;
 
       .tab {
         float: left;
@@ -203,9 +203,9 @@
           float: right;
           cursor: pointer;
           margin: 5px;
-          height: 25px;
-          line-height: 25px;
-          width: 25px;
+          height: 20px;
+          line-height: 20px;
+          width: 20px;
           text-align: center;
 
           &:hover {
@@ -429,20 +429,20 @@
         outline: none;
         border: 0 none;
         resize: none;
-        width: 100%;
         overflow-y: auto;
         box-sizing: border-box;
-      }
+        font-size: 12px;
 
-      textarea::-webkit-scrollbar {
-        width: 10px;
-        border-radius: 10px;
-        background-color: var(--slashnotes-active-background-color);
-       }
+        &::-webkit-scrollbar {
+          width: 10px;
+          border-radius: 10px;
+          background-color: var(--slashnotes-active-background-color);
+         }
 
-      textarea::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background-color: var(--slashnotes-secondary-color);
+        &::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          background-color: var(--slashnotes-secondary-color);
+        }
       }
     }
   }
