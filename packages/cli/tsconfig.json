@@ -8,9 +8,6 @@
       "@slashnotes/core": [
         "../../core/src/index"
       ],
-      "@slashnotes/builder": [
-        "../../builder/src/index"
-      ],
       "@slashnotes/md": [
         "../../md/src/index"
       ]
@@ -22,9 +19,6 @@
     },
     {
       "path": "../core"
-    },
-    {
-      "path": "../builder"
     },
     {
       "path": "../md"

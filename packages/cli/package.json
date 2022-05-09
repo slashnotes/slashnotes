@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "commander": "^9.2.0",
-    "@slashnotes/builder": "*",
     "@slashnotes/md": "*",
     "@slashnotes/desktop": "*",
     "ws": "*"

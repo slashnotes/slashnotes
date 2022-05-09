@@ -1,5 +1,5 @@
 import type { Command } from 'commander'
-import { Builder } from '@slashnotes/builder'
+import { Builder } from './builder'
 import { resolve } from 'path'
 import Md from '@slashnotes/md'
 
