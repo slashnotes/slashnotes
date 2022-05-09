@@ -27,7 +27,8 @@
     "commander": "^9.2.0",
     "@slashnotes/md": "*",
     "@slashnotes/desktop": "*",
-    "ws": "*"
+    "ws": "*",
+    "@faasjs/logger": "*"
   },
   "devDependencies": {
     "nodemon": "*",
