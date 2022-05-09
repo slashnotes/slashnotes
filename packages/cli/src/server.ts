@@ -5,7 +5,7 @@ import { resolve } from 'path'
 import Md from '@slashnotes/md'
 
 import { Logger } from '@faasjs/logger'
-import { SlashnotesFile } from '@slashnotes/types'
+import type { SlashnotesFile } from '@slashnotes/types'
 import { WebSocketServer } from 'ws'
 import { Actions, Options } from '@slashnotes/core'
 
