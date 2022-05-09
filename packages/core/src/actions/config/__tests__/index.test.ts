@@ -1,7 +1,15 @@
 import { Config } from '..'
-import { test, expect } from 'vitest'
+import {
+  test, expect, describe
+} from 'vitest'
 import { sep } from 'path'
 
-test('config', () => {
-  expect(Config('get')).toEqual({ sep })
+describe('config', () => {
+  test('get', () => {
+    expect(Config('get')).toEqual({ sep })
+  })
+
+  test('not found', () => {
+    expect(() => Config('')).toThrowError('Unknown command: config/')
+  })
 })

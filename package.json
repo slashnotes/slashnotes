@@ -8,7 +8,7 @@
     "test": "vitest run",
     "ci": "vitest run --coverage",
     "build": "npm run build --workspaces --if-present",
-    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo coverage",
+    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo coverage && rm **/*.tmp.md **/*.tmp.html",
     "dev": "concurrently \"npm:dev:*\"",
     "dev:cli": "npm run dev --workspace=packages/cli",
     "dev:desktop": "npm run dev --workspace=packages/desktop",

@@ -14,17 +14,12 @@ export function build (body: string, options: MdOptions) {
     }).default
     return renderToString(createElement(mdx))
   } catch (err) {
-    try {
-      const mdx = evaluateSync(body, {
-        ...runtime as any,
-        remarkPlugins: options.remarkPlugins,
-        rehypePlugins: options.rehypePlugins,
-        format: 'md',
-      }).default
-      return renderToString(createElement(mdx))
-    } catch (error) {
-      console.error(error)
-      throw error
-    }
+    const mdx = evaluateSync(body, {
+      ...runtime as any,
+      remarkPlugins: options.remarkPlugins,
+      rehypePlugins: options.rehypePlugins,
+      format: 'md',
+    }).default
+    return renderToString(createElement(mdx))
   }
 }
