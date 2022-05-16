@@ -5,6 +5,7 @@ import { join } from 'path'
 import { readFileSync } from 'fs'
 import { randomUUID } from 'crypto'
 import Md from '..'
+import { templateRender } from '../build'
 
 describe('Md', () => {
   const md = Md()
@@ -68,7 +69,10 @@ return {
       destination: join(__dirname, tmp + '.tmp.html'),
     })
 
-    expect(readFileSync(join(__dirname, tmp + '.tmp.html')).toString()).toEqual(`<h1>${tmp}.tmp</h1>`)
+    expect(readFileSync(join(__dirname, tmp + '.tmp.html')).toString()).toEqual(templateRender({
+      title: tmp + '.tmp',
+      body: `<h1>${tmp}.tmp</h1>`,
+    }))
   })
 
   test('searchableContent', () => {
