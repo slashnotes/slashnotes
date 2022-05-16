@@ -21,10 +21,7 @@
   "devDependencies": {
     "concurrently": "*",
     "vitest": "*",
-    "@vitejs/plugin-react": "*",
-    "@testing-library/react": "*",
-    "jsdom": "*",
-    "c8": "*"
+    "@vitejs/plugin-react": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
