@@ -1,11 +1,11 @@
 import {
-  describe, test, expect
+  describe, test, expect,
 } from 'vitest'
 import { join } from 'path'
 import { readFileSync } from 'fs'
 import { randomUUID } from 'crypto'
 import Md from '..'
-import { templateRender } from '../build'
+import { renderToString } from 'react-dom/server'
 
 describe('Md', () => {
   const md = Md()
@@ -64,15 +64,9 @@ return {
     const tmp = randomUUID()
     md.create({ filename: join(__dirname, tmp + '.tmp.md') })
 
-    md.build({
-      source: join(__dirname, tmp + '.tmp.md'),
-      destination: join(__dirname, tmp + '.tmp.html'),
-    })
+    renderToString(md.build({ source: join(__dirname, tmp + '.tmp.md') }))
 
-    expect(readFileSync(join(__dirname, tmp + '.tmp.html')).toString()).toEqual(templateRender({
-      title: tmp + '.tmp',
-      body: `<h1>${tmp}.tmp</h1>`,
-    }))
+    expect(renderToString(md.build({ source: join(__dirname, tmp + '.tmp.md') }))).toEqual(`<h1>${tmp}.tmp</h1>`)
   })
 
   test('searchableContent', () => {

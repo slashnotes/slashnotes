@@ -4,7 +4,7 @@ import { openFolder, selectFolder } from 'libs/io'
 import { useContext } from 'react'
 
 export function Generate () {
-  const { source } = useContext(DesktopContext)
+  const { source, config } = useContext(DesktopContext)
 
   return <div>
     Generate a website
@@ -14,7 +14,7 @@ export function Generate () {
         source: source.path,
         target: folder
       })
-      openFolder(folder)
+      openFolder(folder + config.sep + 'slashnotes')
     } }>Generate</button>
   </div>
 }

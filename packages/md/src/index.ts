@@ -46,11 +46,8 @@ function Md (options?: MdOptions): SlashnotesFile {
     create ({ filename }) {
       writeFileSync(filename, `# ${basename(filename).replace('.md', '')}\n\n`)
     },
-    build ({ source, destination }) {
-      writeFileSync(destination.replace('.md', '.html'), build(readFileSync(source).toString(), {
-        ...options,
-        filename: basename(source).replace('.md', '')
-      }))
+    build ({ source }) {
+      return build(readFileSync(source).toString(), options)
     },
     searchableContent ({ filename }) {
       return readFileSync(filename).toString()

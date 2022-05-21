@@ -37,8 +37,7 @@ export type SlashnotesFile = {
    */
   build(props: {
     source: string
-    destination: string
-  }): void
+  }): React.FunctionComponentElement<any>
   searchableContent(props: { filename: string }): any
   search(props: {
     q: string

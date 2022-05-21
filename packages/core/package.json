@@ -30,7 +30,8 @@
     "@slashnotes/types": "*",
     "tsup": "*",
     "typescript": "*",
-    "@faasjs/eslint-config-recommended": "*"
+    "@faasjs/eslint-config-recommended": "*",
+    "react-dom": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
