@@ -259,6 +259,17 @@
         overflow: auto;
         line-height: 2;
 
+        &::-webkit-scrollbar {
+          width: 4px;
+          border-radius: 4px;
+          background-color: var(--slashnotes-active-background-color);
+          }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 4px;
+          background-color: var(--slashnotes-secondary-color);
+        }
+
         .content {
           float: left;
           width: calc(80% - 20px);
@@ -410,24 +421,40 @@
           word-break: break-all;
 
           div {
+            clear: both;
             margin-bottom: 0;
-            cursor: pointer;
           }
 
-          ul {
+          .item {
             margin: 0;
-            list-style-position: inside;
-            padding-left: 20px;
+            padding-left: 16px;
           }
 
-          > ul {
+          > .item {
             padding-left: 0;
+          }
+
+          .collapse {
+            position: absolute;
           }
 
           a {
             cursor: pointer;
             color: var(--slashnotes-link-color);
             text-decoration: none;
+            float: left;
+            margin-left: 16px;
+          }
+
+          &::-webkit-scrollbar {
+            width: 4px;
+            border-radius: 4px;
+            background-color: var(--slashnotes-active-background-color);
+            }
+
+          &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: var(--slashnotes-secondary-color);
           }
         }
       }
@@ -449,13 +476,13 @@
         line-height: 1.6;
 
         &::-webkit-scrollbar {
-          width: 10px;
-          border-radius: 10px;
+          width: 4px;
+          border-radius: 4px;
           background-color: var(--slashnotes-active-background-color);
-         }
+          }
 
         &::-webkit-scrollbar-thumb {
-          border-radius: 10px;
+          border-radius: 4px;
           background-color: var(--slashnotes-secondary-color);
         }
       }

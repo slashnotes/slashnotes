@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import { TriangleUpIcon, TriangleDownIcon } from '@primer/octicons-react'
+import {
+  TriangleUpIcon, TriangleDownIcon, DotFillIcon,
+} from '@primer/octicons-react'
 
 type Heading = {
   id: string
@@ -8,15 +10,36 @@ type Heading = {
   items: Heading[]
 }
 
+function CollapsedContent (props: {
+  item: Heading
+}) {
+  const [collapsed, setCollapsed] = useState(false)
+
+  return <>
+    <div
+      className='collapse'
+      onClick={ () => setCollapsed(p => !p) }>
+      {collapsed ? <TriangleUpIcon /> : <TriangleDownIcon />}
+    </div>
+    <a
+      className='collapsed'
+      href={ '#' + props.item.id }
+    >{ props.item.title }</a>
+    {!collapsed && <Content items={ props.item.items } />}
+  </>
+}
+
 function Content (props: {
   items?: Heading[]
 }) {
-  return <ul>
-    {props.items.map(h => <li key={ h.id }>
-      <a href={ '#' + h.id }>{ h.title }</a>
-      { h.items?.length > 0 && <Content items={ h.items } />}
-    </li>)}
-  </ul>
+  return <>
+    {props.items.map(h => <div
+      key={ h.id }
+      className='item'
+    >
+      { h.items?.length > 0 ? <CollapsedContent item={ h } /> : <><a href={ '#' + h.id }>{ h.title }</a></>}
+    </div>)}
+  </>
 }
 
 function nest (headings: Heading[]) {
