@@ -22,6 +22,8 @@
 
 `***All bold and italic***` => ***All bold and italic***
 
+`<sup>sup</sup> and <sub>sub</sub>` => <sup>sup</sup> and <sub>sub</sub>
+
 ## Quoting and Code
 
 > Quoting text
