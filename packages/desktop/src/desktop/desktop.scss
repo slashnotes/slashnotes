@@ -438,6 +438,15 @@
             position: absolute;
           }
 
+          .list-item {
+            display: list-item;
+            margin-left: 16px;
+
+            a {
+              margin-left: 0;
+            }
+          }
+
           a {
             cursor: pointer;
             color: var(--slashnotes-link-color);

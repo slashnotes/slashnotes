@@ -37,7 +37,7 @@ function Content (props: {
       key={ h.id }
       className='item'
     >
-      { h.items?.length > 0 ? <CollapsedContent item={ h } /> : <><a href={ '#' + h.id }>{ h.title }</a></>}
+      { h.items?.length > 0 ? <CollapsedContent item={ h } /> : <div className='list-item'><a href={ '#' + h.id }>{ h.title }</a></div>}
     </div>)}
   </>
 }
