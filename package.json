@@ -21,7 +21,8 @@
   "devDependencies": {
     "concurrently": "*",
     "vitest": "*",
-    "@vitejs/plugin-react": "*"
+    "@vitejs/plugin-react": "*",
+    "c8": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
