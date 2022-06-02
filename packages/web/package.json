@@ -1,0 +1,49 @@
+{
+  "name": "@slashnotes/web",
+  "version": "1.0.0",
+  "license": "AGPL-3.0",
+  "homepage": "https://github.com/slashnotes/slashnotes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slashnotes/slashnotes.git",
+    "directory": "packages/web"
+  },
+  "bugs": {
+    "url": "https://github.com/slashnotes/slashnotes/issues"
+  },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.build.json && tsup-node src/index.tsx --format esm && tsup src/index.tsx --format cjs"
+  },
+  "devDependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "@mdx-js/mdx": "*",
+    "@mdx-js/react": "*",
+    "@primer/octicons-react": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "typescript": "*",
+    "@types/mermaid": "*",
+    "mermaid": "*",
+    "@faasjs/eslint-config-recommended": "*",
+    "@faasjs/eslint-config-react": "*"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
+  },
+  "eslintConfig": {
+    "ignorePatterns": [
+      "**/dist",
+      "**/out"
+    ],
+    "extends": [
+      "@faasjs/recommended",
+      "@faasjs/react"
+    ]
+  }
+}

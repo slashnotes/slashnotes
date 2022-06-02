@@ -10,6 +10,9 @@
       ],
       "@slashnotes/md": [
         "../../md/src/index"
+      ],
+      "@slashnotes/web": [
+        "../../web/src/index"
       ]
     }
   },
@@ -22,6 +25,9 @@
     },
     {
       "path": "../md"
+    },
+    {
+      "path": "../web"
     }
   ]
 }

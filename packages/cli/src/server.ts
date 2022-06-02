@@ -3,6 +3,7 @@ import { platform } from 'os'
 import { exec } from 'child_process'
 import { resolve } from 'path'
 import Md from '@slashnotes/md'
+import Web from '@slashnotes/web'
 
 import { Logger } from '@faasjs/logger'
 import type { SlashnotesFile } from '@slashnotes/types'
@@ -24,32 +25,35 @@ export class WebServer {
     this.folder = options.folder
     console.log(this.folder)
     this.logger = new Logger()
-    this.options = { files: Object.assign({}, ...options.files.map(file => ({ [file.extname]: file }))) }
+    this.options = {
+      files: Object.assign({}, ...options.files.map(file => ({ [file.extname]: file }))),
+      web: Web,
+    }
   }
 
   public async start () {
-    const wss = new WebSocketServer({ port: this.port as number })
-    wss.on('connection', (ws) => {
-      console.log('connected')
-      ws.on('message', (data: Buffer) => {
-        console.log(data.toString())
-        const {
-          id, name, params
-        } = JSON.parse(data.toString())
+    new WebSocketServer({ port: this.port as number })
+      .on('connection', (ws) => {
+        console.log('connected')
+        ws.on('message', (data: Buffer) => {
+          console.log(data.toString())
+          const {
+            id, name, params
+          } = JSON.parse(data.toString())
 
-        try {
-          ws.send(JSON.stringify({
-            id,
-            ...Actions(name, params, this.options),
-          }))
-        } catch (error: any) {
-          ws.send(JSON.stringify({
-            id,
-            error: error.message,
-          }))
-        }
+          try {
+            ws.send(JSON.stringify({
+              id,
+              ...Actions(name, params, this.options),
+            }))
+          } catch (error: any) {
+            ws.send(JSON.stringify({
+              id,
+              error: error.message,
+            }))
+          }
+        })
       })
-    })
 
     this.logger.info('Slashnotes running at http://localhost:' + this.port)
 

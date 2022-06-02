@@ -7,7 +7,7 @@ export function Generate () {
   const { source, config } = useContext(DesktopContext)
 
   return <div>
-    Generate a website
+    <p>Generate static website</p>
     <button onClick={ async () => {
       const folder = await selectFolder()
       await action('folder/generate', {

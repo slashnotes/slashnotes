@@ -6,7 +6,7 @@ import {
 import {
   existsSync, mkdirSync, renameSync, readdirSync, statSync, writeFileSync,
 } from 'fs'
-import { renderToString } from 'react-dom/server'
+import { renderToStaticMarkup } from 'react-dom/server'
 
 type Files = {
   [type: string]: SlashnotesFile
@@ -16,7 +16,7 @@ type AllFiles = {
   [path: string]: SlashnotesItem & {
     mode: 'view'
     title?: string
-    body?: string
+    body?: JSX.Element
   }
 }
 
@@ -52,22 +52,14 @@ const template = `<!DOCTYPE html>
     <title>{{title}}</title>
   </head>
   <body>
-    <ul class="sidebar">{{sidebar}}</ul>
-    <div class="content">{{body}}</div>
+    {{body}}
   </body>
 </html>`
 
 export type TemplateOptions = {
   title: string
   sidebar: string
-  body: string
-}
-
-export function templateRender (options: TemplateOptions) {
-  return template
-    .replace('{{title}}', options.title)
-    .replace('{{sidebar}}', options.sidebar)
-    .replace('{{body}}', options.body)
+  body: JSX.Element
 }
 
 export function Folder (name: string, params: any, options: Options) {
@@ -90,30 +82,16 @@ export function Folder (name: string, params: any, options: Options) {
         if (!existsSync(dir))
           mkdirSync(dir, { recursive: true })
 
-        file.body = renderToString(options.files[file.type].build({ source: join(params.source, file.path) }))
-
-        file.title = file.body.match(/<h1>(.*?)<\/h1>/)[1] || basename(file.path).replace(extname(file.path), '')
-      }
-
-      let sidebar = ''
-      let parent = ''
-
-      for (const f of files) {
-        if (f.path.includes(sep) && !parent.includes(dirname(f.path))) {
-          parent = parent ? `</ul></li><li>${dirname(f.path)}<ul>` : `<li>${dirname(f.path)}<ul>`
-
-          sidebar += parent
-        }
-
-        sidebar += `<li><a href="${f.path}">${f.title}</a></li>`
+        file.body = options.files[file.type].build({ source: join(params.source, file.path) })
       }
 
       for (const file of files) {
-        writeFileSync(join(params.target, 'slashnotes', file.path).replace(extname(file.path), '.html'), templateRender({
-          title: file.title,
-          sidebar,
-          body: file.body,
-        }))
+        const body = renderToStaticMarkup(options.web({ body: file.body }))
+        const title = body.match(/<h1>(.*?)<\/h1>/)[1] || basename(file.path).replace(extname(file.path), '')
+
+        writeFileSync(join(params.target, 'slashnotes', file.path).replace(extname(file.path), '.html'), template
+          .replace('{{title}}', title)
+          .replace('{{body}}', body))
       }
 
       return

@@ -21,12 +21,13 @@
   ],
   "scripts": {
     "build": "tsc -b",
-    "dev": "nodemon --exec 'node --experimental-specifier-resolution=node --loader ./loader.js src/index.ts server --no-open -p 4000 -f ../../docs' --watch src --watch ../builder/src --watch ../md/src --watch ../core/src -e ts"
+    "dev": "nodemon --exec 'node --experimental-specifier-resolution=node --loader ./loader.js src/index.ts server --no-open -p 4000 -f ../../docs' --watch src --watch ../builder/src --watch ../md/src --watch ../core/src --watch ../web/src -e ts,tsx"
   },
   "dependencies": {
     "commander": "^9.3.0",
     "@slashnotes/md": "*",
     "@slashnotes/desktop": "*",
+    "@slashnotes/web": "*",
     "ws": "*",
     "@faasjs/logger": "*"
   },
@@ -34,10 +35,19 @@
     "nodemon": "*",
     "ts-node": "*",
     "tsconfig-paths": "*",
-    "@types/ws": "*"
+    "@types/ws": "*",
+    "@faasjs/eslint-config-recommended": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=16.0.0"
+  },
+  "eslintConfig": {
+    "ignorePatterns": [
+      "**/dist"
+    ],
+    "extends": [
+      "@faasjs/recommended"
+    ]
   }
 }

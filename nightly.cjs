@@ -12,6 +12,7 @@ for (const name of [
   'md',
   'slashnotes',
   'types',
+  'web',
 ]) {
   const packagePath = __dirname + '/packages/' + name + '/package.json'
   const pkg = JSON.parse(readFileSync(packagePath).toString())

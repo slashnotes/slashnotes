@@ -8,6 +8,7 @@ export type Options = {
   files: {
     [type: string]: SlashnotesFile
   }
+  web(props: any): JSX.Element
 }
 
 export function Actions (name: string, params: any, options: Options) {
