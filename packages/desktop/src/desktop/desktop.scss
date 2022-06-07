@@ -327,6 +327,10 @@
             border-left: 5px solid #666;
             margin-left: 0;
             padding-left: 15px;
+
+            & > ul, ol {
+              padding-left: 0px;
+            }
           }
 
           code {
