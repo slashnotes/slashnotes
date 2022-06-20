@@ -8,7 +8,15 @@ export function Show () {
     current, allItems, setAllItems
   } = useContext(DesktopContext)
 
-  if (!current) return null
+  if (!current) return <div style={ {
+    marginTop: '45vh',
+    textAlign: 'center',
+    fontSize: '3em',
+    color: '#666' 
+  } }>
+    &lt;/&gt; Slashnotes
+    <div style={ { fontSize: '.3em' } }>A note taking app for your whole life.</div>
+  </div>
 
   return <div className="show">
     <div className='mode'>

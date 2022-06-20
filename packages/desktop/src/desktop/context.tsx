@@ -135,7 +135,7 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     }
 
     loadList()
-  }, [source])
+  }, [source?.path])
 
   if (!loaded) return null
 
