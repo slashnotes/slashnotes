@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "npm run lint -ws --if-present",
     "test": "vitest run",
-    "ci": "vitest run --coverage",
+    "ci": "vitest run -c vitest.config.ts --coverage",
     "build": "npm run build --workspaces --if-present",
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo coverage ./**/*.tmp.md ./**/*.tmp.html",
     "dev": "concurrently \"npm:dev:*\"",

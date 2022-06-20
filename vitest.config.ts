@@ -6,8 +6,10 @@ export default defineConfig({
   test: {
     coverage: {
       all: true,
-      extension: ['ts', 'tsx'],
-      reporter: ['text', 'lcov']
+      clean: true,
+      include: ['packages/**.{ts,tsx}', 'packages/**/**.{ts,tsx}'],
+      exclude: ['packages/**.test.{ts,tsx}', 'packages/**/**.test.{ts,tsx}', 'packages/__tests__', 'packages/**/__tests__'],
+      reporter: ['text', 'lcov'],
     }
   },
   resolve: {
