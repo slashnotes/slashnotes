@@ -31,7 +31,8 @@
     "tsup": "*",
     "typescript": "*",
     "@faasjs/eslint-config-recommended": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "isomorphic-git": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
