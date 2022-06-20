@@ -54,7 +54,7 @@ export function Search () {
               setCurrent(result.item.path)
             } }
           >
-            {result.item.name}
+            {result.item.path}
           </div>) : <div>Nothing found.</div>}
         </div>}
       </>}
