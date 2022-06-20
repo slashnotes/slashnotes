@@ -123,8 +123,14 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     setCurrent(null)
 
     function loadList () {
-      action('folder/list', { folder: source.path })
-        .then(setAllItems)
+      action<AllItems>('folder/list', { folder: source.path })
+        .then(res => {
+          setAllItems(res)
+          if (!res['README.md']) return
+
+          setOpens(['README.md'])
+          setCurrent('README.md')
+        })
         .catch(loadList)
     }
 
