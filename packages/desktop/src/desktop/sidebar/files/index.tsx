@@ -100,7 +100,7 @@ export function Files () {
           const folder = await selectFolder()
           setSource({
             path: folder,
-            name: folder.split('/').pop()
+            name: folder.split(config.sep).pop()
           })
         } }
       >

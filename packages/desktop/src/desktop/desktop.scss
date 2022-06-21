@@ -51,8 +51,11 @@
       }
     }
 
-    .name svg {
+    svg {
       margin-right: 4px;
+      width: 12px;
+      height: 12px;
+      vertical-align: text-top !important;
     }
 
     input {
@@ -82,28 +85,48 @@
         clear: both;
         overflow: hidden;
         height: 20px;
-        padding-top: 10px;
+        padding: 10px 2px 0 10px;
 
         input {
-          width: 220px;
-          margin-left: 20px;
+          width: 240px;
+          margin-left: 0;
         }
 
         .button {
-          float: left;
-          margin-left: 4px;
+          float: right;
           height: 20px;
           line-height: 20px;
         }
       }
 
       .results {
-        padding: 10px 20px;
+        padding: 10px;
 
         .result {
-          padding: 4px 0;
+          padding: 2px 4px;
           cursor: pointer;
+
+          &:hover {
+            background-color: var(--slashnotes-active-background-color);
+          }
         }
+      }
+    }
+
+    .sync {
+      .box {
+        clear: both;
+        overflow: hidden;
+        padding: 10px;
+      }
+
+      .url {
+        margin-bottom: 10px;
+      }
+
+      ul {
+        margin: 10px 0;
+        padding-left: 20px;
       }
     }
 

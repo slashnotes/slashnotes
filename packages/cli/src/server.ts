@@ -35,7 +35,7 @@ export class WebServer {
     new WebSocketServer({ port: this.port as number })
       .on('connection', (ws) => {
         console.log('connected')
-        ws.on('message', (data: Buffer) => {
+        ws.on('message', async (data: Buffer) => {
           console.log(data.toString())
           const {
             id, name, params
@@ -44,7 +44,7 @@ export class WebServer {
           try {
             ws.send(JSON.stringify({
               id,
-              ...Actions(name, params, this.options),
+              ...(await Actions(name, params, this.options)),
             }))
           } catch (error: any) {
             ws.send(JSON.stringify({

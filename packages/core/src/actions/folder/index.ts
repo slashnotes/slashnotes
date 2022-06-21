@@ -62,7 +62,7 @@ export type TemplateOptions = {
   body: JSX.Element
 }
 
-export function Folder (name: string, params: any, options: Options) {
+export async function Folder (name: string, params: any, options: Options) {
   switch (name) {
     case 'list':
       return findFiles(params.folder, params.folder + sep, options.files)
