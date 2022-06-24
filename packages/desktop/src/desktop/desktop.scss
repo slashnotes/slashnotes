@@ -120,6 +120,18 @@
         padding: 10px;
       }
 
+      .button{
+        background-color: var(--slashnotes-bar-background-color);
+        color: var(--slashnotes-bar-color);
+        border: 0 none;
+        border-radius: 2px;
+      }
+
+      .button[disabled] {
+        background-color: var(--slashnotes-background-color);
+        color: var(--slashnotes-color);
+      }
+
       .url {
         margin-bottom: 10px;
       }

@@ -3,7 +3,6 @@ import { Files } from './files'
 import { useContext } from 'react'
 import { selectFolder } from 'libs/io'
 import { Search } from './search'
-import { Sync } from './sync'
 
 function NoFiles () {
   const { setSource } = useContext(DesktopContext)
@@ -33,7 +32,6 @@ export function Sidebar () {
     {source ? <>
       <Search />
       <Files />
-      <Sync />
     </> : <NoFiles />}
   </div>
 }
