@@ -19,10 +19,11 @@
     "packages/*"
   ],
   "devDependencies": {
-    "concurrently": "*",
-    "vitest": "*",
     "@vitejs/plugin-react": "*",
-    "c8": "*"
+    "@vitest/coverage-c8": "*",
+    "c8": "*",
+    "concurrently": "*",
+    "vitest": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
