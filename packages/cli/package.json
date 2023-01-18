@@ -24,7 +24,7 @@
     "dev": "nodemon --exec 'node --experimental-specifier-resolution=node --loader ./loader.js src/index.ts server --no-open -p 4000 -f ../../docs' --watch src --watch ../builder/src --watch ../md/src --watch ../core/src --watch ../web/src -e ts,tsx"
   },
   "dependencies": {
-    "commander": "^9.5.0",
+    "commander": "^10.0.0",
     "@slashnotes/md": "*",
     "@slashnotes/desktop": "*",
     "@slashnotes/web": "*",
