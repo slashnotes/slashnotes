@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     coverage: {
+      provider: 'v8',
       all: true,
       clean: true,
       include: ['packages/**.{ts,tsx}', 'packages/**/**.{ts,tsx}'],
