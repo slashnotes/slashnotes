@@ -28,7 +28,7 @@ jobs:
       - name: Install
         run: |
           npm install -g npm@latest
-          npm install
+          npm ci
       - uses: actions/cache@v4
         id: cache-npm-install
         with:
