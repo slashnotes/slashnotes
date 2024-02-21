@@ -23,29 +23,19 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - name: Install
         run: |
           npm install -g npm@latest
           npm ci
-      - uses: actions/cache@v4
-        id: cache-npm-install
-        with:
-          path: ./*
-          key: ${{ github.sha }}
   test:
     needs: [ build ]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-      - uses: actions/cache@v4
-        id: cache-npm-install
-        with:
-          path: ./*
-          key: ${{ github.sha }}
       - name: Test
         run: |
           npm run ci
