@@ -6,10 +6,8 @@ export default defineConfig({
   test: {
     coverage: {
       provider: 'v8',
-      all: true,
-      clean: true,
       include: ['packages/**.{ts,tsx}', 'packages/**/**.{ts,tsx}'],
-      exclude: ['packages/**.test.{ts,tsx}', 'packages/**/**.test.{ts,tsx}', 'packages/__tests__', 'packages/**/__tests__'],
+      exclude: ['packages/**.test.{ts,tsx}', 'packages/**/**.test.{ts,tsx}', 'packages/__tests__', 'packages/**/__tests__', '**/**.d.ts'],
       reporter: ['text', 'lcov'],
     }
   },
