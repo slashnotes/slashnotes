@@ -20,9 +20,7 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.json && tsup-node src/index.ts --format esm && tsup src/index.ts --format cjs"
   },
@@ -30,19 +28,10 @@
     "@slashnotes/types": "*",
     "tsup": "*",
     "typescript": "*",
-    "@faasjs/eslint-config-recommended": "*",
     "react-dom": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=16.0.0"
-  },
-  "eslintConfig": {
-    "ignorePatterns": [
-      "**/dist"
-    ],
-    "extends": [
-      "@faasjs/recommended"
-    ]
   }
 }

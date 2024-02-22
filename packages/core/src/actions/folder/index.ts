@@ -1,10 +1,13 @@
 import type { SlashnotesFile, SlashnotesItem } from '@slashnotes/types'
 import type { Options } from '..'
+import { join, extname, sep, dirname, basename } from 'path'
 import {
-  join, extname, sep, dirname, basename,
-} from 'path'
-import {
-  existsSync, mkdirSync, renameSync, readdirSync, statSync, writeFileSync,
+  existsSync,
+  mkdirSync,
+  renameSync,
+  readdirSync,
+  statSync,
+  writeFileSync,
 } from 'fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 
@@ -20,7 +23,12 @@ type AllFiles = {
   }
 }
 
-export function findFiles (dir: string, cwd: string, files: Files, prev?: AllFiles): AllFiles {
+export function findFiles(
+  dir: string,
+  cwd: string,
+  files: Files,
+  prev?: AllFiles
+): AllFiles {
   if (!prev) prev = {}
 
   readdirSync(dir).forEach(f => {
@@ -62,41 +70,52 @@ export type TemplateOptions = {
   body: JSX.Element
 }
 
-export async function Folder (name: string, params: any, options: Options) {
+export async function Folder(name: string, params: any, options: Options) {
   switch (name) {
     case 'list':
       return findFiles(params.folder, params.folder + sep, options.files)
     case 'rename': {
       const dir = join(params.folder, params.to)
-      if (!existsSync(dir))
-        mkdirSync(dir, { recursive: true })
-      renameSync(join(params.folder, params.from), join(params.folder, params.to))
+      if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
+      renameSync(
+        join(params.folder, params.from),
+        join(params.folder, params.to)
+      )
       return
     }
     case 'generate': {
-      const files = Object.values(findFiles(params.source, params.source + sep, options.files))
+      const files = Object.values(
+        findFiles(params.source, params.source + sep, options.files)
+      )
 
       for (const file of files) {
         const dir = dirname(join(params.target, 'slashnotes', file.path))
 
-        if (!existsSync(dir))
-          mkdirSync(dir, { recursive: true })
+        if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
 
-        file.body = options.files[file.type].build({ source: join(params.source, file.path) })
+        file.body = options.files[file.type].build({
+          source: join(params.source, file.path),
+        })
       }
 
       for (const file of files) {
         const body = renderToStaticMarkup(options.web({ body: file.body }))
-        const title = body.match(/<h1>(.*?)<\/h1>/)[1] || basename(file.path).replace(extname(file.path), '')
+        const title =
+          body.match(/<h1>(.*?)<\/h1>/)[1] ||
+          basename(file.path).replace(extname(file.path), '')
 
-        writeFileSync(join(params.target, 'slashnotes', file.path).replace(extname(file.path), '.html'), template
-          .replace('{{title}}', title)
-          .replace('{{body}}', body))
+        writeFileSync(
+          join(params.target, 'slashnotes', file.path).replace(
+            extname(file.path),
+            '.html'
+          ),
+          template.replace('{{title}}', title).replace('{{body}}', body)
+        )
       }
 
       return
     }
     default:
-      throw Error('Unknown command: folder/' + name)
+      throw Error(`Unknown command: folder/${name}`)
   }
 }

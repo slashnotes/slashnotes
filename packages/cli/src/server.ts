@@ -55,7 +55,7 @@ export class WebServer {
         })
       })
 
-    this.logger.info('Slashnotes running at http://localhost:' + this.port)
+    this.logger.info(`Slashnotes running at http://localhost:${this.port}`)
 
     return this
   }
@@ -80,7 +80,7 @@ export function action (
   if (options.open)
     switch (platform()) {
       case 'darwin':
-        exec('open http://localhost:' + server.port)
+        exec(`open http://localhost:${server.port}`)
         break
     }
 }

@@ -16,7 +16,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm install && wait-on tcp:4000 && wait-on tcp:3000 && APP_ENV=development electron .",
-    "lint": "eslint .",
     "test": "vitest run",
     "build": "electron-builder --dir",
     "publish:mac": "node build.cjs && electron-builder --mac",
@@ -52,8 +51,6 @@
   "devDependencies": {
     "electron": "*",
     "wait-on": "*",
-    "@faasjs/eslint-config-recommended": "*",
-    "@faasjs/eslint-config-react": "*",
     "@types/ws": "*",
     "ws": "*",
     "electron-builder": "*"
@@ -61,15 +58,5 @@
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=16.0.0"
-  },
-  "eslintConfig": {
-    "ignorePatterns": [
-      "**/dist",
-      "**/out"
-    ],
-    "extends": [
-      "@faasjs/recommended",
-      "@faasjs/react"
-    ]
   }
 }

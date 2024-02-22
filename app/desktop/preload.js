@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const {
-  contextBridge, ipcRenderer, shell,
-} = require('electron')
+const { contextBridge, ipcRenderer, shell } = require('electron')
 const { randomUUID } = require('crypto')
 
 contextBridge.exposeInMainWorld('Server', {
@@ -13,10 +10,8 @@ contextBridge.exposeInMainWorld('Server', {
     return new Promise((resolve, reject) => {
       ipcRenderer.once(`response-${id}`, (_, data) => {
         console.debug(`response-${id}`, data)
-        if (data.error)
-          reject(data.error)
-        else
-          resolve(data.data)
+        if (data.error) reject(data.error)
+        else resolve(data.data)
       })
     })
   },
@@ -31,12 +26,16 @@ contextBridge.exposeInMainWorld('Server', {
       })
     })
   },
-  openFolder: (path) => {
+  openFolder: path => {
     shell.openPath(path)
-  }
+  },
 })
 
 ipcRenderer.on('update-downloaded', () => {
-  if (window.confirm('New version has been downloaded, do you want to install it now?'))
+  if (
+    window.confirm(
+      'New version has been downloaded, do you want to install it now?'
+    )
+  )
     ipcRenderer.send('restart-app')
 })

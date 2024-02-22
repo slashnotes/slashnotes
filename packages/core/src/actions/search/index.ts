@@ -60,6 +60,6 @@ export function Search (name: string, params: any, options: Options) {
       return result
     }
     default:
-      throw Error('Unknown command: search/' + name)
+      throw Error(`Unknown command: search/${name}`)
   }
 }

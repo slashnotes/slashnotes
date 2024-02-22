@@ -9,11 +9,11 @@ import type { Options } from '..'
 export function File (name: string, params: any, options: Options) {
   switch (name) {
     case 'read':
-      if (!options.files[params.type]) throw Error('Unknown file type: ' + params.type)
+      if (!options.files[params.type]) throw Error(`Unknown file type: ${params.type}`)
 
       return options.files[params.type].read({ filename: join(params.folder, params.path) })
     case 'write': {
-      if (!options.files[params.type]) throw Error('Unknown file type: ' + params.type)
+      if (!options.files[params.type]) throw Error(`Unknown file type: ${params.type}`)
 
       options.files[params.type].write({
         filename: join(params.folder, params.path),
@@ -23,7 +23,7 @@ export function File (name: string, params: any, options: Options) {
       return
     }
     case 'view': {
-      if (!options.files[params.type]) throw Error('Unknown file type: ' + params.type)
+      if (!options.files[params.type]) throw Error(`Unknown file type: ${params.type}`)
 
       return options.files[params.type].render({ filename: join(params.folder, params.path) })
     }
@@ -37,7 +37,7 @@ export function File (name: string, params: any, options: Options) {
       return
     }
     case 'add': {
-      if (!options.files[params.type]) throw Error('Unknown file type: ' + params.type)
+      if (!options.files[params.type]) throw Error(`Unknown file type: ${params.type}`)
 
       const path = join(params.folder, ...params.paths) + params.type
       const dir = dirname(path)
@@ -58,6 +58,6 @@ export function File (name: string, params: any, options: Options) {
       return
     }
     default:
-      throw Error('Unknown command: file/' + name)
+      throw Error(`Unknown command: file/${name}`)
   }
 }

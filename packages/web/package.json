@@ -12,9 +12,7 @@
     "url": "https://github.com/slashnotes/slashnotes/issues"
   },
   "type": "module",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsc --emitDeclarationOnly --declaration -p tsconfig.build.json && tsup-node src/index.tsx --format esm && tsup src/index.tsx --format cjs"
   },
@@ -28,22 +26,10 @@
     "@types/react-dom": "*",
     "typescript": "*",
     "@types/mermaid": "*",
-    "mermaid": "*",
-    "@faasjs/eslint-config-recommended": "*",
-    "@faasjs/eslint-config-react": "*"
+    "mermaid": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=16.0.0"
-  },
-  "eslintConfig": {
-    "ignorePatterns": [
-      "**/dist",
-      "**/out"
-    ],
-    "extends": [
-      "@faasjs/recommended",
-      "@faasjs/react"
-    ]
   }
 }

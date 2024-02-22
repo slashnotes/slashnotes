@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { action } from 'libs/action'
-import {
-  createContext, useEffect, useMemo, useState
-} from 'react'
+import { createContext, useEffect, useMemo, useState } from 'react'
 import { SlashnotesItem, SlashnotesConfig } from '@slashnotes/types'
 
 export type ItemMode = 'view' | 'edit'
@@ -44,21 +41,23 @@ export const DesktopContext = createContext<{
   source: Source
   setSource: React.Dispatch<React.SetStateAction<Source>>
 }>({
-      config: { sep: '' },
-      opens: [],
-      setOpens: () => {},
-      allItems: {},
-      setAllItems: () => {},
-      current: undefined,
-      setCurrent: () => {},
-      loadAllItems: () => {},
-      modal: undefined,
-      setModal: () => {},
-      source: undefined,
-      setSource: () => {},
-    })
+  config: { sep: '' },
+  opens: [],
+  setOpens: () => {},
+  allItems: {},
+  setAllItems: () => {},
+  current: undefined,
+  setCurrent: () => {},
+  loadAllItems: () => {},
+  modal: undefined,
+  setModal: () => {},
+  source: undefined,
+  setSource: () => {},
+})
 
-export function DesktopContextProvider (props: { children: JSX.Element | JSX.Element[] }) {
+export function DesktopContextProvider(props: {
+  children: JSX.Element | JSX.Element[]
+}) {
   const [config, setConfig] = useState<SlashnotesConfig>()
   const [opens, setOpens] = useState<string[]>([])
   const [current, setCurrent] = useState<string>()
@@ -67,50 +66,50 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
   const [modal, setModal] = useState({ visible: false })
   const [source, setSource] = useState<Source>()
 
-  const itemsValue = useMemo(() => ({
-    config,
-    opens,
-    setOpens,
-    allItems,
-    setAllItems,
-    current,
-    setCurrent,
-    loadAllItems: () => {
-      action('folder/list', { folder: source.path }).then(setAllItems)
-    },
-    modal,
-    setModal,
-    source,
-    setSource,
-  }), [
-    config,
-    opens,
-    setOpens,
-    allItems,
-    setAllItems,
-    current,
-    setCurrent,
-    modal,
-    setModal,
-    source,
-    setSource,
-  ])
+  const itemsValue = useMemo(
+    () => ({
+      config,
+      opens,
+      setOpens,
+      allItems,
+      setAllItems,
+      current,
+      setCurrent,
+      loadAllItems: () => {
+        action('folder/list', { folder: source.path }).then(setAllItems)
+      },
+      modal,
+      setModal,
+      source,
+      setSource,
+    }),
+    [
+      config,
+      opens,
+      setOpens,
+      allItems,
+      setAllItems,
+      current,
+      setCurrent,
+      modal,
+      setModal,
+      source,
+      setSource,
+    ]
+  )
 
   useEffect(() => {
-    function loadConfig () {
-      action('config/get')
-        .then(setConfig)
-        .catch(loadConfig)
+    function loadConfig() {
+      action('config/get').then(setConfig).catch(loadConfig)
     }
 
     loadConfig()
 
     const source = localStorage.getItem('source')
-    if (source)
-      setSource(JSON.parse(source))
+    if (source) setSource(JSON.parse(source))
   }, [])
 
-  useEffect(()=> {
+  useEffect(() => {
     if (!loaded && config?.sep) setLoaded(true)
   }, [config?.sep])
 
@@ -122,7 +121,7 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
     setOpens([])
     setCurrent(null)
 
-    function loadList () {
+    function loadList() {
       action<AllItems>('folder/list', { folder: source.path })
         .then(res => {
           setAllItems(res)
@@ -139,7 +138,9 @@ export function DesktopContextProvider (props: { children: JSX.Element | JSX.Ele
 
   if (!loaded) return null
 
-  return <DesktopContext.Provider value={ itemsValue }>
-    {props.children}
-  </DesktopContext.Provider>
+  return (
+    <DesktopContext.Provider value={itemsValue}>
+      {props.children}
+    </DesktopContext.Provider>
+  )
 }

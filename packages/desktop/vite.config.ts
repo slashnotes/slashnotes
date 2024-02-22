@@ -9,15 +9,15 @@ export default defineConfig({
     alias: [
       {
         find: 'libs',
-        replacement: __dirname + '/src/libs',
+        replacement: `${__dirname}/src/libs`,
       },
       {
         find: 'desktop',
-        replacement: __dirname + '/src/desktop',
+        replacement: `${__dirname}/src/desktop`,
       },
       {
         find: 'react/jsx-runtime',
-        replacement: __dirname + '/../../node_modules/react/jsx-runtime.js'
+        replacement: `${__dirname}/../../node_modules/react/jsx-runtime.js`
       }
     ],
   },

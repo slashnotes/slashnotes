@@ -12,7 +12,7 @@ export function build (content: string, options: MdOptions) {
       format: 'mdx',
     }).default
     return createElement(mdx)
-  } catch (err) {
+  } catch (_) {
     const mdx = evaluateSync(content, {
       ...runtime as any,
       remarkPlugins: options.remarkPlugins,

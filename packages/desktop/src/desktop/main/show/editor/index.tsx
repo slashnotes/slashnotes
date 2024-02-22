@@ -1,12 +1,10 @@
-import {
-  useContext,
-  useEffect,
-  useState
-} from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { action } from 'libs/action'
 import { DesktopContext, Item } from 'desktop/context'
 
-export function Editor ({ item }: {
+export function Editor({
+  item,
+}: {
   item: Item
 }) {
   const [value, setValue] = useState<string>()
@@ -18,10 +16,9 @@ export function Editor ({ item }: {
     action<{ body: string }>('file/read', {
       ...item,
       folder: source.path,
+    }).then(data => {
+      setValue(data.body)
     })
-      .then(data => {
-        setValue(data.body)
-      })
   }, [item])
 
   useEffect(() => {
@@ -34,9 +31,11 @@ export function Editor ({ item }: {
     })
   }, [value])
 
-  return <textarea
-    className='editor'
-    value={ value }
-    onChange={ e => setValue(e.target.value) }
-  ></textarea>
+  return (
+    <textarea
+      className='editor'
+      value={value}
+      onChange={e => setValue(e.target.value)}
+    />
+  )
 }

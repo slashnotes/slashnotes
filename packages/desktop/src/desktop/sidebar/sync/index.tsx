@@ -32,6 +32,7 @@ export function Sync () {
         <div className='changes'>Pending changes:
           {data.changes.length && <button
             className='button'
+            type='button'
             disabled={ syncing }
             onClick={ () => {
               setSyncing(true)

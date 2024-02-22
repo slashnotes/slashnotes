@@ -1,21 +1,63 @@
 {
-  "editor.detectIndentation": false,
-  "editor.tabSize": 2,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "editor.fontLigatures": true,
+  "editor.unicodeHighlight.allowedLocales": {
+    "zh-hant": true
   },
+  "editor.detectIndentation": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit"
+  },
+  "editor.inlineSuggest.enabled": true,
+  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.suggest.preview": true,
   "editor.wordWrap": "on",
+  "editor.smoothScrolling": true,
+  "editor.cursorBlinking": "phase",
+  "editor.renderLineHighlight": "all",
+  "editor.renderLineHighlightOnlyWhenFocus": true,
+  "editor.minimap.autohide": true,
+  "editor.minimap.enabled": false,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "eslint.packageManager": "npm",
-  "cSpell.words": [
-    "faasjs",
-    "octicons",
-    "rehype",
-    "slashnotes",
-    "tsup",
-    "vite",
-    "vitest"
-  ]
+  "window.title": "${dirty} ${activeEditorMedium}${separator}${rootName}",
+  "workbench.activityBar.location": "top",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/coverage": true,
+    "**/dist": true,
+    "**/tmp": true,
+    "**/.swc": true,
+    "**/.cache": true,
+    "**/*.bundle.*": true,
+    "**/build": true,
+    "**/Pods": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "typescript.tsc.autoDetect": "off",
+  "npm.autoDetect": "off",
+  "gitlens.codeLens.enabled": false,
+  "files.eol": "\n",
+  "typescript.check.npmIsInstalled": false,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "typescript.workspaceSymbols.scope": "currentProject"
 }

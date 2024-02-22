@@ -11,13 +11,9 @@
   "bugs": {
     "url": "https://github.com/slashnotes/slashnotes/issues"
   },
-  "files": [
-    "dist",
-    "index.js"
-  ],
+  "files": ["dist", "index.js"],
   "scripts": {
     "dev": "vite",
-    "lint": "eslint .",
     "build": "tsc && ELECTRON=true vite build",
     "test": "vitest run"
   },
@@ -36,22 +32,10 @@
     "typescript": "*",
     "sass": "*",
     "@types/mermaid": "*",
-    "mermaid": "*",
-    "@faasjs/eslint-config-recommended": "*",
-    "@faasjs/eslint-config-react": "*"
+    "mermaid": "*"
   },
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=16.0.0"
-  },
-  "eslintConfig": {
-    "ignorePatterns": [
-      "**/dist",
-      "**/out"
-    ],
-    "extends": [
-      "@faasjs/recommended",
-      "@faasjs/react"
-    ]
   }
 }

@@ -1,7 +1,4 @@
-/* eslint-disable no-useless-escape */
-import {
-  describe, test, expect
-} from 'vitest'
+import { describe, test, expect } from 'vitest'
 import { parse } from '../parse'
 import { defaultOptions } from '..'
 
